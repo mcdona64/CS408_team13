@@ -14,17 +14,24 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
 public class Web {
 	private MCF mcf;
 	private String url;
+	private int server;
+	private String nickname = "HumorBot";
 	private static String filePath = "./web/";
 	private String fileName = "index.html";
 	private String fullFileName = filePath + fileName;
 	private String blackCardString;
 	private ArrayList<WhiteCard> whiteCardList = new ArrayList<WhiteCard>();
 	private ArrayList<WhiteCard> gameHand = new ArrayList<WhiteCard>();
-	
 	private ArrayList<String> fileNames = new ArrayList<String>();
+	private ArrayList<String> urls = new ArrayList<String>();
 	
 	public Web(String url){
 		this.url = url;
@@ -37,6 +44,14 @@ public class Web {
 	
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	public void setServer(int s) {
+		this.server = s;
+	}
+	
+	public int getServer() {
+		return this.server;
 	}
 	
 	public String getBlackCard() {
@@ -59,6 +74,7 @@ public class Web {
 		
 		try {
 			u = new URL(webURL);
+			urls.add(webURL);
 			URLConnection connection = u.openConnection();
 			connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
 			connection.connect();
@@ -150,6 +166,7 @@ public class Web {
 		}
 		System.out.println(gameURL);
 		this.setUrl(gameURL);
+		this.setServer(server);
 		this.grabWebpage();
 	}
 	
@@ -211,7 +228,7 @@ public class Web {
 		try {
 			while((buffer = br.readLine()) != null) {
 				if(buffer.contains("The white cards played this round are:")) {
-					System.out.println("White Cards in play");
+			//		System.out.println("White Cards in play");
 					flag_whiteCardsInPlay = true;
 					flag_whiteCardsInHand = false;
 				}
@@ -220,12 +237,12 @@ public class Web {
 					flag_whiteCardsInHand = false;
 				}
 				if(buffer.contains("game_hand_cards")) {
-					System.out.println("White Cards in hand");
+			//		System.out.println("White Cards in hand");
 					flag_whiteCardsInPlay = false;
 					flag_whiteCardsInHand = true;
 				}
 				if(buffer.contains("\"bottom\"")) {
-					System.out.println("Reached end of white cards");
+			//		System.out.println("Reached end of white cards");
 					flag_whiteCardsInPlay = false;
 					flag_whiteCardsInHand = false;
 					return;
@@ -241,11 +258,11 @@ public class Web {
 					//System.out.println(whiteCardString);
 					if(flag_whiteCardsInPlay) {
 						//Add whiteCard obj to ArrayList whiteCardList
-						System.out.println("Add White Card to whiteCardList");						
+				//		System.out.println("Add White Card to whiteCardList");						
 						whiteCardList.add(new WhiteCard(whiteCardString));
 					} else if(flag_whiteCardsInHand) {
 						//Add whiteCard obj to ArrayList gameHand
-						System.out.println("Add White Card to gameHand");
+				//		System.out.println("Add White Card to gameHand");
 						gameHand.add(new WhiteCard(whiteCardString));
 					} else {
 						//Do nothing
@@ -262,6 +279,72 @@ public class Web {
 		}
 	}
 	
+	public void setNickName(String name){
+		//Wait for the right moment to send in your nickname
+		this.nickname = name;
+	}
+	
+	public String getNickName() {
+		return this.nickname;
+	}
+	
+	public void getToGamePage(String nickname) {
+		String url = "";
+		for(String str : urls) {
+			if(str.contains("pyx-" + this.server)) {
+				url = str;
+			}
+		}
+		
+		System.out.println(url);
+		
+		System.setProperty("webdriver.chrome.driver", "ChromeDriver/chromedriver");
+		WebDriver driver = new ChromeDriver();
+		driver.get(url);
+		driver.manage().window().maximize();
+		driver.getPageSource();
+		WebElement button_1 = driver.findElement(By.cssSelector("input"));
+		button_1.click();
+		
+		WebElement name = driver.findElement(By.id("nickname"));
+		name.sendKeys(nickname);
+		WebElement button_2 = driver.findElement(By.id("nicknameconfirm"));
+		button_2.click();
+		
+		String src = driver.getPageSource();
+		
+		
+		//Should add functionality for pausing and waiting for GUI input for what game to choose.
+		//Look into PhantomJS for hiding web browser window
+		// v GUI can be updated with information from below v
+		
+		
+		//For testing purposes close window
+		//driver.close();
+		
+		/* games are labeled by:
+		 * gamelist_lobby_##
+		 * Information that can be viewed in this <div> field:
+		 * 	-Number of Players
+		 * 	-Number of Spectators
+		 * 	-State of game (Not Started / In Progress)
+		 * 	-How many card sets
+		 * 	-Requires Password or not
+		 */
+		
+		
+		//Saves webpage for reference if needed
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter(filePath + "gamePage.html"));
+			bw.write(src);
+			bw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public static void main(String[] args) {
 		Web w = new Web();
 		w.setUrl("http://www.pretendyoure.xyz/zy/");
@@ -270,21 +353,20 @@ public class Web {
 		//Need to implement getting farther to actually reaching a game
 		w.getToGame(2);
 		w.parseBlackCards("findWhiteCards.html");
-		System.out.println(w.getBlackCard());
-		System.out.println("Find White Cards");
+	//	System.out.println(w.getBlackCard());
+	//	System.out.println("Find White Cards");
 		w.parseWhiteCards("findWhiteCards.html");
-		System.out.println("Print White Cards in Play");
-		for(WhiteCard e : w.whiteCardList) {
+	//	System.out.println("Print White Cards in Play");
+	/*	for(WhiteCard e : w.whiteCardList) {
 			System.out.println("\t" + e.getAnswer());
 		}
 		System.out.println("Print White Cards in Hand");
 		for(WhiteCard e : w.gameHand) {
 			System.out.println("\t" + e.getAnswer());
 		}
+		*/
+		w.getToGamePage(w.getNickName());
 	}
 	
-	public void setNickName(String name){
-		//Wait for the right moment to send in your nickname
-	}
 	
 }
