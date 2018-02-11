@@ -26,8 +26,8 @@ public class Web {
 	
 	private ArrayList<String> fileNames = new ArrayList<String>();
 	
-	public Web(MCF mcf) {
-		this.mcf = mcf;
+	public Web(String url){
+		this.url = url;
 		//fileNames.add("index.html");
 	}
 	
@@ -42,8 +42,13 @@ public class Web {
 	public String getBlackCard() {
 		return this.blackCardString;
 	}
+	
+	public ArrayList<WhiteCard> getHand(){
+		return this.gameHand;
+	}
 
-	public void grabWebpage(String webURL) {
+	public void grabWebpage() {
+		String webURL = this.url;
 		URL u;
 		InputStream is = null;
 		BufferedReader br;
@@ -144,7 +149,8 @@ public class Web {
 			e.printStackTrace();
 		}
 		System.out.println(gameURL);
-		this.grabWebpage(gameURL);
+		this.setUrl(gameURL);
+		this.grabWebpage();
 	}
 	
 	/* Parses for Black Card
@@ -258,7 +264,8 @@ public class Web {
 	
 	public static void main(String[] args) {
 		Web w = new Web();
-		w.grabWebpage("http://www.pretendyoure.xyz/zy/");
+		w.setUrl("http://www.pretendyoure.xyz/zy/");
+		w.grabWebpage();
 		//Choose 1, 2, 3 for getToGame();
 		//Need to implement getting farther to actually reaching a game
 		w.getToGame(2);
@@ -274,6 +281,10 @@ public class Web {
 		for(WhiteCard e : w.gameHand) {
 			System.out.println("\t" + e.getAnswer());
 		}
+	}
+	
+	public void setNickName(String name){
+		//Wait for the right moment to send in your nickname
 	}
 	
 }
