@@ -20,8 +20,9 @@ public class Web {
 	private static String filePath = "./web/";
 	private String fileName = "index.html";
 	private String fullFileName = filePath + fileName;
-	private String blackCard;
+	private String blackCardString;
 	private ArrayList<WhiteCard> whiteCardList;
+	private ArrayList<WhiteCard> gameHand;
 	
 	private ArrayList<String> fileNames = new ArrayList<String>();
 	
@@ -122,11 +123,11 @@ public class Web {
 			while((buffer = br.readLine()) != null) {
 				if(buffer.contains("pyx-" + server)) {
 					//System.out.println(buffer);
-					int startIndex = buffer.indexOf("https:");
+					int beginIndex = buffer.indexOf("https:");
 					int endIndex = buffer.indexOf("\">");
-					System.out.println(startIndex);
+					System.out.println(beginIndex);
 					System.out.println(endIndex);
-					gameURL = buffer.substring(startIndex, endIndex);
+					gameURL = buffer.substring(beginIndex, endIndex);
 				}
 				
 			}
@@ -144,7 +145,7 @@ public class Web {
 	
 	
 	public void parseBlackCards(String fn) {
-		File f = new File(fn);
+		File f = new File(filePath + fn);
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader(f));
@@ -156,7 +157,59 @@ public class Web {
 		try {
 			while((buffer = br.readLine()) != null) {
 				if(buffer.contains("\"game_black_card\"")) {
-					
+					buffer = br.readLine();
+					if(buffer.contains("card_text")) {
+						int beginIndex = buffer.indexOf(">");
+						int endIndex = buffer.indexOf("</");
+						System.out.println(beginIndex);
+						System.out.println(endIndex);
+						blackCard = buffer.substring(beginIndex+1, endIndex);
+						System.out.println(blackCard);
+					}
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		blackCardString = blackCard;
+	}
+	
+	
+	//<div class="game_hand"> contains cards in hand
+	/* Parses for White Cards in play and in player's hand
+	 * Stores values in ArrayLists for use by logic and database
+	 */
+	public void parseWhiteCards(String fn) {
+		//"game_right_side"
+		boolean flag_whiteCardsInPlay = false;
+		boolean flag_whiteCardsInHand = false;
+		
+		
+		File f = new File(filePath + fn);
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader(f));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		String buffer;
+		try {
+			while((buffer = br.readLine()) != null) {
+				if(buffer.contains("game_white_cards game_right_side_cards\"><")) {
+					System.out.println("White Cards in play");
+					flag_whiteCardsInPlay = true;
+					if(buffer.contains("card_text")) {
+						int beginIndex = buffer.indexOf(">");
+						int endIndex = buffer.indexOf("</");
+						System.out.println(beginIndex);
+						System.out.println(endIndex);
+						
+					}
 				}
 			}
 		} catch (IOException e) {
@@ -169,17 +222,14 @@ public class Web {
 		}
 	}
 	
-	public void parseWhiteCards(String fn) {
-		
-	}
-	
 	public static void main(String[] args) {
 		Web w = new Web();
 		w.grabWebpage("http://www.pretendyoure.xyz/zy/");
 		//Choose 1, 2, 3 for getToGame();
 		//Need to implement getting farther to actually reaching a game
 		w.getToGame(2);
-		w.parseWhiteCards("findWhiteCards.html");
+		w.parseBlackCards("findWhiteCards.html");
+		//w.parseWhiteCards("findWhiteCards.html");
 	}
 	
 }
