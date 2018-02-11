@@ -66,6 +66,26 @@ public class MCF {
 		return best_choice;
 	}
 	
+	/**
+	 * This is the function that will be used for determining what card wil be thrown away on a throwaway round
+	 * @return
+	 */
+	public int assessHandThrowaway(){
+		long min = this.hand.get(0).getAverageWeight();
+		int best_choice = 0;
+		for(int i = 1; i < this.hand.size(); i++){
+			WhiteCard curr = this.hand.get(i);
+			if(curr.getAverageWeight() < min){
+				min = curr.getWeight();
+				best_choice = i;
+			}else if(curr.getAverageWeight() == min){
+				WhiteCard prevMax = this.hand.get(best_choice);
+				best_choice = (prevMax.getWeight() >= curr.getWeight())? best_choice: i;
+			}
+		}
+		return best_choice;
+	}
+	
 	private void initializeWebCrawler(){
 		this.crawler = new Web(/*this,*/ "http://www.pretendyoure.xyz/zy/");
 		this.crawler.grabWebpage();
