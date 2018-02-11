@@ -203,12 +203,26 @@ public class Web {
 				if(buffer.contains("game_white_cards game_right_side_cards\"><")) {
 					System.out.println("White Cards in play");
 					flag_whiteCardsInPlay = true;
-					if(buffer.contains("card_text")) {
-						int beginIndex = buffer.indexOf(">");
-						int endIndex = buffer.indexOf("</");
-						System.out.println(beginIndex);
-						System.out.println(endIndex);
+					flag_whiteCardsInHand = false;
+				}
+				if(buffer.contains("game_hand_cards")) {
+					System.out.println("White Cards in hand");
+					flag_whiteCardsInPlay = false;
+					flag_whiteCardsInHand = true;
+				}
+				if(buffer.contains("card_text")) {
+					int beginIndex = buffer.indexOf(">");
+					int endIndex = buffer.indexOf("</");
+					System.out.println(beginIndex);
+					System.out.println(endIndex);
+					if(flag_whiteCardsInPlay) {
+						//Add whiteCard obj to ArrayList whiteCardList
+					
+					} else if(flag_whiteCardsInHand) {
+						//Add whiteCard obj to ArrayList gameHand
 						
+					} else {
+						//Do nothing
 					}
 				}
 			}
