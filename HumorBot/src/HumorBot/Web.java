@@ -21,8 +21,8 @@ public class Web {
 	private String fileName = "index.html";
 	private String fullFileName = filePath + fileName;
 	private String blackCardString;
-	private ArrayList<WhiteCard> whiteCardList;
-	private ArrayList<WhiteCard> gameHand;
+	private ArrayList<WhiteCard> whiteCardList = new ArrayList<WhiteCard>();
+	private ArrayList<WhiteCard> gameHand = new ArrayList<WhiteCard>();
 	
 	private ArrayList<String> fileNames = new ArrayList<String>();
 	
@@ -37,6 +37,10 @@ public class Web {
 	
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	public String getBlackCard() {
+		return this.blackCardString;
 	}
 
 	public void grabWebpage(String webURL) {
@@ -125,8 +129,8 @@ public class Web {
 					//System.out.println(buffer);
 					int beginIndex = buffer.indexOf("https:");
 					int endIndex = buffer.indexOf("\">");
-					System.out.println(beginIndex);
-					System.out.println(endIndex);
+					//System.out.println(beginIndex);
+					//System.out.println(endIndex);
 					gameURL = buffer.substring(beginIndex, endIndex);
 				}
 				
@@ -161,10 +165,10 @@ public class Web {
 					if(buffer.contains("card_text")) {
 						int beginIndex = buffer.indexOf(">");
 						int endIndex = buffer.indexOf("</");
-						System.out.println(beginIndex);
-						System.out.println(endIndex);
+						//System.out.println(beginIndex);
+						//System.out.println(endIndex);
 						blackCard = buffer.substring(beginIndex+1, endIndex);
-						System.out.println(blackCard);
+						//System.out.println(blackCard);
 					}
 				}
 			}
@@ -198,11 +202,16 @@ public class Web {
 			e.printStackTrace();
 		}
 		String buffer;
+		String whiteCardString = "";
 		try {
 			while((buffer = br.readLine()) != null) {
-				if(buffer.contains("game_white_cards game_right_side_cards\"><")) {
+				if(buffer.contains("The white cards played this round are:")) {
 					System.out.println("White Cards in play");
 					flag_whiteCardsInPlay = true;
+					flag_whiteCardsInHand = false;
+				}
+				if(buffer.contains("The previous round was won by")) {
+					flag_whiteCardsInPlay = false;
 					flag_whiteCardsInHand = false;
 				}
 				if(buffer.contains("game_hand_cards")) {
@@ -210,17 +219,29 @@ public class Web {
 					flag_whiteCardsInPlay = false;
 					flag_whiteCardsInHand = true;
 				}
+				if(buffer.contains("\"bottom\"")) {
+					System.out.println("Reached end of white cards");
+					flag_whiteCardsInPlay = false;
+					flag_whiteCardsInHand = false;
+					return;
+				}
 				if(buffer.contains("card_text")) {
+					System.out.println(buffer);
 					int beginIndex = buffer.indexOf(">");
 					int endIndex = buffer.indexOf("</");
-					System.out.println(beginIndex);
-					System.out.println(endIndex);
+					//System.out.println(beginIndex);
+					//System.out.println(endIndex);
+					whiteCardString = buffer.substring(beginIndex+1, endIndex);
+					//System.out.println(buffer.substring(beginIndex+1, endIndex));
+					//System.out.println(whiteCardString);
 					if(flag_whiteCardsInPlay) {
 						//Add whiteCard obj to ArrayList whiteCardList
-					
+						System.out.println("Add White Card to whiteCardList");						
+						whiteCardList.add(new WhiteCard(whiteCardString));
 					} else if(flag_whiteCardsInHand) {
 						//Add whiteCard obj to ArrayList gameHand
-						
+						System.out.println("Add White Card to gameHand");
+						gameHand.add(new WhiteCard(whiteCardString));
 					} else {
 						//Do nothing
 					}
@@ -243,7 +264,17 @@ public class Web {
 		//Need to implement getting farther to actually reaching a game
 		w.getToGame(2);
 		w.parseBlackCards("findWhiteCards.html");
-		//w.parseWhiteCards("findWhiteCards.html");
+		System.out.println(w.getBlackCard());
+		System.out.println("Find White Cards");
+		w.parseWhiteCards("findWhiteCards.html");
+		System.out.println("Print White Cards in Play");
+		for(WhiteCard e : w.whiteCardList) {
+			System.out.println("\t" + e.getAnswer());
+		}
+		System.out.println("Print White Cards in Hand");
+		for(WhiteCard e : w.gameHand) {
+			System.out.println("\t" + e.getAnswer());
+		}
 	}
 	
 }
