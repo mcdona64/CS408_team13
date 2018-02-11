@@ -2,6 +2,7 @@ package HumorBot;
 //Imports
 import HumorBotGUI.*;
 import java.util.*;
+import java.lang.*;
 /**
  * @author pxeros
  * This class is the main control flow for our AI
@@ -31,11 +32,23 @@ public class MCF {
 	public String getUserName(){
 		return this.username;
 	}
+	
+	//Setters
+	public void setCurrentCard(BlackCard card){
+		this.currentCard = card;
+	}
 	/**
 	 * This function will return the hand that is given to the user.
 	 */
-	public void getHand(){
-		
+	public void updateHand(){
+		this.hand = this.crawler.getHand();
+		for(int i = 0; i < this.hand.size(); i++){
+			//TODO implement database stuff
+			long weight = 0;
+			long avWeight = 0;
+			this.hand.get(i).setWeight(weight);
+			this.hand.get(i).setAverage(avWeight);
+		}
 	}
 	
 	//AI and important Functions
@@ -46,6 +59,7 @@ public class MCF {
 		
 	}
 	
+	//These are the hand assessors for each individual situation
 	/**
 	 * This is assessing the best hand on a normal round 
 	 * @return the index of the best card,
@@ -86,9 +100,16 @@ public class MCF {
 		return best_choice;
 	}
 	
+	public ArrayList<Integer> assessHandMultipleBlanks(int numBlanks){
+		//TODO Implement
+		return new ArrayList<Integer>();
+	}
+	
+	//These are the functions that we need 
 	private void initializeWebCrawler(){
-		this.crawler = new Web(/*this,*/ "http://www.pretendyoure.xyz/zy/");
+		this.crawler = new Web("http://www.pretendyoure.xyz/zy/");
 		this.crawler.grabWebpage();
+		//TODO add getting to the webpage
 	}
 	
 }
