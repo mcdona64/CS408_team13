@@ -31,4 +31,8 @@ public class WhiteCard {
 	public void setAverage(long average){
 		this.average = average;
 	}
+	
+	public void setWeight(long weight){
+		this.weight = weight;
+	}
 }
