@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Pretend You're Xyzzy</title>
+</head>
+<body>
+<h1>
+Pretend You're <dfn style="border-bottom: 1px dotted black" title="Xyzzy is an Artificial Unintelligence bot. You'll be making more sense than him in this game.">
+Xyzzy</dfn>
+</h1>
+<h3>A Cards Against Humanity clone.</h3>
+<p>
+This webapp is still in development. There will be bugs, but hopefully they won't affect gameplay
+very much. To assist with development, <strong>all traffic on this server <em>may</em> be
+logged.</strong>
+</p>
+<p>
+The name you enter and your computer's IP address will <strong>always</strong> be logged when you
+load the game client. Chat will almost certainly never be logged at all, and if it is, it is only
+temporary. Gameplay <strong>is</strong> always logged for determining popular cards.
+</p>
+<h2>Welcome to the server lobby.</h2>
+<p><strong>These servers are functionally identical. Just make sure you pick the same one as your friends (or follow their direct game link).</strong></p>
+<ul>
+<li><a href="https://pyx-1.pretendyoure.xyz/zy/">The Biggest, Blackest Dick</a>: 352 of 2000 users, 103 of 400 games.</li>
+<li><a href="https://pyx-2.pretendyoure.xyz/zy/">A Falcon with a Box on its Head</a>: 236 of 2000 users, 72 of 400 games.</li>
+<li><a href="https://pyx-3.pretendyoure.xyz/zy/">Dickfingers</a>: 560 of 2000 users, 185 of 400 games.</li>
+</ul>
+</body>
+</html>
