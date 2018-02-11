@@ -1,7 +1,8 @@
 /**
  * 
  */
-
+import HumorBot.*;
+import HumorBotGUI.*;
 /**
  * @author pxeros
  *
