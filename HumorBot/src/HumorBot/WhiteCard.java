@@ -44,4 +44,8 @@ public class WhiteCard {
 	public void setWeight(long weight){
 		this.weight = weight;
 	}
+
+	public boolean equals(WhiteCard card){
+		return this.answer.equals(card.getAnswer());
+	}
 }

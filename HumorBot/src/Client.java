@@ -14,8 +14,12 @@ public class Client {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		MainGUI screen = new MainGUI();
+		MCF mcf = new MCF();
+		screen.launchStartMenu();
+		boolean[] init_flags = {screen.isOnline_Mode(), screen.isSpecMode(), false, false, false, false};
+		mcf.initalize(init_flags);
+		//TODO: find a way to start actually running the damned application
 	}
 
 }

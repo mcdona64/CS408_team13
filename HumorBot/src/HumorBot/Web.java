@@ -344,6 +344,22 @@ public class Web {
 		}
 		
 	}
+
+	/**
+	 * This is the function that actually chooses the answer in the web browser
+	 * @param index winning index
+	 */
+	public void chooseAnswer(int index){
+		//TODO: Implement
+	}
+
+	/**
+	 * "             " except in the case of multiple blanks
+	 * @param indecies array list of winning indecies
+	 */
+	public void chooseAnswer(ArrayList<Integer> indecies){
+		//TODO: Implement
+	}
 	
 	public static void main(String[] args) {
 		Web w = new Web();

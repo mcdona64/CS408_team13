@@ -10,8 +10,12 @@ public class MainGUI {
     private JButton onlineMode;
     private JButton spectatorMode;
     private JPanel panelMenu;
+    private boolean online_Mode;
+    private boolean specMode;
+    
 
     public MainGUI() {
+    	this.online_Mode = this.specMode = false;
         offlineMode.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -21,13 +25,14 @@ public class MainGUI {
         onlineMode.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "ONLINE MODE Has been Launched");
+               flipOnlineMode();
             }
         });
         spectatorMode.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "SPECTATOR MODE Has been Launched");
+                flipSpecMode();
+                flipOnlineMode();
             }
         });
         options.addActionListener(new ActionListener() {
@@ -36,6 +41,22 @@ public class MainGUI {
                 JOptionPane.showMessageDialog(null, "OPTIONS MENU Has been Launched");
             }
         });
+    }
+    
+    public void flipOnlineMode(){
+    	this.online_Mode = !this.online_Mode;
+    }
+    
+    public void flipSpecMode(){
+    	this.specMode = !this.specMode;
+    }
+
+    public boolean isOnline_Mode(){
+        return this.online_Mode;
+    }
+
+    public boolean isSpecMode() {
+        return specMode;
     }
 
     public void launchStartMenu() {
