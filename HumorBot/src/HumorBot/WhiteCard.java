@@ -16,6 +16,15 @@ public class WhiteCard {
 		this.weight = weight;
 	}
 	
+	/**
+	 * This constructor should only be used for a new/unrecognized card
+	 * @param answer
+	 */
+	public WhiteCard(String answer){
+		this.answer = answer;
+		this.weight = 0;
+	}
+	
 	public long getWeight(){
 		return this.weight;
 	}
