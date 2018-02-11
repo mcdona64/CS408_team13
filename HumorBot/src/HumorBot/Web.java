@@ -147,8 +147,10 @@ public class Web {
 		this.grabWebpage(gameURL);
 	}
 	
-	
-	public void parseBlackCards(String fn) {
+	/* Parses for Black Card
+	 * Stores string in class variable and returns string
+	 */
+	public String parseBlackCards(String fn) {
 		File f = new File(filePath + fn);
 		BufferedReader br = null;
 		try {
@@ -181,10 +183,9 @@ public class Web {
 			e.printStackTrace();
 		}
 		blackCardString = blackCard;
+		return blackCardString;
 	}
 	
-	
-	//<div class="game_hand"> contains cards in hand
 	/* Parses for White Cards in play and in player's hand
 	 * Stores values in ArrayLists for use by logic and database
 	 */
@@ -192,8 +193,6 @@ public class Web {
 		//"game_right_side"
 		boolean flag_whiteCardsInPlay = false;
 		boolean flag_whiteCardsInHand = false;
-		
-		
 		File f = new File(filePath + fn);
 		BufferedReader br = null;
 		try {
@@ -226,7 +225,7 @@ public class Web {
 					return;
 				}
 				if(buffer.contains("card_text")) {
-					System.out.println(buffer);
+					//System.out.println(buffer);
 					int beginIndex = buffer.indexOf(">");
 					int endIndex = buffer.indexOf("</");
 					//System.out.println(beginIndex);
