@@ -13,6 +13,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -377,6 +378,10 @@ public class Web {
 			System.out.println("\t" + e.getAnswer());
 		}
 		*/
+		Scanner in = new Scanner(System.in);
+		System.out.println("Please enter name");
+		String name = in.nextLine();
+		w.setNickName(name);
 		w.getToGamePage(w.getNickName());
 	}
 	
