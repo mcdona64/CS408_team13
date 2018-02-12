@@ -23,7 +23,7 @@ public class Web {
 	private MCF mcf;
 	private String url;
 	private int server;
-	private String nickname = "HumorBot";
+	private String nickname;
 	private static String filePath = "./web/";
 	private String fileName = "index.html";
 	private String fullFileName = filePath + fileName;
@@ -42,9 +42,7 @@ public class Web {
 		//fileNames.add("index.html");
 	}
 	
-	public void setUrl(String url) {
-		this.url = url;
-	}
+	public void setUrl(String url) { this.url = url; }
 	
 	public void setServer(int s) {
 		this.server = s;
@@ -53,14 +51,12 @@ public class Web {
 	public int getServer() {
 		return this.server;
 	}
-	
+
 	public String getBlackCard() {
 		return this.blackCardString;
 	}
 	
-	public ArrayList<WhiteCard> getHand(){
-		return this.gameHand;
-	}
+	public ArrayList<WhiteCard> getHand(){ return this.gameHand; }
 
 	public void grabWebpage() {
 		String webURL = this.url;

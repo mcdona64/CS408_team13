@@ -195,6 +195,7 @@ public class MCF {
 	//These are the functions that we need 
 	private void initializeWebCrawler(){
 		this.crawler = new Web("http://www.pretendyoure.xyz/zy/");
+		this.crawler.setNickName(this.username);
 		this.crawler.grabWebpage();
 		//TODO add getting to the webpage
 	}

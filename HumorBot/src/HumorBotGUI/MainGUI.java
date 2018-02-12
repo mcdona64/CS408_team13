@@ -12,7 +12,7 @@ public class MainGUI {
     private JPanel panelMenu;
     private boolean online_Mode;
     private boolean specMode;
-    
+    private String nameEntry;
 
     public MainGUI() {
     	this.online_Mode = this.specMode = false;
@@ -26,6 +26,7 @@ public class MainGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                flipOnlineMode();
+               nameEntry = nameSet();
             }
         });
         spectatorMode.addActionListener(new ActionListener() {
@@ -33,6 +34,7 @@ public class MainGUI {
             public void actionPerformed(ActionEvent e) {
                 flipSpecMode();
                 flipOnlineMode();
+                nameEntry = nameSet();
             }
         });
         options.addActionListener(new ActionListener() {
@@ -59,6 +61,10 @@ public class MainGUI {
         return specMode;
     }
 
+    public String getName(){
+        return this.nameEntry;
+    }
+
     public void launchStartMenu() {
         JFrame frame = new JFrame("MainMenu");
         frame.setContentPane(new MainGUI().panelMenu);
@@ -70,5 +76,9 @@ public class MainGUI {
     public static void main(String[] args) {
         MainGUI m = new MainGUI();
         m.launchStartMenu();
+    }
+
+    public String nameSet(){
+        return JOptionPane.showInputDialog(null, "Please input your name");
     }
 }
