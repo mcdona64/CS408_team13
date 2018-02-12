@@ -211,7 +211,11 @@ public class MCF {
 
 	public void initalize(boolean[] flags){
 		setFlags(flags);
-		this.databaseInterface = new DatabaseInterface();
+		try {
+			this.databaseInterface = new DatabaseInterface();
+		} catch (ConnectionNotEstablishedException e) {
+			e.printStackTrace();
+		}
 		if(this.flags[0]){
 			initializeWebCrawler();
 		}
