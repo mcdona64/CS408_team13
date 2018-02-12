@@ -214,7 +214,8 @@ public class MCF {
 		try {
 			this.databaseInterface = new DatabaseInterface();
 		} catch (ConnectionNotEstablishedException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("ConnectionNotEstablishedException error caught");
 		}
 		if(this.flags[0]){
 			initializeWebCrawler();

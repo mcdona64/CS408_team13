@@ -13,12 +13,20 @@ public class DatabaseInterface {
     public DatabaseInterface() throws ConnectionNotEstablishedException {
         System.out.println("establishing connection...");
         try {
-            this.con = DriverManager.getConnection("128.211.255.58", "root", "password");
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // this will ceate the connection
+            this.con = DriverManager.getConnection("jdbc:mysql://128.211.255.58:3306/humorbot", "sqluser", "sqluserpw");
 
         } catch (SQLException e) {
             System.out.println("connection failed to be established");
+            System.out.println(e.getMessage());
+            throw new ConnectionNotEstablishedException();
+        } catch (ClassNotFoundException e) {
+            System.out.println("failed to load JDBC drivers");
             throw new ConnectionNotEstablishedException();
         }
+        System.out.println("connection established");
     }
 
     public void closeConnection(){
