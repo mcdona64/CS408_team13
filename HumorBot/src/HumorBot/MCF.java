@@ -63,6 +63,14 @@ public class MCF {
 	}
 
 	/**
+	 * this is a hard setter that exists only for testing purposes
+	 * @param hand, the hardcoded hand
+	 */
+	public void hardCodeHand(ArrayList<WhiteCard> hand){
+		this.hand = hand;
+	}
+
+	/**
 	 * This an average function, it gets the average of our hand.
 	 * @param average = a flag to see if we want to get the average of the AverageWeights
 	 * @return the average
@@ -152,26 +160,47 @@ public class MCF {
 		for(int i = 1; i < this.hand.size(); i++){
 			WhiteCard curr = this.hand.get(i);
 			if(curr.getAverageWeight() < min){
-				min = curr.getWeight();
+				min = curr.getAverageWeight();
 				best_choice = i;
 			}else if(curr.getAverageWeight() == min){
-				WhiteCard prevMax = this.hand.get(best_choice);
-				best_choice = (prevMax.getWeight() >= curr.getWeight())? best_choice: i;
+				WhiteCard prevMin = this.hand.get(best_choice);
+				best_choice = (prevMin.getAverageWeight() <= curr.getAverageWeight())? best_choice: i;
 			}
 		}
 		return best_choice;
 	}
-	
+
+	/**
+	 * this is poorly made, but until we get a better method, it will have to do.
+	 * @param numBlanks
+	 * @param throaway
+	 * @return
+	 */
 	public ArrayList<Integer> assessHandMultipleBlanks(int numBlanks, boolean throaway){
 		ArrayList<Integer> choices = new ArrayList<Integer>();
 		if(throaway){
 			for (int i = 0; i < numBlanks; i++){
-				ArrayList<WhiteCard> prevHand = this.hand;
+				ArrayList<WhiteCard> prevHand = new ArrayList<WhiteCard>();
+				for (int e = 0; e < this.hand.size(); e++)
+					prevHand.add(this.hand.get(e));
 				for(int j = 0; j < choices.size(); j++){
-					this.hand.remove(choices.get(j));
+					int f;
+					for(f = 0; f < this.hand.size(); f++){
+						if(this.hand.get(f).equals(prevHand.get((int)choices.get(j)))){
+							break;
+						}
+					}
+					this.hand.remove(f);
 				}
 				int toSend = assessHandThrowaway();
-				choices.add(prevHand.indexOf(this.hand.get(toSend)));
+				//choices.add(prevHand.indexOf(this.hand.get(toSend)));
+				for(int j = 0; j < prevHand.size(); j++){
+					if(prevHand.get(j).equals(this.hand.get(toSend))){
+						choices.add(j);
+						break;
+					}
+				}
+				System.out.println(choices.get(choices.size() -1));
 				this.hand = prevHand;
 			}
 		}else{
@@ -206,5 +235,19 @@ public class MCF {
 	 */
 	public void doStuff(){
 		//TODO: Implement
+	}
+
+	/**
+	 * FOR TESTING PURPOSES ONLY
+	 * @param args
+	 */
+	public static void main(String[] args){
+		MCF mcf = new MCF("Test");
+		ArrayList<WhiteCard> m = new ArrayList<WhiteCard>();
+		for(int i =0 ; i < 6; i++)
+			m.add(new WhiteCard("placeholder" + i, i, i+3));
+		mcf.hardCodeHand(m);
+		ArrayList<Integer> res = mcf.assessHandMultipleBlanks(3, true);
+		System.out.printf("%d, %d, %d\n", res.get(0), res.get(1), res.get(2));
 	}
 }
