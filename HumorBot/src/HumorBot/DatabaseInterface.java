@@ -56,6 +56,23 @@ public class DatabaseInterface {
         connected = false;
     }
 
+    protected void executeCustomQuery(String query) throws ConnectionNotEstablishedException {
+        // if we are currently unconnected connect
+        if (!connected){
+            connect();
+        }
+
+        try {
+            // executes the query and returns true on success
+            stmt.execute(query);
+            System.out.println("executed: " + query);
+        } catch (SQLException e) {
+            // catch errors with the connection
+            System.out.println("Error with connection!");
+            closeConnection();
+        }
+    }
+
     public WhiteCard getWhiteCard(String name){
         // TODO
         return null;
@@ -97,6 +114,11 @@ public class DatabaseInterface {
         }
     }
 
+    // overloaded function to add from class
+    public boolean addWhiteCard(WhiteCard card) throws ConnectionNotEstablishedException {
+        return addWhiteCard(card.getAnswer());
+    }
+
     public boolean addBlackCard(String name, int number_of_blanks) throws ConnectionNotEstablishedException {
         // if we are currently unconnected connect
         if (!connected){
@@ -116,6 +138,11 @@ public class DatabaseInterface {
             closeConnection();
             return false;
         }
+    }
+
+    // overloaded function to add from class
+    public boolean addBlackCard(BlackCard card) throws ConnectionNotEstablishedException {
+        return addBlackCard(card.getQuestion(), card.getBlanks());
     }
 
     public int removeWhiteCard() {
