@@ -151,9 +151,8 @@ public class DatabaseInterface {
         }
     }
 
-    public BlackCard getBlackCard(BlackCard card){
-        // TODO
-        return null;
+    public BlackCard getBlackCard(BlackCard card) throws ConnectionNotEstablishedException {
+        return getBlackCard(card.getQuestion());
     }
 
     public boolean addWhiteCard(String name) throws ConnectionNotEstablishedException {
@@ -208,14 +207,58 @@ public class DatabaseInterface {
         return addBlackCard(card.getQuestion(), card.getBlanks());
     }
 
-    public int removeWhiteCard() {
-        // TODO
-        return -1;
+    public boolean removeWhiteCard(String name) throws ConnectionNotEstablishedException {
+        // if we are currently unconnected connect
+        if (!connected){
+            connect();
+        }
+
+        // check that the card is actually in the database
+        if (null == getWhiteCard(name)){
+            System.out.println("Card not in database!");
+            return false;
+        }
+
+        // create the query to remove a white card to the table
+        String query = "DELETE FROM white_card WHERE name='" + name + "'";
+        try {
+            // executes the query and returns true on success
+            stmt.execute(query);
+            System.out.println("white card \"" + name + "\" removed from database");
+            return true;
+        } catch (SQLException e) {
+            // catch errors with the connection
+            System.out.println("Error with connection!");
+            closeConnection();
+            return false;
+        }
     }
 
-    public int removeBlackCard() {
-        // TODO
-        return -1;
+    public boolean removeBlackCard(String name) throws ConnectionNotEstablishedException {
+        // if we are currently unconnected connect
+        if (!connected){
+            connect();
+        }
+
+        // check that the card is actually in the database
+        if (null == getBlackCard(name)){
+            System.out.println("Card not in database!");
+            return false;
+        }
+
+        // create the query to remove a white card to the table
+        String query = "DELETE FROM black_card WHERE name='" + name + "'";
+        try {
+            // executes the query and returns true on success
+            stmt.execute(query);
+            System.out.println("black card \"" + name + "\" removed from database");
+            return true;
+        } catch (SQLException e) {
+            // catch errors with the connection
+            System.out.println("Error with connection!");
+            closeConnection();
+            return false;
+        }
     }
 
     public int resetDB() {

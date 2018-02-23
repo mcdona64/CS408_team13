@@ -230,6 +230,66 @@ public class DatabaseInterfaceTest {
         assert(result);
     }
 
+    @Test
+    void TestRemoveWhiteCard() {
+        boolean result = false;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            db.closeConnection();
+            db.addWhiteCard("test");
+            result = db.removeWhiteCard("test");
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+        tearDown();
+        assert(result);
+    }
+
+    @Test
+    void TestRemoveWhiteCardNotInDB() {
+        boolean result = false;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            db.closeConnection();
+            result = db.removeWhiteCard("test");
+            if (!result) {result = true;}
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+        tearDown();
+        assert(result);
+    }
+
+    @Test
+    void TestRemoveBlackCard() {
+        boolean result = false;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            db.closeConnection();
+            db.addBlackCard("test", 1);
+            result = db.removeBlackCard("test");
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+        tearDown();
+        assert(result);
+    }
+
+    @Test
+    void TestRemoveBlackCardNotInDB() {
+        boolean result = false;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            db.closeConnection();
+            result = db.removeBlackCard("test");
+            if (!result) {result = true;}
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+        tearDown();
+        assert(result);
+    }
+
 
     public static void tearDown() {
         // this will clean up the database after the tests are run
