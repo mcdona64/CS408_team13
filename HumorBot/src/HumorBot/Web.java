@@ -25,6 +25,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 
+
 public class Web {
 	private MCF mcf;
 	private String url;
@@ -39,6 +40,7 @@ public class Web {
 	private ArrayList<String> fileNames = new ArrayList<String>();
 	private ArrayList<String> urls = new ArrayList<String>();
 	private ArrayList<WhiteCard> winningHand = new ArrayList<WhiteCard>();
+	private ArrayList<Lobby> lobbyList = new ArrayList<Lobby>();
 
 	private WebDriver wd;
 	
@@ -339,24 +341,6 @@ public class Web {
 		name.sendKeys(nickname);
 		WebElement button_2 = driver.findElement(By.id("nicknameconfirm"));
 		button_2.click();
-		
-		WebElement gamelist = driver.findElement(By.id("game_list"));
-		
-		String script = "return document.getElementById('game_list').innerHTML";
-		JavascriptExecutor js = (JavascriptExecutor)driver;
-		js.executeScript(script, gamelist);
-		
-		
-		
-		//WebElement playButtom = driver.findElement(By.id("Join"));
-		//WebElement spectateButton = driver.findElement(By.id("Spectate"));
-		
-		
-		
-		
-		String src = driver.getPageSource();
-		
-		
 		//Should add functionality for pausing and waiting for GUI input for what game to choose.
 		//Look into PhantomJS for hiding web browser window
 		// v GUI can be updated with information from below v
@@ -374,31 +358,102 @@ public class Web {
 		 * 	-How many card sets
 		 * 	-Requires Password or not
 		 */
-		
-		
-		//Saves web page for reference if needed
-		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter(filePath + "gamePage.html"));
-			bw.write(src);
-			bw.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		saveWebpage("gamelist");
 	}
 	
-	public void saveWebpage() {
+	public void saveWebpage(String fileName) {
 		//Saves web page for reference if needed
 		String src = wd.getPageSource();
 				try {
-					BufferedWriter bw = new BufferedWriter(new FileWriter(filePath + "gamePage.html"));
+					BufferedWriter bw = new BufferedWriter(new FileWriter(filePath + fileName + ".html"));
 					bw.write(src);
 					bw.close();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+	}
+	
+	public void parseGames() {
+		File f = new File(filePath + "gamelist.html");
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader(f));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		String buffer;
+		String gameNum = "";
+		String lobbyHost = "";
+		String playerCount = "";
+		String maxPlayers = "";
+		String spectatorCount = "";
+		String maxSpectators = "";
+		String lobbyStatus = "";
+		boolean flag_gameNum = false;
+		boolean flag_lobbyHost = false;
+		boolean flag_playerCount = false;
+		boolean flag_maxPlayers = false;
+		boolean flag_spectatorCount = false;
+		boolean flag_maxSpectators = false;
+		boolean flag_lobbyStatus = false;
+		
+		try {
+			while((buffer = br.readLine()) != null) {
+				if(buffer.contains("div id=\"gamelist_lobby_")) {
+					int beginIndex = buffer.indexOf("lobby_");
+					int endIndex = buffer.indexOf("\" class");
+					gameNum = buffer.substring(beginIndex+("lobby_").length(), endIndex);
+					flag_gameNum = true;
+				} else if(buffer.contains("class=\"gamelist_lobby_host\">")) {
+					int beginIndex = buffer.indexOf(">");
+					int endIndex = buffer.indexOf("</");
+					lobbyHost = buffer.substring(beginIndex+1, endIndex);
+					flag_lobbyHost = true;
+				} else if(buffer.contains("class=\"gamelist_lobby_player_count\">")) {
+					int beginIndex = buffer.indexOf(">");
+					int endIndex = buffer.indexOf("</");
+					playerCount = buffer.substring(beginIndex+1, endIndex);
+					flag_playerCount = true;
+					int begin2Index = buffer.indexOf("max_players\">");
+					int end2Index = buffer.indexOf("</span>,");
+					maxPlayers = buffer.substring(begin2Index+("max_players\">").length(), end2Index);
+					flag_maxPlayers = true;
+				} else if(buffer.contains("class=\"gamelist_lobby_spectator_count\">")) {
+					int beginIndex = buffer.indexOf(">");
+					int endIndex = buffer.indexOf("</");
+					spectatorCount = buffer.substring(beginIndex+1, endIndex);
+					flag_spectatorCount = true;
+					int begin2Index = buffer.indexOf("max_spectators\">");
+					int end2Index = buffer.indexOf("</span>,");
+					maxPlayers = buffer.substring(begin2Index+("max_spectators\">").length(), end2Index);
+					flag_maxSpectators = true;
+				} else if(buffer.contains("class=\"gamelist_lobby_status\">")) {
+					int beginIndex = buffer.indexOf(">");
+					int endIndex = buffer.indexOf("</");
+					lobbyStatus = buffer.substring(beginIndex+1, endIndex);
+					flag_lobbyStatus = true;
+				}
+				if( flag_gameNum && flag_lobbyHost && flag_playerCount && flag_maxPlayers && flag_spectatorCount && flag_maxSpectators && flag_lobbyStatus) {
+					lobbyList.add(new Lobby(gameNum, lobbyHost, playerCount, maxPlayers, spectatorCount, maxSpectators, lobbyStatus));
+					flag_gameNum = false;
+					flag_lobbyHost = false;
+					flag_playerCount = false;
+					flag_maxPlayers = false;
+					flag_spectatorCount = false;
+					flag_maxSpectators = false;
+					flag_lobbyStatus = false;
+				}
+				
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 
@@ -425,6 +480,7 @@ public class Web {
 		//Choose 1, 2, 3 for getToGame();
 		//Need to implement getting farther to actually reaching a game
 		w.getToGame(1);
+		/*
 		w.parseBlackCards("gamePage.html");
 		System.out.println(w.getBlackCard());
 		System.out.println(w.b.getBlanks());
@@ -443,7 +499,7 @@ public class Web {
 		for(WhiteCard e : w.winningHand) {
 			System.out.println("\t" + e.getAnswer());
 		}
-		
+		*/
 		
 		
 		Scanner in = new Scanner(System.in);
@@ -459,7 +515,7 @@ public class Web {
 			System.out.println("Enter: 'p' to save Web page\n" + "Enter: 'stop' to close window");
 			String s = in.nextLine();
 			if(s.equals("p")) {
-				w.saveWebpage();
+				w.saveWebpage("manualSave");
 			} else if(s.equals("stop")) {
 				w.wd.close();
 				t = false;
