@@ -175,6 +175,61 @@ public class DatabaseInterfaceTest {
         assert(result);
     }
 
+    @Test
+        // this test may fail if since actual value is not actually checked in this test case
+    void TestGetBlackCard() {
+        boolean result = false;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            db.closeConnection();
+            result = db.addBlackCard("test",1);
+            BlackCard res = db.getBlackCard("test");
+            if (res != null && res.getQuestion().equals("test")){
+                result = true;
+            }
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+        tearDown();
+        assert(result);
+    }
+
+    @Test
+    void TestGetBlackCardNotInDB() {
+        boolean result = true;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            db.closeConnection();
+            BlackCard res = db.getBlackCard("test");
+            if (res != null && res.getQuestion().equals("test")){
+                result = false;
+            }
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+        tearDown();
+        assert(result);
+    }
+
+    @Test
+    void TestGetBlackCardWithMultipleEntries() {
+        boolean result = true;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            db.closeConnection();
+            db.addBlackCard("test",1);
+            db.addBlackCard("test",1);
+            BlackCard res = db.getBlackCard("test");
+            if (res != null && res.getQuestion().equals("test")){
+                result = false;
+            }
+        } catch (ConnectionNotEstablishedException e) {
+            result = true;
+        }
+        tearDown();
+        assert(result);
+    }
+
 
     public static void tearDown() {
         // this will clean up the database after the tests are run
