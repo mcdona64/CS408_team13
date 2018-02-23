@@ -234,6 +234,10 @@ public class DatabaseInterface {
         }
     }
 
+    public boolean removeWhiteCard(WhiteCard card) throws ConnectionNotEstablishedException {
+        return removeWhiteCard(card.getAnswer());
+    }
+
     public boolean removeBlackCard(String name) throws ConnectionNotEstablishedException {
         // if we are currently unconnected connect
         if (!connected){
@@ -261,9 +265,8 @@ public class DatabaseInterface {
         }
     }
 
-    public int resetDB() {
-        // TODO
-        return -1;
+    public boolean removeBlackCard(BlackCard card) throws ConnectionNotEstablishedException {
+        return removeBlackCard(card.getQuestion());
     }
 
     public int adjustWeights(WhiteCard winner, BlackCard blackcard){
