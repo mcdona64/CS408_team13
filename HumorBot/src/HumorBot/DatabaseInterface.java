@@ -73,14 +73,45 @@ public class DatabaseInterface {
         }
     }
 
-    public WhiteCard getWhiteCard(String name){
-        // TODO
-        return null;
+    public WhiteCard getWhiteCard(String name) throws ConnectionNotEstablishedException {
+        // if we are currently unconnected connect
+        if (!connected){
+            connect();
+        }
+
+        // create the query to add an item to the table
+        String query = "Select * from white_card where name='" + name + "'";
+        try {
+            // executes the query and returns true on success
+            ResultSet rs = stmt.executeQuery(query);
+            // check that we have found it
+            if(rs.next()){
+                // make the white card
+                WhiteCard res = new WhiteCard(rs.getString("name"));
+                // check we have not found multiple
+                if(rs.next()){
+                    // handle if multiple cards are added to the database
+                    System.out.println("Multiple white cards in database with that name");
+                    System.out.println("Database deprecated!");
+                    return null;
+                }
+                // return result if no other errors
+                return res;
+            } else {
+                // handle no white card not in database
+                System.out.println("No white card with that name!");
+                return null;
+            }
+        } catch (SQLException e) {
+            // catch errors with the connection
+            System.out.println("Error with connection!");
+            closeConnection();
+            return null;
+        }
     }
 
-    public WhiteCard getWhiteCard(WhiteCard card){
-        // TODO
-        return null;
+    public WhiteCard getWhiteCard(WhiteCard card) throws ConnectionNotEstablishedException {
+        return getWhiteCard(card.getAnswer());
     }
 
     public BlackCard getBlackCard(String name){

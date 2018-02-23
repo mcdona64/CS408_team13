@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 
 public class DatabaseInterfaceTest {
 
@@ -56,6 +57,7 @@ public class DatabaseInterfaceTest {
         } catch (ConnectionNotEstablishedException e) {
             result = false;
         }
+        tearDown();
         assert(result);
     }
 
@@ -70,6 +72,7 @@ public class DatabaseInterfaceTest {
         } catch (ConnectionNotEstablishedException e) {
             result = false;
         }
+        tearDown();
         assert(result);
     }
 
@@ -84,6 +87,7 @@ public class DatabaseInterfaceTest {
         } catch (ConnectionNotEstablishedException e) {
             result = true;
         }
+        tearDown();
         assert(result);
     }
 
@@ -97,6 +101,7 @@ public class DatabaseInterfaceTest {
         } catch (ConnectionNotEstablishedException e) {
             result = false;
         }
+        tearDown();
         assert(result);
     }
 
@@ -111,19 +116,76 @@ public class DatabaseInterfaceTest {
         } catch (ConnectionNotEstablishedException e) {
             result = false;
         }
+        tearDown();
         assert(result);
     }
 
-    @AfterClass
+    @Test
+        // this test may fail if since actual value is not actually checked in this test case
+    void TestGetWhiteCard() {
+        boolean result = false;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            db.closeConnection();
+            result = db.addWhiteCard("test");
+            WhiteCard res = db.getWhiteCard("test");
+            if (res != null && res.getAnswer().equals("test")){
+                result = true;
+            }
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+        tearDown();
+        assert(result);
+    }
+
+    @Test
+    void TestGetWhiteCardNotInDB() {
+        boolean result = true;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            db.closeConnection();
+            WhiteCard res = db.getWhiteCard("test");
+            if (res != null && res.getAnswer().equals("test")){
+                result = false;
+            }
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+        tearDown();
+        assert(result);
+    }
+
+    @Test
+    void TestGetWhiteCardWithMultipleEntries() {
+        boolean result = true;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            db.closeConnection();
+            db.addWhiteCard("test");
+            db.addWhiteCard("test");
+            WhiteCard res = db.getWhiteCard("test");
+            if (res != null && res.getAnswer().equals("test")){
+                result = false;
+            }
+        } catch (ConnectionNotEstablishedException e) {
+            result = true;
+        }
+        tearDown();
+        assert(result);
+    }
+
+
     public static void tearDown() {
         // this will clean up the database after the tests are run
+        System.out.println("Cleaning up");
         try {
             DatabaseInterface db = new DatabaseInterface();
             db.executeCustomQuery("delete from white_card where (name='test');");
             db.executeCustomQuery("delete from black_card where (name='test');");
             db.executeCustomQuery("ALTER TABLE white_card AUTO_INCREMENT = 1;");
             db.executeCustomQuery("ALTER TABLE black_card AUTO_INCREMENT = 1;");
-            System.out.println("\n\nDatabase Cleaned");
+            System.out.println("Database Cleaned");
         } catch (ConnectionNotEstablishedException e) {
             System.err.println("No Connection Established!");
             System.err.println("Database in unknown state!");
