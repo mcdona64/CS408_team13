@@ -15,10 +15,15 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jetty.util.StringUtil;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import net.sourceforge.htmlunit.corejs.javascript.Script;
 
 public class Web {
 	private MCF mcf;
@@ -28,11 +33,14 @@ public class Web {
 	private static String filePath = "./web/";
 	private String fileName = "index.html";
 	private String fullFileName = filePath + fileName;
-	private String blackCardString;
+	private BlackCard b;
 	private ArrayList<WhiteCard> whiteCardList = new ArrayList<WhiteCard>();
 	private ArrayList<WhiteCard> gameHand = new ArrayList<WhiteCard>();
 	private ArrayList<String> fileNames = new ArrayList<String>();
 	private ArrayList<String> urls = new ArrayList<String>();
+	private ArrayList<WhiteCard> winningHand = new ArrayList<WhiteCard>();
+
+	private WebDriver wd;
 	
 	public Web(String url){
 		this.url = url;
@@ -54,7 +62,7 @@ public class Web {
 	}
 
 	public String getBlackCard() {
-		return this.blackCardString;
+		return this.b.getQuestion();
 	}
 	
 	public ArrayList<WhiteCard> getHand(){ return this.gameHand; }
@@ -168,9 +176,9 @@ public class Web {
 	}
 	
 	/* Parses for Black Card
-	 * Stores string in class variable and returns string
+	 * Stores BlackCard string and blanks in a BlackCard
 	 */
-	public String parseBlackCards(String fn) {
+	public void parseBlackCards(String fn) {
 		File f = new File(filePath + fn);
 		BufferedReader br = null;
 		try {
@@ -202,17 +210,23 @@ public class Web {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		blackCardString = blackCard;
-		return blackCardString;
+		//Find numBlanks
+		int count = StringUtils.countMatches(blackCard, "____");
+		
+		b = new BlackCard(count, blackCard);
 	}
 	
 	/* Parses for White Cards in play and in player's hand
 	 * Stores values in ArrayLists for use by logic and database
 	 */
+	
+	
 	public void parseWhiteCards(String fn) {
 		//"game_right_side"
 		boolean flag_whiteCardsInPlay = false;
 		boolean flag_whiteCardsInHand = false;
+		boolean flag_winningWhiteCard = false;
+		
 		File f = new File(filePath + fn);
 		BufferedReader br = null;
 		try {
@@ -244,6 +258,17 @@ public class Web {
 					flag_whiteCardsInHand = false;
 					return;
 				}
+				if(buffer.contains("card whitecard selected")) {
+					flag_winningWhiteCard = true;
+				//	System.out.println("true");
+				} else {
+					if(buffer.contains("card_text")) {
+						
+					} else {
+						flag_winningWhiteCard = false;
+					//	System.out.println("false");
+					}
+				}
 				if(buffer.contains("card_text")) {
 					//System.out.println(buffer);
 					int beginIndex = buffer.indexOf(">");
@@ -255,14 +280,20 @@ public class Web {
 					//System.out.println(whiteCardString);
 					if(flag_whiteCardsInPlay) {
 						//Add whiteCard obj to ArrayList whiteCardList
-				//		System.out.println("Add White Card to whiteCardList");						
+						//System.out.println("Add White Card to whiteCardList");						
 						whiteCardList.add(new WhiteCard(whiteCardString));
 					} else if(flag_whiteCardsInHand) {
 						//Add whiteCard obj to ArrayList gameHand
-				//		System.out.println("Add White Card to gameHand");
+						//System.out.println("Add White Card to gameHand");
 						gameHand.add(new WhiteCard(whiteCardString));
 					} else {
 						//Do nothing
+					}
+					if(flag_winningWhiteCard) {
+						//System.out.println("Winning WhiteCard");
+						if(winningHand.size() < b.getBlanks()) {
+							winningHand.add(new WhiteCard(whiteCardString));
+						}
 					}
 				}
 			}
@@ -297,6 +328,7 @@ public class Web {
 		
 		System.setProperty("webdriver.chrome.driver", "ChromeDriver/chromedriver");
 		WebDriver driver = new ChromeDriver();
+		wd = driver;
 		driver.get(url);
 		driver.manage().window().maximize();
 		driver.getPageSource();
@@ -307,6 +339,20 @@ public class Web {
 		name.sendKeys(nickname);
 		WebElement button_2 = driver.findElement(By.id("nicknameconfirm"));
 		button_2.click();
+		
+		WebElement gamelist = driver.findElement(By.id("game_list"));
+		
+		String script = "return document.getElementById('game_list').innerHTML";
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript(script, gamelist);
+		
+		
+		
+		//WebElement playButtom = driver.findElement(By.id("Join"));
+		//WebElement spectateButton = driver.findElement(By.id("Spectate"));
+		
+		
+		
 		
 		String src = driver.getPageSource();
 		
@@ -330,7 +376,7 @@ public class Web {
 		 */
 		
 		
-		//Saves webpage for reference if needed
+		//Saves web page for reference if needed
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(filePath + "gamePage.html"));
 			bw.write(src);
@@ -341,6 +387,20 @@ public class Web {
 		}
 		
 	}
+	
+	public void saveWebpage() {
+		//Saves web page for reference if needed
+		String src = wd.getPageSource();
+				try {
+					BufferedWriter bw = new BufferedWriter(new FileWriter(filePath + "gamePage.html"));
+					bw.write(src);
+					bw.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	}
+	
 
 	/**
 	 * This is the function that actually chooses the answer in the web browser
@@ -364,25 +424,48 @@ public class Web {
 		w.grabWebpage();
 		//Choose 1, 2, 3 for getToGame();
 		//Need to implement getting farther to actually reaching a game
-		w.getToGame(2);
-		w.parseBlackCards("findWhiteCards.html");
-	//	System.out.println(w.getBlackCard());
-	//	System.out.println("Find White Cards");
-		w.parseWhiteCards("findWhiteCards.html");
-	//	System.out.println("Print White Cards in Play");
-	/*	for(WhiteCard e : w.whiteCardList) {
+		w.getToGame(1);
+		w.parseBlackCards("gamePage.html");
+		System.out.println(w.getBlackCard());
+		System.out.println(w.b.getBlanks());
+		
+		System.out.println("Find White Cards");
+		w.parseWhiteCards("gamePage.html");
+		System.out.println("Print White Cards in Play");
+		for(WhiteCard e : w.whiteCardList) {
 			System.out.println("\t" + e.getAnswer());
 		}
 		System.out.println("Print White Cards in Hand");
 		for(WhiteCard e : w.gameHand) {
 			System.out.println("\t" + e.getAnswer());
 		}
-		*/
+		System.out.println("Print Winning White Card(s)");
+		for(WhiteCard e : w.winningHand) {
+			System.out.println("\t" + e.getAnswer());
+		}
+		
+		
+		
 		Scanner in = new Scanner(System.in);
 		System.out.println("Please enter name");
 		String name = in.nextLine();
 		w.setNickName(name);
 		w.getToGamePage(w.getNickName());
+		
+		
+		boolean t = true;
+		//w.wd.close();
+		while(t) {
+			System.out.println("Enter: 'p' to save Web page\n" + "Enter: 'stop' to close window");
+			String s = in.nextLine();
+			if(s.equals("p")) {
+				w.saveWebpage();
+			} else if(s.equals("stop")) {
+				w.wd.close();
+				t = false;
+			}
+			
+		}
 	}
 	
 	
