@@ -73,24 +73,86 @@ public class DatabaseInterface {
         }
     }
 
-    public WhiteCard getWhiteCard(String name){
-        // TODO
-        return null;
+    public WhiteCard getWhiteCard(String name) throws ConnectionNotEstablishedException {
+        // if we are currently unconnected connect
+        if (!connected){
+            connect();
+        }
+
+        // create the query to add an item to the table
+        String query = "Select * from white_card where name='" + name + "'";
+        try {
+            // executes the query and returns true on success
+            ResultSet rs = stmt.executeQuery(query);
+            // check that we have found it
+            if(rs.next()){
+                // make the white card
+                WhiteCard res = new WhiteCard(rs.getString("name"));
+                // check we have not found multiple
+                if(rs.next()){
+                    // handle if multiple cards are added to the database
+                    System.out.println("Multiple white cards in database with that name");
+                    System.out.println("Database deprecated!");
+                    return null;
+                }
+                // return result if no other errors
+                return res;
+            } else {
+                // handle no white card not in database
+                System.out.println("No white card with that name!");
+                return null;
+            }
+        } catch (SQLException e) {
+            // catch errors with the connection
+            System.out.println("Error with connection!");
+            closeConnection();
+            return null;
+        }
     }
 
-    public WhiteCard getWhiteCard(WhiteCard card){
-        // TODO
-        return null;
+    public WhiteCard getWhiteCard(WhiteCard card) throws ConnectionNotEstablishedException {
+        return getWhiteCard(card.getAnswer());
     }
 
-    public BlackCard getBlackCard(String name){
-        // TODO
-        return null;
+    public BlackCard getBlackCard(String name) throws ConnectionNotEstablishedException {
+        // if we are currently unconnected connect
+        if (!connected){
+            connect();
+        }
+
+        // create the query to add an item to the table
+        String query = "Select * from black_card where name='" + name + "'";
+        try {
+            // executes the query and returns true on success
+            ResultSet rs = stmt.executeQuery(query);
+            // check that we have found it
+            if(rs.next()){
+                // make the white card
+                BlackCard res = new BlackCard(rs.getInt("number_of_blanks"), rs.getString("name"));
+                // check we have not found multiple
+                if(rs.next()){
+                    // handle if multiple cards are added to the database
+                    System.out.println("Multiple black cards in database with that name");
+                    System.out.println("Database deprecated!");
+                    return null;
+                }
+                // return result if no other errors
+                return res;
+            } else {
+                // handle no white card not in database
+                System.out.println("No black card with that name!");
+                return null;
+            }
+        } catch (SQLException e) {
+            // catch errors with the connection
+            System.out.println("Error with connection!");
+            closeConnection();
+            return null;
+        }
     }
 
-    public BlackCard getBlackCard(BlackCard card){
-        // TODO
-        return null;
+    public BlackCard getBlackCard(BlackCard card) throws ConnectionNotEstablishedException {
+        return getBlackCard(card.getQuestion());
     }
 
     public boolean addWhiteCard(String name) throws ConnectionNotEstablishedException {
@@ -145,19 +207,66 @@ public class DatabaseInterface {
         return addBlackCard(card.getQuestion(), card.getBlanks());
     }
 
-    public int removeWhiteCard() {
-        // TODO
-        return -1;
+    public boolean removeWhiteCard(String name) throws ConnectionNotEstablishedException {
+        // if we are currently unconnected connect
+        if (!connected){
+            connect();
+        }
+
+        // check that the card is actually in the database
+        if (null == getWhiteCard(name)){
+            System.out.println("Card not in database!");
+            return false;
+        }
+
+        // create the query to remove a white card to the table
+        String query = "DELETE FROM white_card WHERE name='" + name + "'";
+        try {
+            // executes the query and returns true on success
+            stmt.execute(query);
+            System.out.println("white card \"" + name + "\" removed from database");
+            return true;
+        } catch (SQLException e) {
+            // catch errors with the connection
+            System.out.println("Error with connection!");
+            closeConnection();
+            return false;
+        }
     }
 
-    public int removeBlackCard() {
-        // TODO
-        return -1;
+    public boolean removeWhiteCard(WhiteCard card) throws ConnectionNotEstablishedException {
+        return removeWhiteCard(card.getAnswer());
     }
 
-    public int resetDB() {
-        // TODO
-        return -1;
+    public boolean removeBlackCard(String name) throws ConnectionNotEstablishedException {
+        // if we are currently unconnected connect
+        if (!connected){
+            connect();
+        }
+
+        // check that the card is actually in the database
+        if (null == getBlackCard(name)){
+            System.out.println("Card not in database!");
+            return false;
+        }
+
+        // create the query to remove a white card to the table
+        String query = "DELETE FROM black_card WHERE name='" + name + "'";
+        try {
+            // executes the query and returns true on success
+            stmt.execute(query);
+            System.out.println("black card \"" + name + "\" removed from database");
+            return true;
+        } catch (SQLException e) {
+            // catch errors with the connection
+            System.out.println("Error with connection!");
+            closeConnection();
+            return false;
+        }
+    }
+
+    public boolean removeBlackCard(BlackCard card) throws ConnectionNotEstablishedException {
+        return removeBlackCard(card.getQuestion());
     }
 
     public int adjustWeights(WhiteCard winner, BlackCard blackcard){

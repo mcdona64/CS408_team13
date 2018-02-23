@@ -58,7 +58,11 @@ public class MCF {
 	public void setHand(ArrayList<WhiteCard> hand){
 		this.hand.clear();
 		for (int i = 0; i < hand.size(); i++){
+			try {
 				this.hand.add(databaseInterface.getWhiteCard(hand.get(i).getAnswer()));
+			} catch (ConnectionNotEstablishedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
