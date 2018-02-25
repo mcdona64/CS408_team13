@@ -156,13 +156,23 @@ public class MCF {
         if (true/*Something average weight to throw during a throaway round*/) {
             if (this.currentCard.getBlanks() <= 1)
                 this.crawler.chooseAnswer(assessHandNormal());
-            else
-                this.crawler.chooseAnswer(assessHandMultipleBlanks(this.currentCard.getBlanks(), false));
+            else{
+                try{
+                    this.crawler.chooseAnswer(assessHandMultipleBlanks(this.currentCard.getBlanks(), false));
+                }catch (CardCountException e){
+                    e.printStackTrace();
+                }
+            }
         } else {
             if (this.currentCard.getBlanks() <= 1)
                 this.crawler.chooseAnswer(assessHandThrowaway());
-            else
+            else{
+                try{
                 this.crawler.chooseAnswer(assessHandMultipleBlanks(this.currentCard.getBlanks(), true));
+                }catch (CardCountException e){
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -217,7 +227,12 @@ public class MCF {
      * @param throaway
      * @return
      */
-    public ArrayList<Integer> assessHandMultipleBlanks(int numBlanks, boolean throaway) {
+    public ArrayList<Integer> assessHandMultipleBlanks(int numBlanks, boolean throaway) throws CardCountException{
+        if(numBlanks >= this.hand.size()){
+            throw new CardCountException("Too many blanks in hand");
+        }else if(numBlanks <= 1){
+            throw new CardCountException("Only 1 or no blanks found, as opposed to the multiple blanks expected");
+        }
         ArrayList<Integer> choices = new ArrayList<Integer>();
         if (throaway) {
             for (int i = 0; i < numBlanks; i++) {
@@ -241,11 +256,21 @@ public class MCF {
                         break;
                     }
                 }
-                System.out.println(choices.get(choices.size() - 1));
+                //System.out.println(choices.get(choices.size() - 1));
                 this.hand = prevHand;
             }
         } else {
-            //TODO: Implement for Normal (accounting for weight);
+            ArrayList<Integer> best_Combo = new ArrayList<Integer>();
+            int max;
+            ArrayList<Integer> starting_pos = new ArrayList<Integer>();
+            for(int i = 0; i < numBlanks; i++)
+                starting_pos.add(i);
+            ArrayList<Integer> curr_pos = new ArrayList<Integer>();
+            for(int i = 0; i < numBlanks; i++)
+                curr_pos.add(i);
+            for(int i = 0; i < this.hand.size()-numBlanks; i++){
+                //TODO: Flesh out algorithm
+            }
         }
         return choices;
     }
@@ -289,12 +314,6 @@ public class MCF {
      * @param args
      */
     public static void main(String[] args) {
-        MCF mcf = new MCF("Test");
-        ArrayList<WhiteCard> m = new ArrayList<WhiteCard>();
-        for (int i = 0; i < 6; i++)
-            m.add(new WhiteCard("placeholder" + i, i, i + 3));
-        mcf.hardCodeHand(m);
-        ArrayList<Integer> res = mcf.assessHandMultipleBlanks(3, true);
-        System.out.printf("%d, %d, %d\n", res.get(0), res.get(1), res.get(2));
+        System.out.println("We have switched to junit babe.");
     }
 }
