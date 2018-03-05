@@ -337,10 +337,10 @@ public class DatabaseInterface {
         return adjustWeights(winner, blackcard.getQuestion());
     }
 
-    public int adjustWeights(WhiteCard winner, String blackcard){
+    public int adjustWeights(WhiteCard winner, String blackcard) throws ConnectionNotEstablishedException{
         return adjustWeights(winner.getAnswer(), blackcard);
     }
-    public int adjustWeights(WhiteCard whitecard, BlackCard blackcard){
+    public int adjustWeights(WhiteCard whitecard, BlackCard blackcard) throws ConnectionNotEstablishedException{
         return adjustWeights(whitecard.getAnswer(), blackcard.getQuestion());
     }
 
@@ -357,11 +357,12 @@ public class DatabaseInterface {
         }
 
         // create the query to add an item to the table
-        String query = "INSERT INTO combonations (name, number_of_blanks) VALUES ('" + name + "', " + number_of_blanks + ");";
+        String query = "INSERT INTO combonations (white_card_id, black_card_id) VALUES ("
+                + "(select * from white_card where name='" + whitecard + "'), " + "(select * from black_card where name='" + blackcard + "'));";
         try {
             // executes the query and returns true on success
             stmt.execute(query);
-            System.out.println("black card \"" + name + "\" added to database");
+            System.out.println("combo of " + whitecard + " and " + blackcard + " added to database");
             return true;
         } catch (SQLException e) {
             // catch errors with the connection

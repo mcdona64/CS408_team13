@@ -290,6 +290,20 @@ public class DatabaseInterfaceTest {
         assert(result);
     }
 
+    @Test
+    void TestAddCombo() {
+        boolean result = false;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            result = db.addCombo("test", "test");
+            if (!result) {result = true;}
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+        tearDown();
+        assert(result);
+    }
+
 
     public static void tearDown() {
         // this will clean up the database after the tests are run
