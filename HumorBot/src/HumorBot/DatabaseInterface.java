@@ -316,14 +316,14 @@ public class DatabaseInterface {
 
     // wc stands for weight change
     // pass in the amount you want the weight to be adjusted negative for less
-    public int adjustWeights(String winner, String blackcard){
+    public int adjustWeights(String winner, String blackcard) throws ConnectionNotEstablishedException {
         // check to see if the combo is already added
         if (getWeight(winner, blackcard) == -1){
             System.out.println("card combo not in database");
             // add combo if it is not in the database
-            int res = addCombo(winner, blackcard);
+            boolean res = addCombo(winner, blackcard);
             // check that it was added correctly
-            if (res != 0){
+            if (res){
                 System.out.println("failed to add combo");
                 return -1;
             }
@@ -333,7 +333,7 @@ public class DatabaseInterface {
         return -1;
     }
 
-    public int adjustWeights(String winner, BlackCard blackcard){
+    public int adjustWeights(String winner, BlackCard blackcard) throws ConnectionNotEstablishedException {
         return adjustWeights(winner, blackcard.getQuestion());
     }
 
@@ -350,35 +350,51 @@ public class DatabaseInterface {
 
 
 
-    public int addCombo(String whitecard, String blackcard){
-        // TODO
-        return -1;
+    public boolean addCombo(String whitecard, String blackcard) throws ConnectionNotEstablishedException {
+        // if we are currently unconnected connect
+        if (!connected){
+            connect();
+        }
+
+        // create the query to add an item to the table
+        String query = "INSERT INTO combonations (name, number_of_blanks) VALUES ('" + name + "', " + number_of_blanks + ");";
+        try {
+            // executes the query and returns true on success
+            stmt.execute(query);
+            System.out.println("black card \"" + name + "\" added to database");
+            return true;
+        } catch (SQLException e) {
+            // catch errors with the connection
+            System.out.println("Error with connection!");
+            closeConnection();
+            return false;
+        }
     }
 
-    public int addCombo(String whitecard, BlackCard blackcard){
+    public boolean addCombo(String whitecard, BlackCard blackcard) throws ConnectionNotEstablishedException {
         return addCombo(whitecard, blackcard.getQuestion());
     }
 
-    public int addCombo(WhiteCard whitecard, String blackcard){
+    public boolean addCombo(WhiteCard whitecard, String blackcard) throws ConnectionNotEstablishedException{
         return addCombo(whitecard.getAnswer(), blackcard);
     }
 
-    public int addCombo(WhiteCard whitecard, BlackCard blackcard){
+    public boolean addCombo(WhiteCard whitecard, BlackCard blackcard)throws ConnectionNotEstablishedException{
         return addCombo(whitecard.getAnswer(), blackcard.getQuestion());
     }
 
-    public int addComboMultipleBlanks(WhiteCard[] whiteCards, BlackCard blackCard, int numberOfBlanks){
+    public boolean addComboMultipleBlanks(WhiteCard[] whiteCards, BlackCard blackCard, int numberOfBlanks){
         // TODO
-        return -1;
+        return false;
     }
 
-    public int getAverageWeight(String blackCard){
+    public int getAverageWeight(String whitecard){
         //TODO
         return -1;
     }
 
-    public int getAverageWeight(BlackCard blackCard){
-        return getAverageWeight(blackCard.getQuestion());
+    public int getAverageWeight(WhiteCard whiteCard){
+        return getAverageWeight(whiteCard.getAnswer());
     }
 
 
