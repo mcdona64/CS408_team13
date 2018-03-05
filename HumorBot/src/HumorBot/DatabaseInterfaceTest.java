@@ -370,6 +370,22 @@ public class DatabaseInterfaceTest {
         assert(result);
     }
 
+    @Test
+    void TestGetWeight() {
+        boolean result = false;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            db.addWhiteCard("test");
+            db.addBlackCard("test", 1);
+            db.addCombo("test", "test");
+            result = db.getWeight("test", "test") == 0;
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+        tearDown();
+        assert(result);
+    }
+
 
     public static void tearDown() {
         // this will clean up the database after the tests are run
@@ -383,8 +399,8 @@ public class DatabaseInterfaceTest {
                 db.executeCustomQuery("delete from white_card where (id='" + whiteCardID + "');");
                 db.executeCustomQuery("delete from black_card where (id='" + blackCardID + "');");
             }
-            //db.executeCustomQuery("delete from white_card where (name='test');");
-            //db.executeCustomQuery("delete from black_card where (name='test');");
+            db.executeCustomQuery("delete from white_card where (name='test');");
+            db.executeCustomQuery("delete from black_card where (name='test');");
             db.executeCustomQuery("ALTER TABLE white_card AUTO_INCREMENT = 1;");
             db.executeCustomQuery("ALTER TABLE black_card AUTO_INCREMENT = 1;");
             System.out.println("Database Cleaned");

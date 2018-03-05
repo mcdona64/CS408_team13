@@ -271,7 +271,69 @@ public class DatabaseInterface {
 
     // returns -1 on not found
     public int getWeight(String winner, String blackcard) throws ConnectionNotEstablishedException{
-        return -1;
+        // if we are currently unconnected connect
+        if (!connected){
+            connect();
+        }
+
+        // get the ids of the cards we want
+        int whiteCardID = getWhiteCardID(winner);
+        int blackCardID = getBlackCardID(blackcard);
+
+        // check for bad values
+        if (whiteCardID == -1) {
+            System.out.println("white card not in database");
+            boolean res  = addWhiteCard(winner);
+            if (!res){
+                System.out.println("unable to add white card to database");
+                return -4;
+            }
+        } else if (whiteCardID < -1){
+            System.out.println("Error with getting white card database could be depricated");
+            return -5;
+        }
+        if (blackCardID == -1) {
+            System.out.println("Black card not in database");
+            boolean res = addBlackCard(blackcard, 1);
+            if (!res) {
+                System.out.println("unable to add black card to database");
+                return -6;
+            }
+        }else if (blackCardID < -1){
+            System.out.println("Error with getting black card database could be depricated");
+            return -7;
+        }
+
+        // create the query to add an item to the table
+        String query = "Select * from combonations where white_card_id=" + whiteCardID + " AND black_card_id=" + blackCardID + ";";
+        try {
+            // executes the query and returns true on success
+            ResultSet rs = stmt.executeQuery(query);
+            // check that we have found it
+            if(rs.next()){
+                // make the white card
+                int res = rs.getInt("weight");
+                // check we have not found multiple
+                if(rs.next()){
+                    // handle if multiple cards are added to the database
+                    System.out.println("Multiple white cards in database with that name");
+                    System.out.println("Database deprecated!");
+                    return -2;
+                }
+                // return result if no other errors
+                System.out.println("Weight: " + res);
+                return res;
+            } else {
+                // handle no white card not in database
+                System.out.println("No Combo in database with those cards!");
+                return -1;
+            }
+        } catch (SQLException e) {
+            // catch errors with the connection
+            System.out.println("Error with connection!");
+            closeConnection();
+            return -3;
+        }
     }
 
     public int getWeight(WhiteCard winner, String blackcard) throws ConnectionNotEstablishedException{
