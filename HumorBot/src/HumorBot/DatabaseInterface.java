@@ -367,6 +367,11 @@ public class DatabaseInterface {
         return addCombo(whitecard.getAnswer(), blackcard.getQuestion());
     }
 
+    public int addComboMultipleBlanks(WhiteCard[] whiteCards, BlackCard blackCard, int numberOfBlanks){
+        // TODO
+        return -1;
+    }
+
     public int getAverageWeight(String blackCard){
         //TODO
         return -1;
