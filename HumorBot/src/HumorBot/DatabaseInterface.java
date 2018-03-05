@@ -271,19 +271,14 @@ public class DatabaseInterface {
 
     // returns -1 on not found
     public int getWeight(String winner, String blackcard){
-        // check to see if the combo is already added
-            return -1;
+        return -1;
     }
 
     public int getWeight(WhiteCard winner, String blackcard){
-        // check to see if the combo is already added
-
         return getWeight(winner.getAnswer(), blackcard);
     }
 
     public int getWeight(String winner, BlackCard blackcard){
-        // check to see if the combo is already added
-
         return getWeight(winner, blackcard.getQuestion());
     }
 
@@ -339,18 +334,21 @@ public class DatabaseInterface {
     }
 
     public int adjustWeights(String winner, BlackCard blackcard){
-        // TODO
-        return -1;
+        return adjustWeights(winner, blackcard.getQuestion());
     }
 
     public int adjustWeights(WhiteCard winner, String blackcard){
-        // TODO
-        return -1;
+        return adjustWeights(winner.getAnswer(), blackcard);
     }
     public int adjustWeights(WhiteCard whitecard, BlackCard blackcard){
-        // TODO
+        return adjustWeights(whitecard.getAnswer(), blackcard.getQuestion());
+    }
+
+    public int adjustWeightsMultiple(WhiteCard[] whitecard, BlackCard blackcard, int numberOfBlanks){
         return -1;
     }
+
+
 
     public int addCombo(String whitecard, String blackcard){
         // TODO
