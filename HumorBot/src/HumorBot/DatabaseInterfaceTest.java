@@ -295,6 +295,8 @@ public class DatabaseInterfaceTest {
         boolean result = false;
         try {
             DatabaseInterface db = new DatabaseInterface();
+            db.addWhiteCard("test");
+            db.addBlackCard("test", 1);
             result = db.addCombo("test", "test");
             if (!result) {result = true;}
         } catch (ConnectionNotEstablishedException e) {

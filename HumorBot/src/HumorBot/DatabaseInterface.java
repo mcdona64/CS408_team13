@@ -270,30 +270,30 @@ public class DatabaseInterface {
     }
 
     // returns -1 on not found
-    public int getWeight(String winner, String blackcard){
+    public int getWeight(String winner, String blackcard) throws ConnectionNotEstablishedException{
         return -1;
     }
 
-    public int getWeight(WhiteCard winner, String blackcard){
+    public int getWeight(WhiteCard winner, String blackcard) throws ConnectionNotEstablishedException{
         return getWeight(winner.getAnswer(), blackcard);
     }
 
-    public int getWeight(String winner, BlackCard blackcard){
+    public int getWeight(String winner, BlackCard blackcard) throws ConnectionNotEstablishedException{
         return getWeight(winner, blackcard.getQuestion());
     }
 
-    public int getWeight(WhiteCard winner, BlackCard blackcard){
+    public int getWeight(WhiteCard winner, BlackCard blackcard) throws ConnectionNotEstablishedException{
         // check to see if the combo is already added
         return getWeight(winner.getAnswer(), blackcard.getQuestion());
     }
 
-    public int[] getBestPermitation(String blackcard, String[] whiteCards, int numberOfBlanks){
+    public int[] getBestPermitation(String blackcard, String[] whiteCards, int numberOfBlanks) throws ConnectionNotEstablishedException {
         // TODO
         int[] bad = {};
         return bad;
     }
 
-    public int[] getBestPermitation(String blackcard, WhiteCard[] whiteCards, int numberOfBlanks){
+    public int[] getBestPermitation(String blackcard, WhiteCard[] whiteCards, int numberOfBlanks) throws ConnectionNotEstablishedException{
         String[] cards = new String[numberOfBlanks];
         for (int i = 0; i < numberOfBlanks; i++){
             cards[i] = whiteCards[i].getAnswer();
@@ -301,11 +301,11 @@ public class DatabaseInterface {
         return getBestPermitation(blackcard, cards, numberOfBlanks);
     }
 
-    public int[] getBestPermitation(BlackCard blackcard, String[] whiteCards, int numberOfBlanks){
+    public int[] getBestPermitation(BlackCard blackcard, String[] whiteCards, int numberOfBlanks) throws ConnectionNotEstablishedException{
         return getBestPermitation(blackcard.getQuestion(), whiteCards, numberOfBlanks);
     }
 
-    public int[] getBestPermitation(BlackCard blackcard, WhiteCard[] whiteCards, int numberOfBlanks){
+    public int[] getBestPermitation(BlackCard blackcard, WhiteCard[] whiteCards, int numberOfBlanks) throws ConnectionNotEstablishedException{
         String[] cards = new String[numberOfBlanks];
         for (int i = 0; i < numberOfBlanks; i++){
             cards[i] = whiteCards[i].getAnswer();
@@ -344,7 +344,7 @@ public class DatabaseInterface {
         return adjustWeights(whitecard.getAnswer(), blackcard.getQuestion());
     }
 
-    public int adjustWeightsMultiple(WhiteCard[] whitecard, BlackCard blackcard, int numberOfBlanks){
+    public int adjustWeightsMultiple(WhiteCard[] whitecard, BlackCard blackcard, int numberOfBlanks) throws ConnectionNotEstablishedException{
         return -1;
     }
 
@@ -384,17 +384,17 @@ public class DatabaseInterface {
         return addCombo(whitecard.getAnswer(), blackcard.getQuestion());
     }
 
-    public boolean addComboMultipleBlanks(WhiteCard[] whiteCards, BlackCard blackCard, int numberOfBlanks){
+    public boolean addComboMultipleBlanks(WhiteCard[] whiteCards, BlackCard blackCard, int numberOfBlanks) throws ConnectionNotEstablishedException{
         // TODO
         return false;
     }
 
-    public int getAverageWeight(String whitecard){
+    public int getAverageWeight(String whitecard) throws ConnectionNotEstablishedException{
         //TODO
         return -1;
     }
 
-    public int getAverageWeight(WhiteCard whiteCard){
+    public int getAverageWeight(WhiteCard whiteCard) throws ConnectionNotEstablishedException{
         return getAverageWeight(whiteCard.getAnswer());
     }
 
