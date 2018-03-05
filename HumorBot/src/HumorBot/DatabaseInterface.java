@@ -269,8 +269,38 @@ public class DatabaseInterface {
         return removeBlackCard(card.getQuestion());
     }
 
-    public int adjustWeights(WhiteCard winner, BlackCard blackcard){
-        // TODO
+    // returns -1 on not found
+    public int getWeight(String winner, String blackcard){
+        // check to see if the combo is already added
+            return -1;
+    }
+
+    public int getWeight(WhiteCard winner, String blackcard){
+        // check to see if the combo is already added
+
+        return getWeight(winner.getAnswer(), blackcard);
+    }
+
+    public int getWeight(String winner, BlackCard blackcard){
+        // check to see if the combo is already added
+
+        return getWeight(winner, blackcard.getQuestion());
+    }
+
+    public int getWeight(WhiteCard winner, BlackCard blackcard){
+        // check to see if the combo is already added
+        return getWeight(winner.getAnswer(), blackcard.getQuestion());
+    }
+
+
+    // wc stands for weight change
+    // pass in the amount you want the weight to be adjusted negative for less
+    public int adjustWeights(String winner, String blackcard){
+        // check to see if the combo is already added
+        if (getWeight(winner, blackcard) == -1){
+
+        }
+
         return -1;
     }
 
@@ -283,9 +313,27 @@ public class DatabaseInterface {
         // TODO
         return -1;
     }
-
-    public int adjustWeights(String winner, String blackcard){
+    public int adjustWeights(WhiteCard whitecard, BlackCard blackcard){
         // TODO
         return -1;
     }
+
+    public int addCombo(String whitecard, String blackcard){
+        // TODO
+        return -1;
+    }
+
+    public int addCombo(String whitecard, BlackCard blackcard){
+        return addCombo(whitecard, blackcard.getQuestion());
+    }
+
+    public int addCombo(WhiteCard whitecard, String blackcard){
+        return addCombo(whitecard.getAnswer(), blackcard);
+    }
+
+    public int addCombo(WhiteCard whitecard, BlackCard blackcard){
+        return addCombo(whitecard.getAnswer(), blackcard.getQuestion());
+    }
+
+
 }
