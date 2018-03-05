@@ -348,7 +348,81 @@ public class DatabaseInterface {
         return -1;
     }
 
+    public int getWhiteCardID(String name) throws ConnectionNotEstablishedException {
+        // if we are currently unconnected connect
+        if (!connected){
+            connect();
+        }
 
+        // create the query to add an item to the table
+        String query = "Select * from white_card where name='" + name + "'";
+        try {
+            // executes the query and returns true on success
+            ResultSet rs = stmt.executeQuery(query);
+            // check that we have found it
+            if(rs.next()){
+                // make the white card
+                int res = rs.getInt("id");
+                // check we have not found multiple
+                if(rs.next()){
+                    // handle if multiple cards are added to the database
+                    System.out.println("Multiple white cards in database with that name");
+                    System.out.println("Database deprecated!");
+                    return -2;
+                }
+                // return result if no other errors
+                System.out.println("ID: " + res);
+                return res;
+            } else {
+                // handle no white card not in database
+                System.out.println("No white card with that name!");
+                return -1;
+            }
+        } catch (SQLException e) {
+            // catch errors with the connection
+            System.out.println("Error with connection!");
+            closeConnection();
+            return -3;
+        }
+    }
+
+    public int getBlackCardID(String name) throws ConnectionNotEstablishedException {
+        // if we are currently unconnected connect
+        if (!connected){
+            connect();
+        }
+
+        // create the query to add an item to the table
+        String query = "Select * from black_card where name='" + name + "'";
+        try {
+            // executes the query and returns true on success
+            ResultSet rs = stmt.executeQuery(query);
+            // check that we have found it
+            if(rs.next()){
+                // make the white card
+                int res = rs.getInt("id");
+                // check we have not found multiple
+                if(rs.next()){
+                    // handle if multiple cards are added to the database
+                    System.out.println("Multiple white cards in database with that name");
+                    System.out.println("Database deprecated!");
+                    return -2;
+                }
+                // return result if no other errors
+                System.out.println("ID: " + res);
+                return res;
+            } else {
+                // handle no white card not in database
+                System.out.println("No black card with that name!");
+                return -1;
+            }
+        } catch (SQLException e) {
+            // catch errors with the connection
+            System.out.println("Error with connection!");
+            closeConnection();
+            return -3;
+        }
+    }
 
     public boolean addCombo(String whitecard, String blackcard) throws ConnectionNotEstablishedException {
         // if we are currently unconnected connect
@@ -356,9 +430,14 @@ public class DatabaseInterface {
             connect();
         }
 
+        // get the ids of the cards we want
+        int whiteCardID = getWhiteCardID(whitecard);
+        int blackCardID = getBlackCardID(blackcard);
+
         // create the query to add an item to the table
         String query = "INSERT INTO combonations (white_card_id, black_card_id) VALUES ("
-                + "(select * from white_card where name='" + whitecard + "'), " + "(select * from black_card where name='" + blackcard + "'));";
+                + whiteCardID + ", " + blackCardID + ");";
+        System.out.println(query);
         try {
             // executes the query and returns true on success
             stmt.execute(query);
@@ -367,6 +446,7 @@ public class DatabaseInterface {
         } catch (SQLException e) {
             // catch errors with the connection
             System.out.println("Error with connection!");
+            System.out.println(e.getMessage());
             closeConnection();
             return false;
         }
