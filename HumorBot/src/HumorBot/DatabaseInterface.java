@@ -684,8 +684,29 @@ public class DatabaseInterface {
     }
 
     public int getAverageWeight(String whitecard) throws ConnectionNotEstablishedException{
-        //TODO
-        return -1;
+        // create the query to get average
+        int id = getWhiteCardID(whitecard, false);
+        String query = "Select AVG(weight) as averageWeight from (select * from combonations where white_card_id=" + id + ") temp;";
+        System.out.println(query);
+        try {
+            // executes the query and returns true on success
+            ResultSet rs = stmt.executeQuery(query);
+            // check that we have found it
+            if(rs.next()){
+                // get the avg weight
+                int res = rs.getInt("averageWeight");
+                return res;
+            } else {
+                // handle no white card not in database
+                System.out.println("No white card with that name!");
+                return -1;
+            }
+        } catch (SQLException e) {
+            // catch errors with the connection
+            System.out.println("Error with connection!");
+            closeConnection();
+            return -2;
+        }
     }
 
     public int getAverageWeight(WhiteCard whiteCard) throws ConnectionNotEstablishedException{

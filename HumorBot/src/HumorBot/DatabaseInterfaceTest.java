@@ -443,6 +443,34 @@ public class DatabaseInterfaceTest {
     }
 
 
+    @Test
+    void TestGetAverageWeight() {
+        boolean result = false;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            db.addWhiteCard("test");
+            db.addBlackCard("test1", 1);
+            db.addCombo("test", "test1");
+            db.adjustWeights("test", "test1");
+            db.adjustWeights("test", "test1");
+            db.addBlackCard("test2", 1);
+            db.addCombo("test", "test2");
+            db.adjustWeights("test", "test2");
+            db.adjustWeights("test", "test2");
+            db.addBlackCard("test3", 1);
+            db.addCombo("test", "test3");
+            db.adjustWeights("test", "test3");
+            db.adjustWeights("test", "test3");
+            int res = db.getAverageWeight("test");
+            System.out.println(res);
+            result = res == 2;
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+        tearDown();
+        assert(result);
+    }
+
     public static void tearDown() {
         // this will clean up the database after the tests are run
         System.out.println("Cleaning up");
