@@ -291,6 +291,38 @@ public class DatabaseInterfaceTest {
     }
 
     @Test
+    void TestgetWhiteCardID() {
+        boolean result = false;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            db.addWhiteCard("test");
+            if (db.getWhiteCardID("test") >= 0){
+                result = true;
+            }
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+        tearDown();
+        assert(result);
+    }
+
+    @Test
+    void TestgetBlackCardID() {
+        boolean result = false;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            db.addBlackCard("test", 1);
+            if (db.getBlackCardID("test") >= 0){
+                result = true;
+            }
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+        tearDown();
+        assert(result);
+    }
+
+    @Test
     void TestAddCombo() {
         boolean result = false;
         try {
@@ -298,7 +330,6 @@ public class DatabaseInterfaceTest {
             db.addWhiteCard("test");
             db.addBlackCard("test", 1);
             result = db.addCombo("test", "test");
-            if (!result) {result = true;}
         } catch (ConnectionNotEstablishedException e) {
             result = false;
         }
