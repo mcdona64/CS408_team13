@@ -292,29 +292,30 @@ public class DatabaseInterface {
         return getWeight(winner.getAnswer(), blackcard.getQuestion());
     }
 
-    public int getWeightMultipleWhiteCard(String blackcard, String[] whiteCards, int numberOfBlanks){
+    public int[] getBestPermitation(String blackcard, String[] whiteCards, int numberOfBlanks){
         // TODO
-        return -1;
+        int[] bad = {};
+        return bad;
     }
 
-    public int getWeightMultipleWhiteCard(String blackcard, WhiteCard[] whiteCards, int numberOfBlanks){
+    public int[] getBestPermitation(String blackcard, WhiteCard[] whiteCards, int numberOfBlanks){
         String[] cards = new String[numberOfBlanks];
         for (int i = 0; i < numberOfBlanks; i++){
             cards[i] = whiteCards[i].getAnswer();
         }
-        return getWeightMultipleWhiteCard(blackcard, cards, numberOfBlanks);
+        return getBestPermitation(blackcard, cards, numberOfBlanks);
     }
 
-    public int getWeightMultipleWhiteCard(BlackCard blackcard, String[] whiteCards, int numberOfBlanks){
-        return getWeightMultipleWhiteCard(blackcard.getQuestion(), whiteCards, numberOfBlanks);
+    public int[] getBestPermitation(BlackCard blackcard, String[] whiteCards, int numberOfBlanks){
+        return getBestPermitation(blackcard.getQuestion(), whiteCards, numberOfBlanks);
     }
 
-    public int getWeightMultipleWhiteCard(BlackCard blackcard, WhiteCard[] whiteCards, int numberOfBlanks){
+    public int[] getBestPermitation(BlackCard blackcard, WhiteCard[] whiteCards, int numberOfBlanks){
         String[] cards = new String[numberOfBlanks];
         for (int i = 0; i < numberOfBlanks; i++){
             cards[i] = whiteCards[i].getAnswer();
         }
-        return getWeightMultipleWhiteCard(blackcard.getQuestion(), cards, numberOfBlanks);
+        return getBestPermitation(blackcard.getQuestion(), cards, numberOfBlanks);
     }
 
 
