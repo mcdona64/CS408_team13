@@ -296,7 +296,7 @@ public class DatabaseInterfaceTest {
         try {
             DatabaseInterface db = new DatabaseInterface();
             db.addWhiteCard("test");
-            if (db.getWhiteCardID("test") >= 0){
+            if (db.getWhiteCardID("test", false) >= 0){
                 result = true;
             }
         } catch (ConnectionNotEstablishedException e) {
@@ -312,7 +312,7 @@ public class DatabaseInterfaceTest {
         try {
             DatabaseInterface db = new DatabaseInterface();
             db.addBlackCard("test", 1);
-            if (db.getBlackCardID("test") >= 0){
+            if (db.getBlackCardID("test", false) >= 0){
                 result = true;
             }
         } catch (ConnectionNotEstablishedException e) {
@@ -386,21 +386,77 @@ public class DatabaseInterfaceTest {
         assert(result);
     }
 
+    @Test
+    void TestGetWeightTwo() {
+        boolean result = false;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            db.addWhiteCard("test");
+            db.addBlackCard("test", 1);
+            db.addCombo("test", "test");
+            db.adjustWeights("test", "test");
+            result = db.getWeight("test", "test") == 1;
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+        tearDown();
+        assert(result);
+    }
+
+    @Test
+    void TestAddComboMultipleBlanks() {
+        boolean result = true;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            db.addWhiteCard("test1");
+            db.addWhiteCard("test2");
+            db.addBlackCard("test", 2);
+            String[] whitecards = {"test1", "test2"};
+            result = db.addComboMultipleBlanks(whitecards, "test", 2);
+            db.executeCustomQuery("delete from combonations2blanks where (black_card_id=" + db.getBlackCardID("test", false) + ");");
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+
+        tearDown();
+        assert(result);
+    }
+
+    @Test
+    void TestAddComboMultipleBlanksThreeBlanks() {
+        boolean result = true;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            db.addWhiteCard("test1");
+            db.addWhiteCard("test2");
+            db.addWhiteCard("test3");
+            db.addBlackCard("test", 2);
+            String[] whitecards = {"test1", "test2", "test3"};
+            result = db.addComboMultipleBlanks(whitecards, "test", 3);
+            db.executeCustomQuery("delete from combonations3blanks where (black_card_id=" + db.getBlackCardID("test", false) + ");");
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+
+        tearDown();
+        assert(result);
+    }
+
 
     public static void tearDown() {
         // this will clean up the database after the tests are run
         System.out.println("Cleaning up");
         try {
             DatabaseInterface db = new DatabaseInterface();
-            while (db.getBlackCardID("test") >= 0 || db.getWhiteCardID("test") >=0) {
-                int blackCardID = db.getBlackCardID("test");
-                int whiteCardID = db.getWhiteCardID("test");
+            while (db.getBlackCardID("REGEXP '^test'", true) >= 0 || db.getWhiteCardID("REGEXP '^test'", true) >=0) {
+                int blackCardID = db.getBlackCardID("REGEXP '^test'", true);
+                int whiteCardID = db.getWhiteCardID("REGEXP '^test'", true);
                 db.executeCustomQuery("delete from combonations where (white_card_id=" + whiteCardID + " OR black_card_id=" + blackCardID + ");");
                 db.executeCustomQuery("delete from white_card where (id='" + whiteCardID + "');");
                 db.executeCustomQuery("delete from black_card where (id='" + blackCardID + "');");
             }
-            db.executeCustomQuery("delete from white_card where (name='test');");
-            db.executeCustomQuery("delete from black_card where (name='test');");
+            db.executeCustomQuery("delete from white_card where (name REGEXP '^test');");
+            db.executeCustomQuery("delete from black_card where (name REGEXP '^test');");
             db.executeCustomQuery("ALTER TABLE white_card AUTO_INCREMENT = 1;");
             db.executeCustomQuery("ALTER TABLE black_card AUTO_INCREMENT = 1;");
             System.out.println("Database Cleaned");
