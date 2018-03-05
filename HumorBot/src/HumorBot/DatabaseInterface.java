@@ -292,12 +292,45 @@ public class DatabaseInterface {
         return getWeight(winner.getAnswer(), blackcard.getQuestion());
     }
 
+    public int getWeightMultipleWhiteCard(String blackcard, String[] whiteCards, int numberOfBlanks){
+        // TODO
+        return -1;
+    }
+
+    public int getWeightMultipleWhiteCard(String blackcard, WhiteCard[] whiteCards, int numberOfBlanks){
+        String[] cards = new String[numberOfBlanks];
+        for (int i = 0; i < numberOfBlanks; i++){
+            cards[i] = whiteCards[i].getAnswer();
+        }
+        return getWeightMultipleWhiteCard(blackcard, cards, numberOfBlanks);
+    }
+
+    public int getWeightMultipleWhiteCard(BlackCard blackcard, String[] whiteCards, int numberOfBlanks){
+        return getWeightMultipleWhiteCard(blackcard.getQuestion(), whiteCards, numberOfBlanks);
+    }
+
+    public int getWeightMultipleWhiteCard(BlackCard blackcard, WhiteCard[] whiteCards, int numberOfBlanks){
+        String[] cards = new String[numberOfBlanks];
+        for (int i = 0; i < numberOfBlanks; i++){
+            cards[i] = whiteCards[i].getAnswer();
+        }
+        return getWeightMultipleWhiteCard(blackcard.getQuestion(), cards, numberOfBlanks);
+    }
+
 
     // wc stands for weight change
     // pass in the amount you want the weight to be adjusted negative for less
     public int adjustWeights(String winner, String blackcard){
         // check to see if the combo is already added
         if (getWeight(winner, blackcard) == -1){
+            System.out.println("card combo not in database");
+            // add combo if it is not in the database
+            int res = addCombo(winner, blackcard);
+            // check that it was added correctly
+            if (res != 0){
+                System.out.println("failed to add combo");
+                return -1;
+            }
 
         }
 
