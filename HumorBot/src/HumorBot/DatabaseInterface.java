@@ -269,21 +269,58 @@ public class DatabaseInterface {
         return removeBlackCard(card.getQuestion());
     }
 
+    public boolean removeCombo(String whiteCard, String blackCard) throws ConnectionNotEstablishedException {
+        //TODO
+        return false;
+    }
+
+    public boolean removeCombo(WhiteCard whiteCard, String blackCard) throws ConnectionNotEstablishedException {
+        return removeCombo(whiteCard.getAnswer(), blackCard);
+    }
+
+    public boolean removeCombo(String whiteCard, BlackCard blackCard) throws ConnectionNotEstablishedException {
+        return removeCombo(whiteCard, blackCard.getQuestion());
+    }
+
+    public boolean removeCombo(WhiteCard whiteCard, BlackCard blackCard) throws ConnectionNotEstablishedException {
+        return removeCombo(whiteCard.getAnswer(), blackCard.getQuestion());
+    }
+
+    public boolean removeCombo(String[] whiteCards, String blackCard, int numberOfBlanks){
+        //TODO
+        return false;
+    }
+
+    public boolean removeCombo(WhiteCard[] whiteCards, String blackCard, int numberOfBlanks){
+        //TODO
+        return false;
+    }
+
+    public boolean removeCombo(String[] whiteCards, BlackCard blackCard, int numberOfBlanks){
+        //TODO
+        return false;
+    }
+
+    public boolean removeCombo(WhiteCard[] whiteCards, BlackCard blackCard, int numberOfBlanks){
+        //TODO
+        return false;
+    }
+
     // returns -1 on not found
-    public int getWeight(String winner, String blackcard) throws ConnectionNotEstablishedException{
+    public int getWeight(String whiteCard, String blackcard) throws ConnectionNotEstablishedException{
         // if we are currently unconnected connect
         if (!connected){
             connect();
         }
 
         // get the ids of the cards we want
-        int whiteCardID = getWhiteCardID(winner, false);
+        int whiteCardID = getWhiteCardID(whiteCard, false);
         int blackCardID = getBlackCardID(blackcard, false);
 
         // check for bad values
         if (whiteCardID == -1) {
             System.out.println("white card not in database");
-            boolean res  = addWhiteCard(winner);
+            boolean res  = addWhiteCard(whiteCard);
             if (!res){
                 System.out.println("unable to add white card to database");
                 return -4;
@@ -336,17 +373,22 @@ public class DatabaseInterface {
         }
     }
 
-    public int getWeight(WhiteCard winner, String blackcard) throws ConnectionNotEstablishedException{
-        return getWeight(winner.getAnswer(), blackcard);
+    public int getWeight(WhiteCard whiteCard, String blackcard) throws ConnectionNotEstablishedException{
+        return getWeight(whiteCard.getAnswer(), blackcard);
     }
 
-    public int getWeight(String winner, BlackCard blackcard) throws ConnectionNotEstablishedException{
-        return getWeight(winner, blackcard.getQuestion());
+    public int getWeight(String whiteCard, BlackCard blackcard) throws ConnectionNotEstablishedException{
+        return getWeight(whiteCard, blackcard.getQuestion());
     }
 
-    public int getWeight(WhiteCard winner, BlackCard blackcard) throws ConnectionNotEstablishedException{
+    public int getWeight(WhiteCard whiteCard, BlackCard blackcard) throws ConnectionNotEstablishedException{
         // check to see if the combo is already added
-        return getWeight(winner.getAnswer(), blackcard.getQuestion());
+        return getWeight(whiteCard.getAnswer(), blackcard.getQuestion());
+    }
+
+    public int getWeightMultipleBlanks(String[] whitecard, String blackcard) throws ConnectionNotEstablishedException{
+        //TODO
+        return -1;
     }
 
     // returns an integer array which is the indecies of the best possible white cards;
@@ -444,13 +486,105 @@ public class DatabaseInterface {
     public boolean adjustWeights(WhiteCard winner, String blackcard) throws ConnectionNotEstablishedException{
         return adjustWeights(winner.getAnswer(), blackcard);
     }
-    public boolean adjustWeights(WhiteCard whitecard, BlackCard blackcard) throws ConnectionNotEstablishedException{
-        return adjustWeights(whitecard.getAnswer(), blackcard.getQuestion());
+    public boolean adjustWeights(WhiteCard winner, BlackCard blackcard) throws ConnectionNotEstablishedException{
+        return adjustWeights(winner.getAnswer(), blackcard.getQuestion());
     }
 
-    public boolean adjustWeightsMultiple(WhiteCard[] whitecard, BlackCard blackcard, int numberOfBlanks) throws ConnectionNotEstablishedException{
-        //TODO
+    public boolean adjustWeights(String[] winners, String blackCard, int numberOfBlanks) throws ConnectionNotEstablishedException{
+        // check that length of white Cards is actually the number of blanks
+        if (winners.length != numberOfBlanks){
+            System.out.println("whiteCard array does not match the number of blanks!");
+            return false;
+        }
+
+        // holds table name
+        String tablename = "combonations" + numberOfBlanks + "blanks";
+
+        //check that table exists
+        try {
+            DatabaseMetaData meta = conn.getMetaData();
+            ResultSet res = meta.getTables(null, null, tablename, new String[]{"TABLE"});
+            if (!res.next()) {
+                // no table of this
+                addCombo(winners, blackCard, numberOfBlanks);
+            }
+        } catch (SQLException e) {
+            System.out.println("error with connection!");
+            return false;
+        }
+
+        // TODO below this point
         return false;
+        /*
+        // check to see if the combo is already added
+        if (getWeight(winner, blackcard) == -1){
+            System.out.println("card combo not in database");
+            // add combo if it is not in the database
+            boolean res = addCombo(winner, blackcard);
+            // check that it was added correctly
+            if (res){
+                System.out.println("failed to add combo");
+                return false;
+            }
+
+        }
+
+        // get the ids of the cards we want
+        int whiteCardID = getWhiteCardID(winner, false);
+        int blackCardID = getBlackCardID(blackcard, false);
+
+        // check for bad values
+        if (whiteCardID == -1) {
+            System.out.println("white card not in database");
+            boolean res  = addWhiteCard(winner);
+            if (!res){
+                System.out.println("unable to add white card to database");
+                return false;
+            }
+        } else if (whiteCardID < -1){
+            System.out.println("Error with getting white card database could be depricated");
+            return false;
+        }
+        if (blackCardID == -1) {
+            System.out.println("Black card not in database");
+            boolean res = addBlackCard(blackcard, 1);
+            if (!res) {
+                System.out.println("unable to add black card to database");
+                return false;
+            }
+        }else if (blackCardID < -1){
+            System.out.println("Error with getting black card database could be depricated");
+            return false;
+        }
+
+        // create the query to remove a white card to the table
+        String query = "UPDATE combonations SET weight = weight+1 WHERE white_card_id='" + whiteCardID + "' AND black_card_id='"
+                + blackCardID + "';";
+        try {
+            // executes the query and returns true on success
+            stmt.execute(query);
+            System.out.println("combo of " + winner + " and " + blackcard + " weight updated");
+            return true;
+        } catch (SQLException e) {
+            // catch errors with the connection
+            System.out.println("Error with connection!");
+            closeConnection();
+            return false;
+        }*/
+    }
+
+    public boolean adjustWeights(WhiteCard[] winners, BlackCard blackCard, int numberOfBlanks) throws ConnectionNotEstablishedException{
+        // check that length of white Cards is actually the number of blanks
+        if (winners.length != numberOfBlanks){
+            System.out.println("whiteCard array does not match the number of blanks!");
+            return false;
+        }
+
+        String[] wc = new String[numberOfBlanks];
+        for (int i = 0; i < numberOfBlanks; i++){
+            wc[i] = winners[i].getAnswer();
+        }
+        return adjustWeights(wc, blackCard.getQuestion(), numberOfBlanks);
     }
 
     public int getWhiteCardID(String name, boolean usingRegex) throws ConnectionNotEstablishedException {
@@ -605,7 +739,7 @@ public class DatabaseInterface {
 
 
 
-    public boolean addComboMultipleBlanks(String[] whiteCards, String blackCard, int numberOfBlanks) throws ConnectionNotEstablishedException{
+    public boolean addCombo(String[] whiteCards, String blackCard, int numberOfBlanks) throws ConnectionNotEstablishedException{
         // check that length of white Cards is actually the number of blanks
         if (whiteCards.length != numberOfBlanks){
             System.out.println("whiteCard array does not match the number of blanks!");
@@ -669,7 +803,7 @@ public class DatabaseInterface {
 
     }
 
-    public boolean addComboMultipleBlanks(WhiteCard[] whiteCards, BlackCard blackCard, int numberOfBlanks) throws ConnectionNotEstablishedException{
+    public boolean addCombo(WhiteCard[] whiteCards, BlackCard blackCard, int numberOfBlanks) throws ConnectionNotEstablishedException{
         // check that length of white Cards is actually the number of blanks
         if (whiteCards.length != numberOfBlanks){
             System.out.println("whiteCard array does not match the number of blanks!");
@@ -680,7 +814,25 @@ public class DatabaseInterface {
         for (int i = 0; i < numberOfBlanks; i++){
             wc[i] = whiteCards[i].getAnswer();
         }
-        return addComboMultipleBlanks(wc, blackCard.getQuestion(), numberOfBlanks);
+        return addCombo(wc, blackCard.getQuestion(), numberOfBlanks);
+    }
+
+    public boolean addCombo(String[] whiteCards, BlackCard blackCard, int numberOfBlanks) throws ConnectionNotEstablishedException{
+        return addCombo(whiteCards, blackCard.getQuestion(), numberOfBlanks);
+    }
+
+    public boolean addCombo(WhiteCard[] whiteCards, String blackCard, int numberOfBlanks) throws ConnectionNotEstablishedException{
+        // check that length of white Cards is actually the number of blanks
+        if (whiteCards.length != numberOfBlanks){
+            System.out.println("whiteCard array does not match the number of blanks!");
+            return false;
+        }
+
+        String[] wc = new String[numberOfBlanks];
+        for (int i = 0; i < numberOfBlanks; i++){
+            wc[i] = whiteCards[i].getAnswer();
+        }
+        return addCombo(wc, blackCard, numberOfBlanks);
     }
 
     public int getAverageWeight(String whitecard) throws ConnectionNotEstablishedException{
