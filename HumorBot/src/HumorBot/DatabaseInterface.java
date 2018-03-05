@@ -316,7 +316,7 @@ public class DatabaseInterface {
 
     // wc stands for weight change
     // pass in the amount you want the weight to be adjusted negative for less
-    public int adjustWeights(String winner, String blackcard) throws ConnectionNotEstablishedException {
+    public boolean adjustWeights(String winner, String blackcard) throws ConnectionNotEstablishedException {
         // check to see if the combo is already added
         if (getWeight(winner, blackcard) == -1){
             System.out.println("card combo not in database");
@@ -325,27 +325,68 @@ public class DatabaseInterface {
             // check that it was added correctly
             if (res){
                 System.out.println("failed to add combo");
-                return -1;
+                return false;
             }
 
         }
 
-        return -1;
+        // get the ids of the cards we want
+        int whiteCardID = getWhiteCardID(winner);
+        int blackCardID = getBlackCardID(blackcard);
+
+        // check for bad values
+        if (whiteCardID == -1) {
+            System.out.println("white card not in database");
+            boolean res  = addWhiteCard(winner);
+            if (!res){
+                System.out.println("unable to add white card to database");
+                return false;
+            }
+        } else if (whiteCardID < -1){
+            System.out.println("Error with getting white card database could be depricated");
+            return false;
+        }
+        if (blackCardID == -1) {
+            System.out.println("Black card not in database");
+            boolean res = addBlackCard(blackcard, 1);
+            if (!res) {
+                System.out.println("unable to add black card to database");
+                return false;
+            }
+        }else if (blackCardID < -1){
+            System.out.println("Error with getting black card database could be depricated");
+            return false;
+        }
+
+        // create the query to remove a white card to the table
+        String query = "UPDATE combonations SET weight = weight+1 WHERE white_card_id='" + whiteCardID + "' AND black_card_id='"
+                + blackCardID + "';";
+        try {
+            // executes the query and returns true on success
+            stmt.execute(query);
+            System.out.println("combo of " + winner + " and " + blackcard + " weight updated");
+            return true;
+        } catch (SQLException e) {
+            // catch errors with the connection
+            System.out.println("Error with connection!");
+            closeConnection();
+            return false;
+        }
     }
 
-    public int adjustWeights(String winner, BlackCard blackcard) throws ConnectionNotEstablishedException {
+    public boolean adjustWeights(String winner, BlackCard blackcard) throws ConnectionNotEstablishedException {
         return adjustWeights(winner, blackcard.getQuestion());
     }
 
-    public int adjustWeights(WhiteCard winner, String blackcard) throws ConnectionNotEstablishedException{
+    public boolean adjustWeights(WhiteCard winner, String blackcard) throws ConnectionNotEstablishedException{
         return adjustWeights(winner.getAnswer(), blackcard);
     }
-    public int adjustWeights(WhiteCard whitecard, BlackCard blackcard) throws ConnectionNotEstablishedException{
+    public boolean adjustWeights(WhiteCard whitecard, BlackCard blackcard) throws ConnectionNotEstablishedException{
         return adjustWeights(whitecard.getAnswer(), blackcard.getQuestion());
     }
 
-    public int adjustWeightsMultiple(WhiteCard[] whitecard, BlackCard blackcard, int numberOfBlanks) throws ConnectionNotEstablishedException{
-        return -1;
+    public boolean adjustWeightsMultiple(WhiteCard[] whitecard, BlackCard blackcard, int numberOfBlanks) throws ConnectionNotEstablishedException{
+        return false;
     }
 
     public int getWhiteCardID(String name) throws ConnectionNotEstablishedException {
@@ -434,9 +475,33 @@ public class DatabaseInterface {
         int whiteCardID = getWhiteCardID(whitecard);
         int blackCardID = getBlackCardID(blackcard);
 
+        // check for bad values
+        if (whiteCardID == -1) {
+            System.out.println("white card not in database");
+            boolean res  = addWhiteCard(whitecard);
+            if (!res){
+                System.out.println("unable to add white card to database");
+                return false;
+            }
+        } else if (whiteCardID < -1){
+            System.out.println("Error with getting white card database could be depricated");
+            return false;
+        }
+        if (blackCardID == -1) {
+            System.out.println("Black card not in database");
+            boolean res = addBlackCard(blackcard, 1);
+            if (!res) {
+                System.out.println("unable to add black card to database");
+                return false;
+            }
+        }else if (blackCardID < -1){
+            System.out.println("Error with getting black card database could be depricated");
+            return false;
+        }
+
         // create the query to add an item to the table
-        String query = "INSERT INTO combonations (white_card_id, black_card_id) VALUES ("
-                + whiteCardID + ", " + blackCardID + ");";
+        String query = "INSERT INTO combonations (white_card_id, black_card_id, weight) VALUES ("
+                + whiteCardID + ", " + blackCardID + ", 0);";
         System.out.println(query);
         try {
             // executes the query and returns true on success

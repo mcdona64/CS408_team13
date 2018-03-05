@@ -337,14 +337,54 @@ public class DatabaseInterfaceTest {
         assert(result);
     }
 
+    @Test
+    void TestAddComboMultipleEntriesWithSameName() {
+        boolean result = true;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            db.addWhiteCard("test");
+            db.addBlackCard("test", 1);
+            db.addWhiteCard("test");
+            db.addBlackCard("test", 1);
+            result = db.addCombo("test", "test");
+        } catch (ConnectionNotEstablishedException e) {
+            result = true;
+        }
+        tearDown();
+        assert(!result);
+    }
+
+    @Test
+    void TestAdjustWeights() {
+        boolean result = false;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            db.addWhiteCard("test");
+            db.addBlackCard("test", 1);
+            db.addCombo("test", "test");
+            result = db.adjustWeights("test", "test");
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+        tearDown();
+        assert(result);
+    }
+
 
     public static void tearDown() {
         // this will clean up the database after the tests are run
         System.out.println("Cleaning up");
         try {
             DatabaseInterface db = new DatabaseInterface();
-            db.executeCustomQuery("delete from white_card where (name='test');");
-            db.executeCustomQuery("delete from black_card where (name='test');");
+            while (db.getBlackCardID("test") >= 0 || db.getWhiteCardID("test") >=0) {
+                int blackCardID = db.getBlackCardID("test");
+                int whiteCardID = db.getWhiteCardID("test");
+                db.executeCustomQuery("delete from combonations where (white_card_id=" + whiteCardID + " OR black_card_id=" + blackCardID + ");");
+                db.executeCustomQuery("delete from white_card where (id='" + whiteCardID + "');");
+                db.executeCustomQuery("delete from black_card where (id='" + blackCardID + "');");
+            }
+            //db.executeCustomQuery("delete from white_card where (name='test');");
+            //db.executeCustomQuery("delete from black_card where (name='test');");
             db.executeCustomQuery("ALTER TABLE white_card AUTO_INCREMENT = 1;");
             db.executeCustomQuery("ALTER TABLE black_card AUTO_INCREMENT = 1;");
             System.out.println("Database Cleaned");
