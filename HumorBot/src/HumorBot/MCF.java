@@ -12,8 +12,8 @@ import java.lang.*;
  * This class is the main control flow for our AI
  */
 public class MCF {
-    long THROWAWAY_MAX = 10;
-    long THROWAWAY_AVERAGE = 5;
+    final long THROWAWAY_MAX = 10;
+    final long THROWAWAY_AVERAGE = 5;
     //Here is our hand
     private ArrayList<WhiteCard> hand = new ArrayList<WhiteCard>();
     //This is the username
@@ -171,7 +171,7 @@ public class MCF {
                     e.printStackTrace();
                 }
             }
-        }//throwaway round 
+        }//throwaway round
         else {
             if (this.currentCard.getBlanks() <= 1)
                 this.crawler.chooseAnswer(assessHandThrowaway());
