@@ -12,6 +12,8 @@ import java.lang.*;
  * This class is the main control flow for our AI
  */
 public class MCF {
+    long THROWAWAY_MAX = 10;
+    long THROWAWAY_AVERAGE = 5;
     //Here is our hand
     private ArrayList<WhiteCard> hand = new ArrayList<WhiteCard>();
     //This is the username
@@ -107,7 +109,7 @@ public class MCF {
      * This function will return the hand that is given to the user.
      */
     /*public void updateHand(){
-		this.hand = this.crawler.getHand();
+        this.hand = this.crawler.getHand();
 		for(int i = 0; i < this.hand.size(); i++){
 			//TODO implement database stuff
 			long weight = 0;
@@ -126,18 +128,22 @@ public class MCF {
         //get the number of blanks
         String blackCard = this.crawler.getBlackCard();
         String[] splitted = blackCard.split("_");
-        setCurrentCard(new BlackCard(splitted.length - 1, blackCard));
+        this.setCurrentCard(new BlackCard(splitted.length - 1, blackCard));
         setHand(this.crawler.getHand());
-        for (int i = 0; i < this.hand.size(); i++){
-            try{
-                this.hand.set(i, this.databaseInterface.getWhiteCard(this.hand.get(i)));
-            }catch (ConnectionNotEstablishedException e){
+        for (int i = 0; i < this.hand.size(); i++) {
+            try {
+                this.hand.set(i, new WhiteCard(this.hand.get(i).getAnswer(), this.databaseInterface.getWeight(this.hand.get(i), this.currentCard),
+                        this.databaseInterface.getAverageWeight(this.hand.get(i))));
+            } catch (ConnectionNotEstablishedException e) {
                 e.printStackTrace();
-            }catch (NullPointerException n){
-                try{
-                    this.databaseInterface.getWhiteCard(this.hand.get(i));
-                }catch (ConnectionNotEstablishedException conn){
-                    conn.printStackTrace();
+            } catch (NullPointerException n) {
+                try {
+                    this.databaseInterface.addWhiteCard(this.hand.get(i));
+                } catch (ConnectionNotEstablishedException e) {
+                    e.printStackTrace();
+                } catch (NullPointerException kill) {
+                    System.out.println("either hand or database is uninitialzed, which is no good");
+                    kill.printStackTrace();
                 }
             }
         }
@@ -153,27 +159,40 @@ public class MCF {
             }
         }
         long averageWeight = getCardAverage(false);
-        if (true/*Something average weight to throw during a throaway round*/) {
+        long best_weight = getCardMaxWeight();
+        //Not a throaway round
+        if (best_weight >= THROWAWAY_MAX || averageWeight >= THROWAWAY_AVERAGE) {
             if (this.currentCard.getBlanks() <= 1)
                 this.crawler.chooseAnswer(assessHandNormal());
-            else{
-                try{
+            else {
+                try {
                     this.crawler.chooseAnswer(assessHandMultipleBlanks(this.currentCard.getBlanks(), false));
-                }catch (CardCountException e){
+                } catch (CardCountException e) {
                     e.printStackTrace();
                 }
             }
-        } else {
+        }//throwaway round 
+        else {
             if (this.currentCard.getBlanks() <= 1)
                 this.crawler.chooseAnswer(assessHandThrowaway());
-            else{
-                try{
-                this.crawler.chooseAnswer(assessHandMultipleBlanks(this.currentCard.getBlanks(), true));
-                }catch (CardCountException e){
+            else {
+                try {
+                    this.crawler.chooseAnswer(assessHandMultipleBlanks(this.currentCard.getBlanks(), true));
+                } catch (CardCountException e) {
                     e.printStackTrace();
                 }
             }
         }
+    }
+
+    private long getCardMaxWeight() {
+        long best = this.hand.get(0).getWeight();
+        for (int i = 1; i < this.hand.size(); i++) {
+            if (this.hand.get(i).getWeight() >= best) {
+                best = this.hand.get(i).getWeight();
+            }
+        }
+        return best;
     }
 
     //These are the hand assessors for each individual situation
@@ -227,10 +246,10 @@ public class MCF {
      * @param throaway
      * @return
      */
-    public ArrayList<Integer> assessHandMultipleBlanks(int numBlanks, boolean throaway) throws CardCountException{
-        if(numBlanks >= this.hand.size()){
+    public ArrayList<Integer> assessHandMultipleBlanks(int numBlanks, boolean throaway) throws CardCountException {
+        if (numBlanks >= this.hand.size()) {
             throw new CardCountException("Too many blanks in hand");
-        }else if(numBlanks <= 1){
+        } else if (numBlanks <= 1) {
             throw new CardCountException("Only 1 or no blanks found, as opposed to the multiple blanks expected");
         }
         ArrayList<Integer> choices = new ArrayList<Integer>();
@@ -260,16 +279,20 @@ public class MCF {
                 this.hand = prevHand;
             }
         } else {
-            ArrayList<Integer> best_Combo = new ArrayList<Integer>();
-            int max;
-            ArrayList<Integer> starting_pos = new ArrayList<Integer>();
-            for(int i = 0; i < numBlanks; i++)
-                starting_pos.add(i);
-            ArrayList<Integer> curr_pos = new ArrayList<Integer>();
-            for(int i = 0; i < numBlanks; i++)
-                curr_pos.add(i);
-            for(int i = 0; i < this.hand.size()-numBlanks; i++){
-                //TODO: Flesh out algorithm
+            try {
+                WhiteCard[] g = new WhiteCard[this.hand.size()];
+                for (int i = 0; i < this.hand.size(); i++) {
+                    g[i] = this.hand.get(i);
+                }
+                int[] i = this.databaseInterface.getBestPermitation(this.currentCard, g, numBlanks);
+                for (int j = 0; j < i.length; j++) {
+                    choices.add(i[j]);
+                }
+            } catch (ConnectionNotEstablishedException f) {
+                f.printStackTrace();
+            } catch (NullPointerException n) {
+                System.out.println("Database interface not initialized");
+                n.printStackTrace();
             }
         }
         return choices;
@@ -287,7 +310,7 @@ public class MCF {
             initializeWebCrawler();
         }
         if (this.flags[1]) {
-            //TODO: Initialize Spectator Mode
+            System.out.println("Spectator Mode: has been initlialized.");
         }
     }
 
