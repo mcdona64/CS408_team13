@@ -320,7 +320,6 @@ public class MCF {
         this.crawler = new Web("http://www.pretendyoure.xyz/zy/");
         this.crawler.setNickName(this.username);
         this.crawler.grabWebpage();
-        //TODO add getting to the webpage
     }
 
     /**
@@ -328,7 +327,62 @@ public class MCF {
      * Don't know how that will be done. but when we do it will be a doozy.
      */
     public void doStuff() {
-        //TODO: Implement, so we can run the web
+        try {
+            for(;;){
+                //TODO: Add Never-ending gui display here
+                try{
+                    for(;;){
+                        //Connect to a game Think I may be missing things
+                        this.crawler.parseGames();
+                        if(this.crawler.getLobbyList().size() == 0){
+                            throw new Game_Over_Excpetion();
+                        }
+                        Lobby curr_Lobby = null;
+                        for(int i = 0; i < this.crawler.getLobbyList().size(); i++){
+                            if(this.flags[1]){
+                                if (this.crawler.getLobbyList().get(i).getSpectatorCount() >= this.crawler.getLobbyList().get(i).getMaxSpectators()){
+                                    continue;
+                                }else {
+                                    curr_Lobby = this.crawler.getLobbyList().get(i);
+                                    //TODO: join lobby in web crawler as spectator
+                                    break;
+                                }
+                            }else{
+                                if(this.crawler.getLobbyList().get(i).getPlayerCount() >= this.crawler.getLobbyList().get(i).getMaxPlayers()){
+                                    continue;
+                                }else {
+                                    curr_Lobby = this.crawler.getLobbyList().get(i);
+                                    //TODO: join lobby in web crawler as player
+                                    break;
+                                }
+                            }
+                        }
+                        if(curr_Lobby == null){
+                            throw new Exit_Automation_Exception("No games with space found in this server");
+                        }
+                        //Now for the actual play
+                        for (;;){
+                            if(!this.flags[1]){
+                                //updates handled in makeDecision
+                                this.makeDecision();
+                            }
+                            System.out.println("Waiting");
+                            //find a way to actually wait
+                            try {
+                                this.databaseInterface.adjustWeights("Temp Whitecard", "Temp BlackCard");
+                            }catch (ConnectionNotEstablishedException u){
+                                u.printStackTrace();
+                                return;
+                            }
+                        }
+                    }
+                }catch (Game_Over_Excpetion r){
+                    System.out.println("Game ended, finding new Game");
+                }
+            }
+        }catch (Exit_Automation_Exception e){
+            e.cheeseIt(this.flags[1]);
+        }
     }
 
     /**

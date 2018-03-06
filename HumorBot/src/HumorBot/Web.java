@@ -69,6 +69,8 @@ public class Web {
 	
 	public ArrayList<WhiteCard> getHand(){ return this.gameHand; }
 
+	public ArrayList<Lobby> getLobbyList() { return lobbyList; }
+
 	public void grabWebpage() {
 		String webURL = this.url;
 		URL u;
