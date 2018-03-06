@@ -27,20 +27,20 @@ public class MCFTest {
     }
 
     @Test
-    public void TestMCFMultExceptionTooMany(){
+    public void TestMCFMultExceptionTooMany() {
         MCF mcf = new MCF("Test");
         ArrayList<WhiteCard> m = new ArrayList<WhiteCard>();
         try {
             ArrayList<Integer> res = mcf.assessHandMultipleBlanks(3, true);
-            assert(false);
+            assert (false);
         } catch (CardCountException e) {
-            assert(true);
+            assert (true);
             e.printStackTrace();
         }
     }
 
     @Test
-    public void TestMCFMultExceptionNotEnough(){
+    public void TestMCFMultExceptionNotEnough() {
         MCF mcf = new MCF("Test");
         ArrayList<WhiteCard> m = new ArrayList<WhiteCard>();
         for (int i = 0; i < 6; i++)
@@ -48,9 +48,9 @@ public class MCFTest {
         mcf.hardCodeHand(m);
         try {
             ArrayList<Integer> res = mcf.assessHandMultipleBlanks(1, true);
-            assert(false);
+            assert (false);
         } catch (CardCountException e) {
-            assert(true);
+            assert (true);
             e.printStackTrace();
         }
     }
@@ -87,7 +87,7 @@ public class MCFTest {
             assert (m.size() == 6);
             assert (res.size() == 3);
             for (int i = 0; i < 3; i++)
-                assert (res.get(i) == i+3);
+                assert (res.get(i) == i + 3);
         } catch (CardCountException e) {
             e.printStackTrace();
         }
