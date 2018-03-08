@@ -412,7 +412,7 @@ public class DatabaseInterfaceTest {
             db.addWhiteCard("test2");
             db.addBlackCard("test", 2);
             String[] whitecards = {"test1", "test2"};
-            result = db.addComboMultipleBlanks(whitecards, "test", 2);
+            result = db.addCombo(whitecards, "test", 2);
             db.executeCustomQuery("delete from combonations2blanks where (black_card_id=" + db.getBlackCardID("test", false) + ");");
         } catch (ConnectionNotEstablishedException e) {
             result = false;
@@ -432,7 +432,7 @@ public class DatabaseInterfaceTest {
             db.addWhiteCard("test3");
             db.addBlackCard("test", 2);
             String[] whitecards = {"test1", "test2", "test3"};
-            result = db.addComboMultipleBlanks(whitecards, "test", 3);
+            result = db.addCombo(whitecards, "test", 3);
             db.executeCustomQuery("delete from combonations3blanks where (black_card_id=" + db.getBlackCardID("test", false) + ");");
         } catch (ConnectionNotEstablishedException e) {
             result = false;
@@ -467,6 +467,27 @@ public class DatabaseInterfaceTest {
         } catch (ConnectionNotEstablishedException e) {
             result = false;
         }
+        tearDown();
+        assert(result);
+    }
+
+    @Test
+    void TestAdjustWeightsMultipleBlanksThreeBlanks() {
+        boolean result = true;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            db.addWhiteCard("test1");
+            db.addWhiteCard("test2");
+            db.addWhiteCard("test3");
+            db.addBlackCard("test", 2);
+            String[] whitecards = {"test1", "test2", "test3"};
+            db.addCombo(whitecards, "test", 3);
+            result = db.adjustWeights(whitecards, "test", 3);
+            db.executeCustomQuery("delete from combonations3blanks where (black_card_id=" + db.getBlackCardID("test", false) + ");");
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+
         tearDown();
         assert(result);
     }
