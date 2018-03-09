@@ -6,27 +6,27 @@ public class WhiteCard {
 	private long average;
 	private String cardID;
 	
-	public WhiteCard(String answer, long weight, long average, String cardID){
+	public WhiteCard(String answer, long weight, long average){
 		this.answer = answer;
 		this.weight = weight;
 		this.average = average;
-		this.cardID = cardID;
+
 	}
 	
-	public WhiteCard(String answer, long weight, String cardID){
+	public WhiteCard(String answer, long weight){
 		this.answer = answer;
 		this.weight = weight;
-		this.cardID = cardID;
+		;
 	}
 	
 	/**
 	 * This constructor should only be used for a new/unrecognized card
 	 * @param answer
 	 */
-	public WhiteCard(String answer, String cardID){
+	public WhiteCard(String answer){
 		this.answer = answer;
 		this.weight = 0;
-		this.cardID = cardID;
+
 	}
 	
 	public long getWeight(){
@@ -55,5 +55,7 @@ public class WhiteCard {
 		return this.answer.equals(card.getAnswer());
 	}
 
-
+	public void setCardID(String cardID) {
+		this.cardID = cardID;
+	}
 }
