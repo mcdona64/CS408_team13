@@ -504,19 +504,24 @@ public class DatabaseInterface {
         // create the query to get the weights
         String query = "SELECT * FROM " + tablename + " WHERE (";
         for (int i = 1; i <= whiteCards.length; i++){
-            query += "(";
+            query += "white_card_" + i + "_id in (";
             for (int j = 1; j <= whiteCards.length; j++) {
-                query += "white_card_" + i + "_id=" + getWhiteCardID(whiteCards[j - 1], false) + " OR ";
+                query += getWhiteCardID(whiteCards[j - 1], false);
                 if (getWhiteCardID(whiteCards[j - 1], false) < 1) {
                     System.out.println("white card " + whiteCards[j - 1] + " not in database");
                     return null;
                 }
+                if (j + 1 <= whiteCards.length){
+                    query += ", ";
+                }
             }
-            query += ") AND";
+            query += ") AND ";
         }
         query += " black_card_id=" + getBlackCardID(blackcard, false);
 
         query += ");";
+        System.out.println(query);
+        //return  null;
         try {
             // executes the query and returns true on success
             ResultSet rs = stmt.executeQuery(query);
@@ -531,8 +536,8 @@ public class DatabaseInterface {
                 if (weight > max_weight){
                     max_weight = weight;
                     res = new int[numberOfBlanks];
-                    for (int i = 0; i < numberOfBlanks; i++){
-                        res[i] = rs.getInt("white_card_" + i + "_id");
+                    for (int i = 1; i <= numberOfBlanks; i++){
+                        res[i-1] = rs.getInt("white_card_" + i + "_id");
                     }
                 }
             }
@@ -544,6 +549,7 @@ public class DatabaseInterface {
         } catch (SQLException e) {
             // catch errors with the connection
             System.out.println("Error with connection!");
+            System.out.println(e.getMessage());
             closeConnection();
             return null;
         }
