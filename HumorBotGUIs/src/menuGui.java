@@ -44,7 +44,7 @@ public class menuGui
         f.getContentPane().add(rbot);
 
         JButton b=new JButton("Offline Mode");
-        b.setBounds(100,300,120,30);
+        b.setBounds(80,300,150,30);
 
         b.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
@@ -56,7 +56,7 @@ public class menuGui
         f.add(b);
 
         JButton onl=new JButton("Online Mode");
-        onl.setBounds(250,300,120,30);
+        onl.setBounds(270,300,150,30);
 
         onl.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){

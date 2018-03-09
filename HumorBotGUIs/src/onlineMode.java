@@ -11,7 +11,7 @@ public class onlineMode {
         Frame frame= new JFrame("Online Mode");
         //frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        frame.setSize(500,300);
+        frame.setSize(520,300);
         //f.getContentPane().setBackground(Color.WHITE);
         JLabel title, instr, rec;
         title = new JLabel("ONLINE MODE!",JLabel.CENTER);
@@ -19,9 +19,9 @@ public class onlineMode {
         title.setFont(new Font("Serif", Font.BOLD, 24));
         instr.setFont(new Font("Serif", Font.PLAIN, 14));
 
-        title.setBounds(0,20, 500,20);
+        title.setBounds(0,20, 520,20);
         //title.setSize(350,100);
-        instr.setBounds(0,100, 500,20);
+        instr.setBounds(0,100, 520,20);
 
         JButton b=new JButton("Launch Online Mode");
         b.setBounds(150,200,200,30);
