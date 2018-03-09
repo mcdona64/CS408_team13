@@ -365,14 +365,6 @@ public class Web {
 		 */
 		saveWebpage("gamelist");
 
-		System.out.println("Find gamelist_lobby");
-		//driver.findElement(By.id("game_list"));
-
-		WebDriverWait wait = new WebDriverWait(driver, 30);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='main']//*[@id='game_list']//*[@id='gamelist_lobby_2']//*[@class='gamelist_lobby_spectate']"))).click();
-		System.out.println("Clicked");
-
-		System.out.println("Item found");
 	}
 	
 	public void saveWebpage(String fileName) {
@@ -469,7 +461,24 @@ public class Web {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * Join a specific game
+	 * @param game game lobby index
+	 * @param play true for play. false for spectate
+	 */
+	public void joinGame(int game, boolean play){
+		WebDriverWait wait = new WebDriverWait(wd, 30);
+		if(play){
+			System.out.println("Join Game");
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='main']//*[@id='game_list']//*[@id='gamelist_lobby_" + game + "']//*[@class='gamelist_lobby_join']"))).click();
+		} else {
+			System.out.println("Spectate Game");
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='main']//*[@id='game_list']//*[@id='gamelist_lobby_" + game + "']//*[@class='gamelist_lobby_spectate']"))).click();
+		}
+
+	}
+
 
 	/**
 	 * This is the function that actually chooses the answer in the web browser
@@ -501,8 +510,12 @@ public class Web {
 		String name = in.nextLine();
 		w.setNickName(name);
 		w.getToGamePage(w.getNickName());
+
+		w.parseGames();
+
 		
-		
+		//w.joinGame(2, true);
+
 		boolean t = true;
 
 		while(t) {
