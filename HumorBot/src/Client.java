@@ -3,6 +3,9 @@
  */
 import HumorBot.*;
 import HumorBotGUI.*;
+
+import javax.swing.*;
+
 /**
  * @author pxeros
  *
@@ -14,11 +17,9 @@ public class Client {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		MainGUI screen = new MainGUI();
-		MCF mcf = new MCF();
-		screen.launchStartMenu();
-		boolean[] init_flags = {screen.isOnline_Mode(), screen.isSpecMode(), false, false, false, false};
-		mcf.initalize(init_flags);
+		String name = JOptionPane.showInputDialog("Before we get started: Please input a name for the bot:");
+		MCF mcf = new MCF(name);
+		menuGui menuGui = new menuGui(mcf);
 		//TODO: find a way to start actually running the damned application
 	}
 

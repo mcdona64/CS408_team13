@@ -33,7 +33,7 @@ public class MCF {
      * Here is what it might stand for:
      * {Online Mode, Spectator Mode, assortedOption1, assortedOption2, assortedOption3, assortedOption4}
      */
-    private boolean[] flags = new boolean[6];
+    private boolean[] flags = new boolean[2];
 
 
     //Constructors
@@ -48,6 +48,10 @@ public class MCF {
     //getters
     public String getUserName() {
         return this.username;
+    }
+
+    public void break_automation(){
+        this.automation = false;
     }
 
     /**
@@ -331,6 +335,7 @@ public class MCF {
     }
 
     public void initalize(boolean[] flags) {
+        this.automation = true;
         setFlags(flags);
         try {
             this.databaseInterface = new DatabaseInterface();
@@ -361,7 +366,7 @@ public class MCF {
     public void doStuff() {
         try {
             for(;;){
-                //TODO: Add Never-ending gui display here
+                this.automation = true;
                 try{
                     for(;;){
                         //Connect to a game Think I may be missing things
@@ -376,7 +381,7 @@ public class MCF {
                                     continue;
                                 }else {
                                     curr_Lobby = this.crawler.getLobbyList().get(i);
-                                    //TODO: join lobby in web crawler as spectator
+                                    this.crawler.joinGame(Integer.parseInt(curr_Lobby.getGameNum()), false);
                                     break;
                                 }
                             }else{
@@ -384,7 +389,7 @@ public class MCF {
                                     continue;
                                 }else {
                                     curr_Lobby = this.crawler.getLobbyList().get(i);
-                                    //TODO: join lobby in web crawler as player
+                                    this.crawler.joinGame(Integer.parseInt(curr_Lobby.getGameNum()), true);
                                     break;
                                 }
                             }
@@ -394,6 +399,8 @@ public class MCF {
                         }
                         //Now for the actual play
                         for (;;){
+                            if(!this.automation)
+                                throw new Exit_Automation_Exception("Automation Exited");
                             if(!this.flags[1]){
                                 //updates handled in makeDecision
                                 this.makeDecision();

@@ -1,5 +1,7 @@
 package HumorBotGUI;
 
+import HumorBot.MCF;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,9 +13,11 @@ public class offlineMode
     ArrayList<whiteCard> wcards = new ArrayList<whiteCard>();
     blackCard blc;
     int cnt = 0;
-
-    public offlineMode()
+    private MCF mcf;
+    private menuGui menuGui;
+    public offlineMode(MCF mcf)
     {
+        this.mcf = mcf;
         JFrame f= new JFrame("Offline Mode");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -23,7 +27,7 @@ public class offlineMode
         f.getContentPane().setBackground(Color.WHITE);
         JLabel title, instr, rec;
         title = new JLabel("OFFLINE MODE!",JLabel.CENTER);
-        instr = new JLabel("In offline mode, the GUI will emulate your hand and give you advice",JLabel.CENTER);
+        instr = new JLabel("In offline mode, the GUI will emulate your hand and give you advice.",JLabel.CENTER);
         title.setFont(new Font("Serif", Font.BOLD, 24));
         instr.setFont(new Font("Serif", Font.PLAIN, 14));
 
@@ -68,7 +72,26 @@ public class offlineMode
             }
         });
 
+        JButton scat = new JButton("Return to menu");
+
+        scat.setBounds(361, 330, 150, 30);
+
+        scat.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                blc.f.dispose();
+                for (int i = 0; i < wcards.size(); i++)
+                    wcards.get(i).f.dispose();
+                wcards.clear();
+                menuGui menuGui = new menuGui(mcf);
+                f.dispose();
+            }
+        });
+
+
+
+
         f.add(b);
+        f.add(scat);
 
         f.add(br);
         f.add(rec);
@@ -103,9 +126,5 @@ public class offlineMode
         wcards.add(whte);
     }
 
-    public static void main(String[]args)
-    {
-        offlineMode om = new offlineMode();
-    }
 
 }

@@ -9,21 +9,30 @@ import HumorBot.*;
 public class onlineMode {
     private Frame frame;
     private JButton b;
-    public onlineMode() {
+    private MCF mcf;
+    private menuGui menuGui;
+    private boolean in_game;
+    public onlineMode(MCF mcf) {
+        this.mcf = mcf;
+        this.in_game = false;
+        this.menuGui = menuGui;
         this.frame = new JFrame("Online Mode");
         //frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         this.frame.setSize(520, 300);
         //f.getContentPane().setBackground(Color.WHITE);
-        JLabel title, instr, rec;
+        JLabel title, instr, mode, rec;
         title = new JLabel("ONLINE MODE!", JLabel.CENTER);
         instr = new JLabel("In online mode, the BOT will play Cards Against Humanity on a Website", JLabel.CENTER);
+        mode = new JLabel("Spectator Mode enabled", JLabel.CENTER);
         title.setFont(new Font("Serif", Font.BOLD, 24));
         instr.setFont(new Font("Serif", Font.PLAIN, 14));
+        mode.setFont(new Font("Serif", Font.PLAIN, 14));
 
         title.setBounds(0, 20, 520, 20);
         //title.setSize(350,100);
         instr.setBounds(0, 100, 520, 20);
+        mode.setBounds(0, 130, 520, 20);
 
         this.b = new JButton("Launch Online Mode");
         this.b.setBounds(150, 200, 200, 30);
@@ -35,15 +44,42 @@ public class onlineMode {
             }
         });
 
+        JButton scat = new JButton("Return to menu");
 
+        scat.setBounds(362, 238, 150, 30);
+
+        scat.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                set_line(false);
+                menuGui menuGui = new menuGui(mcf);
+                frame.dispose();
+            }
+        });
+
+        JButton g = new JButton("Set Mode");
+
+        g.setBounds(0, 238,150, 30 );
+
+        g.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(!in_game){
+                    boolean[] h = {true, true};
+                    mcf.initalize(h);
+
+                }else{
+                    JOptionPane.showMessageDialog(null, "Cannot change mode while in play", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
 
 
         this.frame.add(b);
-
+        this.frame.add(scat);
         //f.add(br);
         //f.add(rec);
         this.frame.add(title);
         this.frame.add(instr);
+        this.frame.add(mode);
         this.frame.setLayout(null);
         this.frame.setVisible(true);
 
@@ -60,6 +96,8 @@ public class onlineMode {
             this.b.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     set_line(false);
+                    mcf.break_automation();
+                    in_game = false;
                     //f.dispose();
                 }
             });
@@ -71,15 +109,11 @@ public class onlineMode {
             this.b.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     set_line(true);
+                    mcf.doStuff();
+                    in_game = true;
                     //f.dispose();
                 }
             });
         }
     }
-
-    public static void main(String[]args)
-    {
-        onlineMode om = new onlineMode();
-    }
-
 }

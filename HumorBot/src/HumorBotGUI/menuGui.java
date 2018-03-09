@@ -1,5 +1,7 @@
 package HumorBotGUI;
 
+import HumorBot.MCF;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -14,8 +16,10 @@ import static javax.swing.SwingConstants.*;
 
 public class menuGui
 {
-    public menuGui()
+    private MCF mcf;
+    public menuGui(MCF mcf)
     {
+        this.mcf = mcf;
         JFrame f= new JFrame("Main Menu");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -50,8 +54,10 @@ public class menuGui
 
         b.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                offlineMode om = new offlineMode();
-                //f.dispose();
+                offlineMode om = new offlineMode(mcf);
+                boolean[] g = {false, false};
+                mcf.initalize(g);
+                f.dispose();
             }
         });
 
@@ -62,8 +68,8 @@ public class menuGui
 
         onl.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                onlineMode olm = new onlineMode();
-                //f.dispose();
+                onlineMode olm = new onlineMode(mcf);
+                f.dispose();
             }
         });
 
@@ -97,11 +103,6 @@ public class menuGui
     }
 
 
-    public static void main(String args[])
-    {
-        menuGui strt = new menuGui();
-
-    }
 
 
 

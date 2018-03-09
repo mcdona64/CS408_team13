@@ -1,5 +1,7 @@
 package HumorBotGUI;
 
+import oracle.jrockit.jfr.JFR;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,9 +9,10 @@ public class blackCard
 {
 
     public JTextArea in;
+    public JFrame f;
     public blackCard()
     {
-        JFrame f = new JFrame("Black Card");
+        f = new JFrame("Black Card");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.setSize(300,420);
         f.getContentPane().setBackground(Color.BLACK);

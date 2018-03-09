@@ -13,13 +13,14 @@ public class whiteCard {
     public JTextArea in;
     public int ind;
     public offlineMode ofmode;
+    public JFrame f;
 
     public whiteCard(int index, offlineMode om)
     {
         ind = index;
         ofmode = om;
 
-        JFrame f = new JFrame("White Card" + " " + index);
+        f = new JFrame("White Card" + " " + index);
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.getContentPane().setBackground(Color.white);
         f.setSize(300,420);
