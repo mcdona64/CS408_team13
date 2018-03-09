@@ -243,8 +243,10 @@ public class Web {
 		}
 		String buffer;
 		String whiteCardString = "";
+		String whiteCardID = "";
 		try {
 			while((buffer = br.readLine()) != null) {
+
 				if(buffer.contains("The white cards played this round are:")) {
 			//		System.out.println("White Cards in play");
 					flag_whiteCardsInPlay = true;
@@ -270,13 +272,20 @@ public class Web {
 				//	System.out.println("true");
 				} else {
 					if(buffer.contains("card_text")) {
-						
+
 					} else {
 						flag_winningWhiteCard = false;
 					//	System.out.println("false");
 					}
 				}
-				if(buffer.contains("card_text")) {
+				if(buffer.contains("<div id=\"card_") && buffer.contains("<div id=\"white_up_")){
+					int beginIndex = buffer.indexOf("<div id=\"");
+					int endIndex = buffer.indexOf("\" class");
+					System.out.println("CardID");
+					whiteCardID = buffer.substring(beginIndex+("<div id=\"").length(), endIndex);
+
+				}
+				if(buffer.contains("card_text")){
 					//System.out.println(buffer);
 					int beginIndex = buffer.indexOf(">");
 					int endIndex = buffer.indexOf("</");
@@ -287,19 +296,19 @@ public class Web {
 					//System.out.println(whiteCardString);
 					if(flag_whiteCardsInPlay) {
 						//Add whiteCard obj to ArrayList whiteCardList
-						//System.out.println("Add White Card to whiteCardList");						
-						whiteCardList.add(new WhiteCard(whiteCardString));
+						//System.out.println("Add White Card to whiteCardList");
+						whiteCardList.add(new WhiteCard(whiteCardString, whiteCardID));
 					} else if(flag_whiteCardsInHand) {
 						//Add whiteCard obj to ArrayList gameHand
 						//System.out.println("Add White Card to gameHand");
-						gameHand.add(new WhiteCard(whiteCardString));
+						gameHand.add(new WhiteCard(whiteCardString, whiteCardID));
 					} else {
 						//Do nothing
 					}
 					if(flag_winningWhiteCard) {
 						//System.out.println("Winning WhiteCard");
 						if(winningHand.size() < b.getBlanks()) {
-							winningHand.add(new WhiteCard(whiteCardString));
+							winningHand.add(new WhiteCard(whiteCardString, whiteCardID));
 						}
 					}
 				}
@@ -313,16 +322,16 @@ public class Web {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void setNickName(String name){
 		//Wait for the right moment to send in your nickname
 		this.nickname = name;
 	}
-	
+
 	public String getNickName() {
 		return this.nickname;
 	}
-	
+
 	public void getToGamePage(String nickname) {
 		String url = "";
 		for (String str : urls) {
@@ -353,7 +362,7 @@ public class Web {
 
 		//For testing purposes close window
 		//driver.close();
-		
+
 		/* games are labeled by:
 		 * gamelist_lobby_##
 		 * Information that can be viewed in this <div> field:
@@ -366,7 +375,7 @@ public class Web {
 		saveWebpage("gamelist");
 
 	}
-	
+
 	public void saveWebpage(String fileName) {
 		//Saves web page for reference if needed
 		String src = wd.getPageSource();
@@ -379,9 +388,9 @@ public class Web {
 					e.printStackTrace();
 				}
 	}
-	
+
 	public void parseGames() {
-		File f = new File(filePath + "gamelist.html");
+		File f = new File(filePath + "lobby.html");
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader(f));
@@ -395,18 +404,78 @@ public class Web {
 		String maxPlayers = "";
 		String spectatorCount = "";
 		String maxSpectators = "";
-		String lobbyStatus = "";
-		boolean flag_gameNum = false;
-		boolean flag_lobbyHost = false;
-		boolean flag_playerCount = false;
-		boolean flag_maxPlayers = false;
-		boolean flag_spectatorCount = false;
-		boolean flag_maxSpectators = false;
-		boolean flag_lobbyStatus = false;
-		
+		boolean lobbyStatus = false;
+		boolean password = false;
+
 		try {
 			while((buffer = br.readLine()) != null) {
-				if(buffer.contains("div id=\"gamelist_lobby_")) {
+				if(buffer.contains("div id=\"gamelist_lobby_") && !buffer.contains("div id=\"gamelist_lobby_template")){
+					int beginIndex = buffer.indexOf("aria-label=\"");
+					int endIndex = buffer.indexOf("\">");
+					String str = buffer.substring(beginIndex+("aria-label=\"").length(), endIndex);
+					System.out.println(str);
+					//parse string and break it up into components
+
+					//gameNum
+					beginIndex = buffer.indexOf("lobby_");
+					endIndex = buffer.indexOf("\" class");
+					gameNum = buffer.substring(beginIndex+("lobby_").length(), endIndex);
+
+					//lobbyHost
+					beginIndex = 0;
+					endIndex = str.indexOf("'s game");
+					lobbyHost = str.substring(beginIndex, endIndex);
+
+					//playerCount
+					beginIndex = str.indexOf("with ");
+					endIndex = str.indexOf(" of");
+					playerCount = str.substring(beginIndex + ("with ").length(), endIndex);
+
+					//maxPlayers
+					beginIndex = str.indexOf("of ");
+					endIndex = str.indexOf(" player");
+					maxPlayers = str.substring(beginIndex + ("of ").length(), endIndex);
+
+					//spectatorCount
+					beginIndex = str.indexOf("and ");
+					endIndex = str.lastIndexOf(" of");
+					spectatorCount = str.substring(beginIndex + ("and ").length(), endIndex);
+
+					//maxSpectators
+					beginIndex = str.lastIndexOf("of ");
+					endIndex = str.indexOf("spectator");
+					maxSpectators = str.substring(beginIndex + ("of ").length(), endIndex);
+
+					//lobbyStatus
+					if(str.contains("In Progress")){
+						lobbyStatus = true;
+					} else {
+						lobbyStatus = false;
+					}
+
+					//password
+					if(str.contains("Does not have a password")){
+						password = false;
+					} else {
+						password = true;
+					}
+
+
+					System.out.println("gameNum " + gameNum);
+					System.out.println("lobbyHost " + lobbyHost);
+					System.out.println("playerCount " + playerCount);
+					System.out.println("maxPlayers " + maxPlayers);
+					System.out.println("spectatorCount " + spectatorCount);
+					System.out.println("maxSpectators " + maxSpectators);
+					System.out.println("lobbyStatus " + lobbyStatus);
+					System.out.println("---------------------");
+					//lobbyList.add(new Lobby(gameNum, lobbyHost, playerCount, maxPlayers, spectatorCount, maxSpectators, lobbyStatus));
+
+				}
+
+
+
+			/*	if(buffer.contains("div id=\"gamelist_lobby_")) {
 					int beginIndex = buffer.indexOf("lobby_");
 					int endIndex = buffer.indexOf("\" class");
 					gameNum = buffer.substring(beginIndex+("lobby_").length(), endIndex);
@@ -431,7 +500,7 @@ public class Web {
 					spectatorCount = buffer.substring(beginIndex+1, endIndex);
 					flag_spectatorCount = true;
 					int begin2Index = buffer.indexOf("max_spectators\">");
-					int end2Index = buffer.indexOf("</span>,");
+					int end2Index = buffer.indexOf("</span>)");
 					maxPlayers = buffer.substring(begin2Index+("max_spectators\">").length(), end2Index);
 					flag_maxSpectators = true;
 				} else if(buffer.contains("class=\"gamelist_lobby_status\">")) {
@@ -441,7 +510,15 @@ public class Web {
 					flag_lobbyStatus = true;
 				}
 				if( flag_gameNum && flag_lobbyHost && flag_playerCount && flag_maxPlayers && flag_spectatorCount && flag_maxSpectators && flag_lobbyStatus) {
-					lobbyList.add(new Lobby(gameNum, lobbyHost, playerCount, maxPlayers, spectatorCount, maxSpectators, lobbyStatus));
+					System.out.println("gameNum " + gameNum);
+					System.out.println("lobbyHost " + lobbyHost);
+					System.out.println("playerCount " + playerCount);
+					System.out.println("maxPlayers " + maxPlayers);
+					System.out.println("spectatorCount " + spectatorCount);
+					System.out.println("maxSpectators " + maxSpectators);
+					System.out.println("lobbyStatus " + lobbyStatus);
+					System.out.println("---------------------");
+					//lobbyList.add(new Lobby(gameNum, lobbyHost, playerCount, maxPlayers, spectatorCount, maxSpectators, lobbyStatus));
 					flag_gameNum = false;
 					flag_lobbyHost = false;
 					flag_playerCount = false;
@@ -450,7 +527,7 @@ public class Web {
 					flag_maxSpectators = false;
 					flag_lobbyStatus = false;
 				}
-				
+				*/
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -479,13 +556,13 @@ public class Web {
 
 	}
 
-
 	/**
 	 * This is the function that actually chooses the answer in the web browser
 	 * @param index winning index
 	 */
 	public void chooseAnswer(int index){
 		//TODO: Implement
+
 	}
 
 	/**
@@ -495,25 +572,37 @@ public class Web {
 	public void chooseAnswer(ArrayList<Integer> indecies){
 		//TODO: Implement
 	}
-	
+
+	public void close(){
+
+		wd.close();
+	}
+
 	public static void main(String[] args) {
 		Web w = new Web();
+
+		w.parseGames();
+
+		/*
+
 		w.setUrl("http://www.pretendyoure.xyz/zy/");
 		w.grabWebpage();
 		//Choose 1, 2, 3 for getToGame();
 		//Need to implement getting farther to actually reaching a game
 		w.getToGame(1);
-		
-		
+
+
 		Scanner in = new Scanner(System.in);
 		System.out.println("Please enter name");
 		String name = in.nextLine();
 		w.setNickName(name);
 		w.getToGamePage(w.getNickName());
 
-		w.parseGames();
+		//w.parseGames();
 
-		
+
+
+
 		//w.joinGame(2, true);
 
 		boolean t = true;
@@ -527,8 +616,9 @@ public class Web {
 				w.wd.close();
 				t = false;
 			}
-			
+
 		}
+		*/
 	}
 	
 	
