@@ -24,6 +24,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import net.sourceforge.htmlunit.corejs.javascript.Script;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class Web {
@@ -322,14 +325,14 @@ public class Web {
 	
 	public void getToGamePage(String nickname) {
 		String url = "";
-		for(String str : urls) {
-			if(str.contains("pyx-" + this.server)) {
+		for (String str : urls) {
+			if (str.contains("pyx-" + this.server)) {
 				url = str;
 			}
 		}
-		
+
 		System.out.println(url);
-		
+
 		System.setProperty("webdriver.chrome.driver", "ChromeDriver/chromedriver");
 		WebDriver driver = new ChromeDriver();
 		wd = driver;
@@ -338,7 +341,7 @@ public class Web {
 		driver.getPageSource();
 		WebElement button_1 = driver.findElement(By.cssSelector("input"));
 		button_1.click();
-		
+
 		WebElement name = driver.findElement(By.id("nickname"));
 		name.sendKeys(nickname);
 		WebElement button_2 = driver.findElement(By.id("nicknameconfirm"));
@@ -346,8 +349,8 @@ public class Web {
 		//Should add functionality for pausing and waiting for GUI input for what game to choose.
 		//Look into PhantomJS for hiding web browser window
 		// v GUI can be updated with information from below v
-		
-		
+
+
 		//For testing purposes close window
 		//driver.close();
 		
@@ -361,6 +364,15 @@ public class Web {
 		 * 	-Requires Password or not
 		 */
 		saveWebpage("gamelist");
+
+		System.out.println("Find gamelist_lobby");
+		//driver.findElement(By.id("game_list"));
+
+		WebDriverWait wait = new WebDriverWait(driver, 30);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='main']//*[@id='game_list']//*[@id='gamelist_lobby_2']//*[@class='gamelist_lobby_spectate']"))).click();
+		System.out.println("Clicked");
+
+		System.out.println("Item found");
 	}
 	
 	public void saveWebpage(String fileName) {
@@ -482,26 +494,6 @@ public class Web {
 		//Choose 1, 2, 3 for getToGame();
 		//Need to implement getting farther to actually reaching a game
 		w.getToGame(1);
-		/*
-		w.parseBlackCards("gamePage.html");
-		System.out.println(w.getBlackCard());
-		System.out.println(w.b.getBlanks());
-		
-		System.out.println("Find White Cards");
-		w.parseWhiteCards("gamePage.html");
-		System.out.println("Print White Cards in Play");
-		for(WhiteCard e : w.whiteCardList) {
-			System.out.println("\t" + e.getAnswer());
-		}
-		System.out.println("Print White Cards in Hand");
-		for(WhiteCard e : w.gameHand) {
-			System.out.println("\t" + e.getAnswer());
-		}
-		System.out.println("Print Winning White Card(s)");
-		for(WhiteCard e : w.winningHand) {
-			System.out.println("\t" + e.getAnswer());
-		}
-		*/
 		
 		
 		Scanner in = new Scanner(System.in);
@@ -512,7 +504,7 @@ public class Web {
 		
 		
 		boolean t = true;
-		//w.wd.close();
+
 		while(t) {
 			System.out.println("Enter: 'p' to save Web page\n" + "Enter: 'stop' to close window");
 			String s = in.nextLine();
