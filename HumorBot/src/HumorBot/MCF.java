@@ -26,6 +26,8 @@ public class MCF {
     private BlackCard currentCard;
     //This is the database Interface we will be using
     private DatabaseInterface databaseInterface;
+    //This is for automation purposes:
+    private boolean automation;
     /**
      * This variable is our flags, the are rather important, 6 is kindof a placeholder for now.
      * Here is what it might stand for:
@@ -280,14 +282,35 @@ public class MCF {
             }
         } else {
             try {
-                WhiteCard[] g = new WhiteCard[this.hand.size()];
-                for (int i = 0; i < this.hand.size(); i++) {
-                    g[i] = this.hand.get(i);
+                int bestWeight = -1;
+
+                WhiteCard[] g = new WhiteCard[numBlanks];
+                int numArrays = (int)Math.pow(this.hand.size(), numBlanks);
+                for(int i = 0; i < numArrays; i++) {
+                    // Calculate the correct item for each position in the array
+                    for(int j = 0; j < numBlanks; j++) {
+                        // This is the period with which this position changes, i.e.
+                        // a period of 5 means the value changes every 5th array
+                        int period = (int) Math.pow(this.hand.size(), numBlanks - j - 1);
+                        // Get the correct item and set it
+                        int index = i / period % this.hand.size();
+                        g[j] = this.hand.get(index);
+                    }
+                    int[] l = this.databaseInterface.getBestPermitation(this.currentCard, g, numBlanks);
+                    WhiteCard[] goodg = new WhiteCard[numBlanks];
+                    for(int f = 0; f < l.length; f++){
+                        goodg[f] = this.hand.get(getIndex(g[l[f]]));
+                    }
+                    int smifned;
+                    if((smifned = this.databaseInterface.getWeight(goodg, this.currentCard)) >= bestWeight){
+                        bestWeight = smifned;
+                        for (int j = 0; j < l.length; j++) {
+                            choices.add(l[j]);
+                        }
+                    }
                 }
-                int[] i = this.databaseInterface.getBestPermitation(this.currentCard, g, numBlanks);
-                for (int j = 0; j < i.length; j++) {
-                    choices.add(i[j]);
-                }
+
+
             } catch (ConnectionNotEstablishedException f) {
                 f.printStackTrace();
             } catch (NullPointerException n) {
@@ -296,6 +319,15 @@ public class MCF {
             }
         }
         return choices;
+    }
+
+    public int getIndex(WhiteCard card){
+        for (int i = 0; i < this.hand.size(); i++){
+            if(this.hand.get(i).equals(card)){
+                return i;
+            }
+        }
+        return -1;
     }
 
     public void initalize(boolean[] flags) {
