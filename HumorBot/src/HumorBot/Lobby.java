@@ -7,9 +7,9 @@ public class Lobby {
 	private int maxPlayers;
 	private int spectatorCount;
 	private int maxSpectators;
-	private String lobbyStatus;
+	private boolean lobbyStatus;
 	private boolean password;
-	public Lobby(String gameNum, String lobbyHost, String playerCount, String maxPlayers, String spectatorCount, String maxSpectatros, String lobbyStatus, boolean password) {
+	public Lobby(String gameNum, String lobbyHost, String playerCount, String maxPlayers, String spectatorCount, String maxSpectatros, boolean lobbyStatus, boolean password) {
 		this.gameNum = gameNum;
 		this.lobbyHost = lobbyHost;
 		this.playerCount = Integer.parseInt(playerCount);
@@ -44,7 +44,7 @@ public class Lobby {
 		return this.maxSpectators;
 	}
 	
-	public String getLobbyStatus() {
+	public boolean getLobbyStatus() {
 		return this.lobbyStatus;
 	}
 
