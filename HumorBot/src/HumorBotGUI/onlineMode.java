@@ -12,10 +12,11 @@ public class onlineMode {
     private MCF mcf;
     private menuGui menuGui;
     private boolean in_game;
+    private short modey;
     public onlineMode(MCF mcf) {
         this.mcf = mcf;
+        this.modey = 0;
         this.in_game = false;
-        this.menuGui = menuGui;
         this.frame = new JFrame("Online Mode");
         //frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -39,7 +40,16 @@ public class onlineMode {
 
         this.b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if(modey == 1){
+                    boolean[] g = {true,true};
+                    mcf.initalize(g);
+                }else{
+                    boolean[] h = {true, false};
+                    mcf.initalize(h);
+                }
                 set_line(true);
+                mcf.doStuff();
+                in_game = true;
                 //f.dispose();
             }
         });
@@ -63,8 +73,17 @@ public class onlineMode {
         g.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(!in_game){
-                    boolean[] h = {true, true};
-                    mcf.initalize(h);
+                    if(modey == 1){
+                        boolean[] h = {true, true};
+                        mcf.initalize(h);
+                        modey = 0;
+                        mode.setText("Spectator Mode Enabled");
+                    }else {
+                        boolean[] h = {true, false};
+                        mcf.initalize(h);
+                        modey = 1;
+                        mode.setText("Player Mode Enabled");
+                    }
 
                 }else{
                     JOptionPane.showMessageDialog(null, "Cannot change mode while in play", "Error", JOptionPane.ERROR_MESSAGE);
@@ -75,6 +94,7 @@ public class onlineMode {
 
         this.frame.add(b);
         this.frame.add(scat);
+        this.frame.add(g);
         //f.add(br);
         //f.add(rec);
         this.frame.add(title);
