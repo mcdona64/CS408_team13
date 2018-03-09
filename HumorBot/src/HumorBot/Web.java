@@ -297,18 +297,21 @@ public class Web {
 					if(flag_whiteCardsInPlay) {
 						//Add whiteCard obj to ArrayList whiteCardList
 						//System.out.println("Add White Card to whiteCardList");
-						whiteCardList.add(new WhiteCard(whiteCardString, whiteCardID));
+						whiteCardList.add(new WhiteCard(whiteCardString));
+						whiteCardList.get(whiteCardList.size() - 1).setCardID(whiteCardID);
 					} else if(flag_whiteCardsInHand) {
 						//Add whiteCard obj to ArrayList gameHand
 						//System.out.println("Add White Card to gameHand");
-						gameHand.add(new WhiteCard(whiteCardString, whiteCardID));
+						gameHand.add(new WhiteCard(whiteCardString));
+						gameHand.get(gameHand.size() - 1).setCardID(whiteCardID);
 					} else {
 						//Do nothing
 					}
 					if(flag_winningWhiteCard) {
 						//System.out.println("Winning WhiteCard");
 						if(winningHand.size() < b.getBlanks()) {
-							winningHand.add(new WhiteCard(whiteCardString, whiteCardID));
+							winningHand.add(new WhiteCard(whiteCardString));
+							winningHand.get(winningHand.size() - 1).setCardID(whiteCardID);
 						}
 					}
 				}
@@ -468,6 +471,7 @@ public class Web {
 					System.out.println("spectatorCount " + spectatorCount);
 					System.out.println("maxSpectators " + maxSpectators);
 					System.out.println("lobbyStatus " + lobbyStatus);
+					System.out.println("Password" + password);
 					System.out.println("---------------------");
 					//lobbyList.add(new Lobby(gameNum, lobbyHost, playerCount, maxPlayers, spectatorCount, maxSpectators, lobbyStatus));
 
