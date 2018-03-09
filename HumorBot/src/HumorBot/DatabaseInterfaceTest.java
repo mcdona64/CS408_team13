@@ -472,6 +472,27 @@ public class DatabaseInterfaceTest {
     }
 
     @Test
+    void TestGetWeightsMultipleBlanksThreeBlanks() {
+        boolean result = true;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            db.addWhiteCard("test1");
+            db.addWhiteCard("test2");
+            db.addWhiteCard("test3");
+            db.addBlackCard("test", 2);
+            String[] whitecards = {"test1", "test2", "test3"};
+            db.addCombo(whitecards, "test", 3);
+            result = db.getWeight(whitecards, "test") == 0;
+            db.executeCustomQuery("delete from combonations3blanks where (black_card_id=" + db.getBlackCardID("test", false) + ");");
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+
+        tearDown();
+        assert(result);
+    }
+
+    @Test
     void TestAdjustWeightsMultipleBlanksThreeBlanks() {
         boolean result = true;
         try {

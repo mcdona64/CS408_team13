@@ -392,15 +392,14 @@ public class DatabaseInterface {
         // holds table name
         String tablename = "combonations" + whiteCards.length + "blanks";
 
-        // TODO
-        return -1;
         //check that table exists
-        /*try {
+        try {
             DatabaseMetaData meta = conn.getMetaData();
             ResultSet res = meta.getTables(null, null, tablename, new String[]{"TABLE"});
             if (!res.next()) {
-                // no table of this
-                addCombo(winners, blackCard, numberOfBlanks);
+                // no table of this type
+                System.out.println("combo not in database");
+                return -1;
             }
         } catch (SQLException e) {
             System.out.println("error with connection!");
@@ -408,44 +407,48 @@ public class DatabaseInterface {
         }
 
 
-        // check to see if the combo is already added
-        if (getWeight(winners, blackCard) <= -1){
-            System.out.println("card combo not in database");
-            // add combo if it is not in the database
-            boolean res = addCombo(winners, blackCard, winners.length);
-            // check that it was added correctly
-            if (res){
-                System.out.println("failed to add combo");
+        // create the query to get the weights
+        String query = "SELECT * FROM " + tablename + " WHERE (";
+        for (int i = 1; i <= whiteCards.length; i++){
+            query += "white_card_" + i + "_id=" + getWhiteCardID(whiteCards[i-1], false) + " AND ";
+            if (getWhiteCardID(whiteCards[i-1], false) < 1){
+                System.out.println("white card " + whiteCards[i-1] + " not in database");
                 return -1;
             }
-
         }
-
-
-        //now we can add the combo to the correct database
-        // create the query to add an item to the table
-        String query = "UPDATE " + tablename + " SET weight = weight+1 WHERE (";
-        for (int i = 1; i <= numberOfBlanks; i++){
-            query += "white_card_" + i + "_id=" + getWhiteCardID(winners[i-1], false) + " AND ";
-            if (getWhiteCardID(winners[i-1], false) < 1){
-                System.out.println("white card " + winners[i-1] + " not in database");
-                return false;
-            }
-        }
-        query += "black_card_id=" + getBlackCardID(blackCard, false);
+        query += "black_card_id=" + getBlackCardID(blackcard, false);
 
         query += ");";
         System.out.println(query);
+        return -1;
+        /*
         try {
             // executes the query and returns true on success
-            stmt.execute(query);
-            System.out.println("combo weight updated");
-            return true;
+            ResultSet rs = stmt.executeQuery(query);
+            // check that we have found it
+            if(rs.next()){
+                // make the white card
+                int res = rs.getInt("weight");
+                // check we have not found multiple
+                if(rs.next()){
+                    // handle if multiple cards are added to the database
+                    System.out.println("Multiple white cards in database with that name");
+                    System.out.println("Database deprecated!");
+                    return -2;
+                }
+                // return result if no other errors
+                System.out.println("Weight: " + res);
+                return res;
+            } else {
+                // handle no white card not in database
+                System.out.println("No Combo in database with those cards!");
+                return -1;
+            }
         } catch (SQLException e) {
             // catch errors with the connection
             System.out.println("Error with connection!");
             closeConnection();
-            return false;
+            return -3;
         }*/
     }
 
