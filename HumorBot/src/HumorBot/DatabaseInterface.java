@@ -419,9 +419,6 @@ public class DatabaseInterface {
         query += "black_card_id=" + getBlackCardID(blackcard, false);
 
         query += ");";
-        System.out.println(query);
-        return -1;
-        /*
         try {
             // executes the query and returns true on success
             ResultSet rs = stmt.executeQuery(query);
@@ -449,7 +446,7 @@ public class DatabaseInterface {
             System.out.println("Error with connection!");
             closeConnection();
             return -3;
-        }*/
+        }
     }
 
     public int getWeight(WhiteCard[] whiteCards, String blackcard) throws ConnectionNotEstablishedException{
@@ -485,10 +482,71 @@ public class DatabaseInterface {
     }
 
     // returns an integer array which is the indecies of the best possible white cards;
-    public int[] getBestPermitation(String blackcard, String[] whiteCards, int numberOfBlanks) throws ConnectionNotEstablishedException {
-        // TODO
-        int[] bad = {};
-        return bad;
+    public int[] getBestPermitation(String[] whiteCards, String blackcard, int numberOfBlanks) throws ConnectionNotEstablishedException {
+        // holds table name
+        String tablename = "combonations" + whiteCards.length + "blanks";
+
+        //check that table exists
+        try {
+            DatabaseMetaData meta = conn.getMetaData();
+            ResultSet res = meta.getTables(null, null, tablename, new String[]{"TABLE"});
+            if (!res.next()) {
+                // no table of this type
+                System.out.println("combo not in database");
+                return null;
+            }
+        } catch (SQLException e) {
+            System.out.println("error with connection!");
+            return null;
+        }
+
+
+        // create the query to get the weights
+        String query = "SELECT * FROM " + tablename + " WHERE (";
+        for (int i = 1; i <= whiteCards.length; i++){
+            query += "(";
+            for (int j = 1; j <= whiteCards.length; j++) {
+                query += "white_card_" + i + "_id=" + getWhiteCardID(whiteCards[j - 1], false) + " OR ";
+                if (getWhiteCardID(whiteCards[j - 1], false) < 1) {
+                    System.out.println("white card " + whiteCards[j - 1] + " not in database");
+                    return null;
+                }
+            }
+            query += ") AND";
+        }
+        query += " black_card_id=" + getBlackCardID(blackcard, false);
+
+        query += ");";
+        try {
+            // executes the query and returns true on success
+            ResultSet rs = stmt.executeQuery(query);
+            // stores the max weight
+            int max_weight = -1;
+            // stores the permiatation
+            int[] res = null;
+            // check that we have found it
+            while(rs.next()){
+                // make the white card
+                int weight = rs.getInt("weight");
+                if (weight > max_weight){
+                    max_weight = weight;
+                    res = new int[numberOfBlanks];
+                    for (int i = 0; i < numberOfBlanks; i++){
+                        res[i] = rs.getInt("white_card_" + i + "_id");
+                    }
+                }
+            }
+            if (res == null) {
+                // handle no white card not in database
+                System.out.println("No Combo in database with those cards!");
+            }
+            return res;
+        } catch (SQLException e) {
+            // catch errors with the connection
+            System.out.println("Error with connection!");
+            closeConnection();
+            return null;
+        }
     }
 
     public int[] getBestPermitation(String blackcard, WhiteCard[] whiteCards, int numberOfBlanks) throws ConnectionNotEstablishedException{
@@ -496,11 +554,11 @@ public class DatabaseInterface {
         for (int i = 0; i < numberOfBlanks; i++){
             cards[i] = whiteCards[i].getAnswer();
         }
-        return getBestPermitation(blackcard, cards, numberOfBlanks);
+        return getBestPermitation(cards, blackcard, numberOfBlanks);
     }
 
     public int[] getBestPermitation(BlackCard blackcard, String[] whiteCards, int numberOfBlanks) throws ConnectionNotEstablishedException{
-        return getBestPermitation(blackcard.getQuestion(), whiteCards, numberOfBlanks);
+        return getBestPermitation(whiteCards, blackcard.getQuestion(), numberOfBlanks);
     }
 
     public int[] getBestPermitation(BlackCard blackcard, WhiteCard[] whiteCards, int numberOfBlanks) throws ConnectionNotEstablishedException{
@@ -508,7 +566,7 @@ public class DatabaseInterface {
         for (int i = 0; i < numberOfBlanks; i++){
             cards[i] = whiteCards[i].getAnswer();
         }
-        return getBestPermitation(blackcard.getQuestion(), cards, numberOfBlanks);
+        return getBestPermitation(cards, blackcard.getQuestion(), numberOfBlanks);
     }
 
 
