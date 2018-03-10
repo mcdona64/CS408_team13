@@ -1,7 +1,7 @@
 package HumorBot;
 
 public class Lobby {
-	private String gameNum;
+	private int gameNum;
 	private String lobbyHost;
 	private int playerCount;
 	private int maxPlayers;
@@ -9,18 +9,18 @@ public class Lobby {
 	private int maxSpectators;
 	private boolean lobbyStatus;
 	private boolean password;
-	public Lobby(String gameNum, String lobbyHost, String playerCount, String maxPlayers, String spectatorCount, String maxSpectatros, boolean lobbyStatus, boolean password) {
+	public Lobby(int gameNum, String lobbyHost, int playerCount, int maxPlayers, int spectatorCount, int maxSpectatros, boolean lobbyStatus, boolean password) {
 		this.gameNum = gameNum;
 		this.lobbyHost = lobbyHost;
-		this.playerCount = Integer.parseInt(playerCount);
-		this.maxPlayers = Integer.parseInt(maxPlayers);
-		this.spectatorCount = Integer.parseInt(spectatorCount);
-		this.maxSpectators = Integer.parseInt(maxSpectatros);
+		this.playerCount = playerCount;
+		this.maxPlayers = maxPlayers;
+		this.spectatorCount = spectatorCount;
+		this.maxSpectators = maxSpectatros;
 		this.lobbyStatus = lobbyStatus;
 		this.password = password;
 	}
 	
-	public String getGameNum() {
+	public int getGameNum() {
 		return this.gameNum;
 	}
 	
@@ -49,4 +49,24 @@ public class Lobby {
 	}
 
 	public boolean hasPassword() { return this.password; }
+
+	public void print(){
+		System.out.println("Game Number: " + this.gameNum);
+		System.out.println("Lobby Host: " + this.lobbyHost);
+		System.out.println("Player Count: " + this.playerCount);
+		System.out.println("Max Players: " + this.maxPlayers);
+		System.out.println("Spectator Count: " + this.spectatorCount);
+		System.out.println("Max Spectators: " + this.maxSpectators);
+		if(this.lobbyStatus) {
+			System.out.println("Lobby Status: In Progress");
+		} else {
+			System.out.println("Lobby Status: Not started");
+		}
+		if(this.password){
+			System.out.println("Has Password");
+		} else {
+			System.out.println("Does not have password");
+		}
+
+	}
 }
