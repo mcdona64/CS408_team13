@@ -51,6 +51,7 @@ public class Web {
 	private ArrayList<Lobby> availableLobbies = new ArrayList<Lobby>();
 
 	private String parseFileName = "current";
+	private int score = 0;
 
 	private WebDriver wd;
 	
@@ -535,6 +536,7 @@ public class Web {
 	 * @return
 	 */
 	public void joinLobby(int gameNum, boolean play){
+		this.score = 0;
 		for(Lobby e : availableLobbies){
 			if(e.getGameNum()==gameNum){
 				if(play){
@@ -624,6 +626,7 @@ public class Web {
 	 * @param play true for play. false for spectate
 	 */
 	public void join(int game, boolean play){
+		this.score = 0;
 		WebDriverWait wait = new WebDriverWait(wd, 30);
 		if(play){
 			System.out.println("Join Game");
@@ -647,6 +650,7 @@ public class Web {
 	}
 
 	public void leaveGame(){
+		this.score = 0;
 		if(inGame()){
 			wd.findElement(By.xpath("//*[@id='leave_game']")).click();
 			String parentWindow = wd.getWindowHandle();
@@ -714,11 +718,53 @@ public class Web {
 
 	}
 
+	/**
+	 * Return bool when winning card is selected
+	 * @return true if won round | false if not
+	 */
 	public boolean seeWinningCardSelected(){
 		WebDriverWait wait = new WebDriverWait(wd, 420);
 		wait.pollingEvery(2, TimeUnit.SECONDS);
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@class='game_right_side_box game_white_card_wrapper']//*[@class='card whitecard selected']")));
-		return true;
+		//check to see if you won round
+
+
+		this.saveWebpage("checkScore");
+		File f = new File(filePath + "checkScore.html");
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader(f));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		String buffer = "";
+
+		try {
+			while ((buffer = br.readLine()) != null) {
+				if(buffer.contains("scorecard_player\">" + this.nickname)){
+					br.readLine();
+					buffer = br.readLine();
+					int beginIndex = buffer.indexOf("scoreboard_score\">");
+					int endIndex = buffer.indexOf("</span>");
+					String str = buffer.substring(beginIndex + ("scoreboard_score\">").length(), endIndex);
+					int i = Integer.parseInt(str);
+					if(this.score < i){
+						this.score = i;
+						return true;
+					} else {
+						return false;
+					}
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	public void webInit(String username){
@@ -779,6 +825,7 @@ public class Web {
 	}
 
 	public void close(){
+		this.score = 0;
 		if(inGame()){
 			leaveGame();
 		}
