@@ -13,6 +13,12 @@ public class onlineMode {
     private menuGui menuGui;
     private boolean in_game;
     private short modey;
+    private Thread r = new Thread(){
+        @Override
+        public void run() {
+            mcf.doStuff();
+        }
+    };
     public onlineMode(MCF mcf) {
         this.mcf = mcf;
         this.modey = 0;
@@ -49,7 +55,7 @@ public class onlineMode {
                 }
                 set_line(true);
                 in_game = true;
-                mcf.doStuff();
+                r.start();
                 //f.dispose();
                 System.out.println("bollocks");
             }
@@ -118,6 +124,11 @@ public class onlineMode {
                 public void actionPerformed(ActionEvent e) {
                     set_line(false);
                     mcf.break_automation();
+                    try {
+                        r.join();
+                    } catch (InterruptedException e1) {
+                        e1.printStackTrace();
+                    }
                     in_game = false;
                     //f.dispose();
                 }
@@ -131,7 +142,18 @@ public class onlineMode {
                 public void actionPerformed(ActionEvent e) {
                     set_line(true);
                     in_game = true;
-                    mcf.doStuff();
+                    try{
+                    r.start();
+                    }catch (IllegalThreadStateException y){
+                        r = new Thread(){
+                            @Override
+                            public void run() {
+                                mcf.doStuff();
+                            }
+                        };
+                        mcf.initializeWebCrawler();
+                        r.start();
+                    }
                     //f.dispose();
                 }
             });

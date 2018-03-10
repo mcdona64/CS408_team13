@@ -352,7 +352,10 @@ public class MCF {
 
 
     //These are the functions that we need
-    private void initializeWebCrawler() {
+    public void initializeWebCrawler() {
+        if(this.crawler != null){
+            this.crawler.close();
+        }
         this.crawler = new Web("http://www.pretendyoure.xyz/zy/");
         this.crawler.grabWebpage();
         this.crawler.getToGame(1);
@@ -405,8 +408,10 @@ public class MCF {
                             if(!this.flags[1]){
                                 //updates handled in makeDecision
                                 this.crawler.saveWebpage("current");
-                                this.crawler.parseBlackCards("current");
-                                this.makeDecision(this.crawler.getBlackCard());
+                                this.crawler.parseCards("current");
+                                this.setHand(this.crawler.getHand());
+                                if(this.hand.size() > 0)
+                                    this.makeDecision(this.crawler.getBlackCard());
                             }
                             System.out.println("Waiting");
                             //find a way to actually wait
