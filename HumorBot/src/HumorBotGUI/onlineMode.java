@@ -51,6 +51,7 @@ public class onlineMode {
                 in_game = true;
                 mcf.doStuff();
                 //f.dispose();
+                System.out.println("bollocks");
             }
         });
 

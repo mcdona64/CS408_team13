@@ -109,9 +109,12 @@ public class offlineMode
 
     public String getRecs(String blctxt, ArrayList<String> whtcards)
     {
-        String str = "temp";
-        wcards.get(2).getInd();
-        return str;
+        int i = 0;
+        for(i = 0; i < wcards.size(); i++)
+            if(wcards.get(i).getTxt().equalsIgnoreCase(blctxt))
+                break;
+        wcards.get(i).getInd();
+        return blctxt;
     }
 
     public void removeWhiteCard(whiteCard i)

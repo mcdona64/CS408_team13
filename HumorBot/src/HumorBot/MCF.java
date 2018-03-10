@@ -130,9 +130,8 @@ public class MCF {
     /**
      * Deep stuff, this will come way later down the road
      */
-    public void makeDecision() {
+    public void makeDecision(String blackCard) {
         //get the number of blanks
-        String blackCard = this.crawler.getBlackCard();
         String[] splitted = blackCard.split("_");
         this.setCurrentCard(new BlackCard(splitted.length - 1, blackCard));
         setHand(this.crawler.getHand());
@@ -405,7 +404,9 @@ public class MCF {
                                 throw new Exit_Automation_Exception("Automation Exited");
                             if(!this.flags[1]){
                                 //updates handled in makeDecision
-                                this.makeDecision();
+                                this.crawler.saveWebpage("current");
+                                this.crawler.parseBlackCards("current");
+                                this.makeDecision(this.crawler.getBlackCard());
                             }
                             System.out.println("Waiting");
                             //find a way to actually wait
@@ -419,10 +420,13 @@ public class MCF {
                     }
                 }catch (Game_Over_Excpetion r){
                     System.out.println("Game ended, finding new Game");
+                }catch (NullPointerException t){
+                    throw new Exit_Automation_Exception("Null pointer: Something is not right...");
                 }
             }
-        }catch (Exit_Automation_Exception e){
+        }catch (Exit_Automation_Exception e) {
             e.cheeseIt(this.flags[1]);
+            this.crawler.leaveGame();
             this.crawler.close();
         }
     }
