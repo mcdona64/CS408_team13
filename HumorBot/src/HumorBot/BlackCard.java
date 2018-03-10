@@ -16,4 +16,8 @@ public class BlackCard {
 	public String getQuestion(){
 		return this.question;
 	}
+
+	public void setBlanks(int blanks){
+		this.blanks = blanks;
+	}
 }
