@@ -2,6 +2,7 @@ package HumorBotGUI;
 
 import HumorBot.MCF;
 import HumorBot.WhiteCard;
+import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -74,6 +75,11 @@ public class offlineMode
                 //use white card function get index to actually get the index, not the index in the arrayList.
 
                 rec.setText(getRecs(blackcardtext,stuff));
+
+                if(JOptionPane.showConfirmDialog(null, "Did You win?",
+                        "Success", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                    mcf.handleWin(stuff);
+                }else { /*Do nothing*/}
             }
         });
 

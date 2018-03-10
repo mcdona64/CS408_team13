@@ -585,7 +585,7 @@ public class DatabaseInterface {
             // add combo if it is not in the database
             boolean res = addCombo(winner, blackcard);
             // check that it was added correctly
-            if (res){
+            if (!res){
                 System.out.println("failed to add combo");
                 return false;
             }
@@ -677,7 +677,7 @@ public class DatabaseInterface {
             // add combo if it is not in the database
             boolean res = addCombo(winners, blackCard, winners.length);
             // check that it was added correctly
-            if (res){
+            if (!res){
                 System.out.println("failed to add combo");
                 return false;
             }

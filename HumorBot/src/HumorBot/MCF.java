@@ -480,6 +480,22 @@ public class MCF {
         }
     }
 
+    public void handleWin(int[] pos) {
+        try {
+            if (pos.length == 1) {
+                this.databaseInterface.adjustWeights(this.hand.get(pos[0]), this.currentCard.getQuestion());
+            }else{
+                String[] h = new String[pos.length];
+                for(int i = 0; i < pos.length; i++){
+                    h[i] = this.hand.get(pos[i]).getAnswer();
+                }
+                this.databaseInterface.adjustWeights(h, this.currentCard.getQuestion(), this.currentCard.getBlanks());
+            }
+        } catch (ConnectionNotEstablishedException t) {
+            t.printStackTrace();
+        }
+    }
+
     /**
      * FOR TESTING PURPOSES ONLY
      *
