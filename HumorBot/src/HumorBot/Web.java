@@ -75,12 +75,13 @@ public class Web {
 	
 	public ArrayList<WhiteCard> getHand(){ return this.gameHand; }
 
-	public ArrayList<Lobby> getLobbyList() { return lobbyList; }
+	public ArrayList<Lobby> getLobbyList() { return this.lobbyList; }
 
-	public ArrayList<Lobby> getAvailableLobbies() { return availableLobbies; }
+	public ArrayList<Lobby> getAvailableLobbies() { return this.availableLobbies; }
+
+	public ArrayList<WhiteCard> getWinningHand() { return this.winningHand;	}
 
 	
-
 
 	public void grabWebpage() {
 		String webURL = this.url;
@@ -242,7 +243,7 @@ public class Web {
 		boolean flag_whiteCardsInHand = false;
 		boolean flag_winningWhiteCard = false;
 		
-		File f = new File(filePath + fn);
+		File f = new File(filePath + fn + ".html");
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader(f));
