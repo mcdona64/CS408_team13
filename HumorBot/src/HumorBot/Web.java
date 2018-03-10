@@ -81,7 +81,7 @@ public class Web {
 
 	public ArrayList<WhiteCard> getWinningHand() { return this.winningHand;	}
 
-	
+
 
 	public void grabWebpage() {
 		String webURL = this.url;
@@ -335,6 +335,20 @@ public class Web {
 		}
 	}
 
+	public void clearLists(){
+		this.whiteCardList.clear();
+		this.gameHand.clear();
+		this.winningHand.clear();
+	}
+
+	public void parseCards(String fn){
+		this.saveWebpage(fn);
+		this.clearLists();
+		this.parseBlackCards(fn);
+		this.parseWhiteCards(fn);
+	}
+
+
 	public void setNickName(String name){
 		//Wait for the right moment to send in your nickname
 		this.nickname = name;
@@ -546,6 +560,44 @@ public class Web {
 		}
 	}
 
+	public void printBlackCard(){
+		System.out.println("Print Black Card:");
+		System.out.println(this.b.getQuestion());
+		System.out.println("-----------------------");
+	}
+
+	public void printHand(){
+		System.out.println("Print White Cards in Hand:");
+		for(WhiteCard e : this.gameHand){
+			System.out.println(e.getAnswer());
+		}
+		System.out.println("-----------------------");
+	}
+
+	public void printWhiteCardsInPlay(){
+		System.out.println("Print White Cards in Play:");
+		for(WhiteCard e : this.whiteCardList){
+			System.out.println(e.getAnswer());
+		}
+		System.out.println("-----------------------");
+	}
+
+	public void printWinningCards(){
+		System.out.println("Print Winning Hand:");
+		for(WhiteCard e : this.winningHand){
+			System.out.println(e.getAnswer());
+		}
+		System.out.println("-----------------------");
+	}
+
+	public void printCardIDs(){
+		System.out.println("Print White Cards in Hand CardIDs:");
+		for(WhiteCard e : this.gameHand){
+			System.out.println(e.getAnswer() + " | " + e.getCardID());
+		}
+		System.out.println("-----------------------");
+	}
+
 	/**
 	 * Join a specific game
 	 * @param game game lobby index
@@ -641,6 +693,9 @@ public class Web {
 						+ "Enter: 'l' to list available lobbies\n"
 						+ "Enter: 'j' to join a game\n"
 						+ "Enter: 'c' to check if in game\n"
+						+ "Enter: 'parse' to parse cards\n"
+						+ "Enter: 'ids' to print card ids\n"
+						+ "Enter: 'leave' to leave a game\n"
 						+ "Enter: 'stop' to close window");
 				String s = in.nextLine();
 				int i;
@@ -674,7 +729,20 @@ public class Web {
 					case "leave":
 						w.leaveGame();
 						break;
-
+					case "parse":
+						System.out.println("Parse white and black cards");
+						w.parseCards("current");
+						System.out.println("Print Cards");
+						w.printBlackCard();
+						w.printHand();
+						w.printWhiteCardsInPlay();
+						w.printWinningCards();
+						System.out.println("Cards Parsed");
+						break;
+					case "ids":
+						System.out.println("Get Card IDs");
+						w.printCardIDs();
+						break;
 
 				}
 			} else {
