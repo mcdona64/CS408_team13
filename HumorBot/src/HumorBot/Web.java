@@ -85,7 +85,7 @@ public class Web {
 
 	public ArrayList<WhiteCard> getWinningHand() { return this.winningHand;	}
 
-
+	public ArrayList<WhiteCard> getWhiteCardList() { return this.whiteCardList; }
 
 	public void grabWebpage() {
 		String webURL = this.url;
@@ -732,6 +732,38 @@ public class Web {
 		}
 		this.parseLobbies();
 
+	}
+
+	/**
+	 * Finds current state of player when in play mode
+	 * @return true if player | false if card czar
+	 */
+	public boolean currentState(){
+		this.saveWebpage("checkState");
+		File f = new File(filePath + "checkState.html");
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader(f));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		String buffer = "";
+
+		try {
+			while ((buffer = br.readLine()) != null) {
+				if(buffer.contains("You are the Card Czar")){
+					return false;
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return true;
 	}
 
 
