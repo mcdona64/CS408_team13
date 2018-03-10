@@ -28,6 +28,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Sleeper;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
@@ -47,6 +48,8 @@ public class Web {
 	private ArrayList<WhiteCard> winningHand = new ArrayList<WhiteCard>();
 	private ArrayList<Lobby> lobbyList = new ArrayList<Lobby>();
 	private ArrayList<Lobby> availableLobbies = new ArrayList<Lobby>();
+
+	private String parseFileName = "current";
 
 	private WebDriver wd;
 	
@@ -358,7 +361,7 @@ public class Web {
 		return this.nickname;
 	}
 
-	public void getToGamePage(String nickname) {
+	public boolean getToGamePage(String nickname) {
 		String url = "";
 		for (String str : urls) {
 			if (str.contains("pyx-" + this.server)) {
@@ -374,35 +377,43 @@ public class Web {
 		driver.get(url);
 		driver.manage().window().maximize();
 		driver.getPageSource();
-		WebElement button_1 = driver.findElement(By.cssSelector("input"));
-		button_1.click();
+		WebDriverWait wait = new WebDriverWait(wd, 30);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@type='button']"))).click();
+
+
 
 		WebElement name = driver.findElement(By.id("nickname"));
 		name.sendKeys(nickname);
 		WebElement button_2 = driver.findElement(By.id("nicknameconfirm"));
 		button_2.click();
 
-		//CHECK IF NAME WAS ACCEPTED
+		this.saveWebpage("usernameInput");
 
+		File f = new File(filePath + "lobby.html");
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader(f));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		String buffer = "";
+		try {
+			while ((buffer = br.readLine()) != null){
+				if(buffer.contains("Nickname is already in use") || buffer.contains("Nickname must contain only upper and lower case letters, numbers, or underscores, must be 3 to 30 characters long, and must not start with a number")){
+					System.out.println("Invalid Username");
+					return false;
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-		//Should add functionality for pausing and waiting for GUI input for what game to choose.
-		//Look into PhantomJS for hiding web browser window
-		// v GUI can be updated with information from below v
-
-
-		//For testing purposes close window
-		//driver.close();
-
-		/* games are labeled by:
-		 * gamelist_lobby_##
-		 * Information that can be viewed in this <div> field:
-		 * 	-Number of Players
-		 * 	-Number of Spectators
-		 * 	-State of game (Not Started / In Progress)
-		 * 	-How many card sets
-		 * 	-Requires Password or not
-		 */
-
+		return true;
 
 	}
 
@@ -598,6 +609,14 @@ public class Web {
 		System.out.println("-----------------------");
 	}
 
+	public void printInPlayCardIDs(){
+		System.out.println("Print White Cards in Play CardIDs:");
+		for(WhiteCard e : this.whiteCardList){
+			System.out.println(e.getAnswer() + " | " + e.getCardID());
+		}
+		System.out.println("-----------------------");
+	}
+
 	/**
 	 * Join a specific game
 	 * @param game game lobby index
@@ -608,6 +627,7 @@ public class Web {
 		if(play){
 			System.out.println("Join Game");
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='main']//*[@id='game_list']//*[@id='gamelist_lobby_" + game + "']//*[@class='gamelist_lobby_join']"))).click();
+			waitForCardsInHand();
 		} else {
 			System.out.println("Spectate Game");
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='main']//*[@id='game_list']//*[@id='gamelist_lobby_" + game + "']//*[@class='gamelist_lobby_spectate']"))).click();
@@ -639,14 +659,65 @@ public class Web {
 
 	}
 
+	public boolean waitForCardsInHand(){
+		WebDriverWait wait = new WebDriverWait(wd, 120);
+		int i = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@class='game_hand_cards']//*[@class='card_holder']"))).size();
+		parseCards(parseFileName);
+		System.out.println(i);
+		return i > 0;
+	}
+
 	/**
 	 * This is the function that actually chooses the answer in the web browser
 	 * @param index winning index
 	 */
 	public void chooseAnswer(int index){
-		//TODO: Implement
+		String id = "";
+		parseCards(parseFileName);
+		int i = 0;
+		for(WhiteCard e : this.gameHand){
+			id = e.getCardID().substring(e.getCardID().indexOf("_") + 1);
+			i = Integer.parseInt(id);
+			if(i==index){
+				WebDriverWait wait = new WebDriverWait(wd, 30);
+				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='game_hand_cards']//*[@id='" + e.getCardID() + "']"))).click();
+				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='main_holder']//*[@class='confirm_card']"))).click();
+				return;
+			}
+		}
+		System.out.println("Card index not available");
+	}
+
+	public void czarChoose(int index){
+		String id = "";
+		parseCards(parseFileName);
+		int i = 0;
+		for(WhiteCard e : this.whiteCardList){
+			id = e.getCardID().substring(e.getCardID().indexOf("_") + 1);
+			i = Integer.parseInt(id);
+			if(i==index){
+				WebDriverWait wait = new WebDriverWait(wd, 30);
+				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='game_right_side']//*[@id='" + e.getCardID() + "']"))).click();
+				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='main_holder']//*[@class='confirm_card']"))).click();
+			}
+		}
 
 	}
+
+	public void webInit(String username){
+		this.setUrl("http://www.pretendyoure.xyz/zy/");
+		this.grabWebpage();
+		this.getToGame(1);
+		this.setNickName(username);
+		boolean flag = this.getToGamePage(this.getNickName());
+		if(!flag) {
+			System.out.println("Invalid Username or Could not enter lobby");
+		}
+		this.parseLobbies();
+
+	}
+
+
 
 	/**
 	 * "             " except in the case of multiple blanks
@@ -657,6 +728,9 @@ public class Web {
 	}
 
 	public void close(){
+		if(inGame()){
+			leaveGame();
+		}
 		wd.findElement(By.xpath("//*[@id='logout']")).click();
 		String parentWindow = wd.getWindowHandle();
 		wd.switchTo().alert().accept();
@@ -717,6 +791,7 @@ public class Web {
 						System.out.println("Enter an available game lobby number:");
 						i = in.nextInt();
 						w.joinLobby(i, true);
+
 						break;
 					case "s":
 						System.out.println("Enter an available game lobby number:");
@@ -731,7 +806,7 @@ public class Web {
 						break;
 					case "parse":
 						System.out.println("Parse white and black cards");
-						w.parseCards("current");
+						w.parseCards(w.parseFileName);
 						System.out.println("Print Cards");
 						w.printBlackCard();
 						w.printHand();
@@ -742,6 +817,23 @@ public class Web {
 					case "ids":
 						System.out.println("Get Card IDs");
 						w.printCardIDs();
+						break;
+					case "wait":
+						w.waitForCardsInHand();
+						break;
+					case "choose":
+						System.out.println("Choose card given ID:");
+						w.parseCards(w.parseFileName);
+						w.printCardIDs();
+						i = in.nextInt();
+						w.chooseAnswer(i);
+						break;
+					case "czar":
+						System.out.println("Choose card given ID:");
+						w.parseCards(w.parseFileName);
+						w.printInPlayCardIDs();
+						i = in.nextInt();
+						w.czarChoose(i);
 						break;
 
 				}
