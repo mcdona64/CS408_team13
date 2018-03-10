@@ -548,7 +548,7 @@ public class Web {
 				} else {
 					//spectating a game
 					//check if there is room for spectators
-					if(e.getSpectatorCount() > 0 && e.getSpectatorCount() < e.getMaxSpectators() && !e.hasPassword()){
+					if(e.getMaxSpectators() > 0 && e.getSpectatorCount() < e.getMaxSpectators() && !e.hasPassword()){
 						join(gameNum, play);
 					} else {
 						System.out.println("Spectating not available");
@@ -773,7 +773,9 @@ public class Web {
 	 * @param indecies array list of winning indecies
 	 */
 	public void chooseAnswer(ArrayList<Integer> indecies){
-		//TODO: Implement
+		for(int i = 0; i < indecies.size(); i++){
+			chooseAnswer(Integer.parseInt("dunnowhyneedname", indecies.get(i)));
+		}
 	}
 
 	public void close(){

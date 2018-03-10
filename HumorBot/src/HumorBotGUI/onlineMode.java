@@ -46,7 +46,7 @@ public class onlineMode {
 
         this.b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(modey == 1){
+                if(modey == 0){
                     boolean[] g = {true,true};
                     mcf.initalize(g);
                 }else{
@@ -82,12 +82,12 @@ public class onlineMode {
                 if(!in_game){
                     if(modey == 1){
                         boolean[] h = {true, true};
-                        mcf.initalize(h);
+                        mcf.setFlags(h);
                         modey = 0;
                         mode.setText("Spectator Mode Enabled");
                     }else {
                         boolean[] h = {true, false};
-                        mcf.initalize(h);
+                        mcf.setFlags(h);
                         modey = 1;
                         mode.setText("Player Mode Enabled");
                     }

@@ -451,21 +451,30 @@ public class MCF {
                                 throw new Exit_Automation_Exception("Automation Exited");
                             if (!this.flags[1]) {
                                 //updates handled in makeDecision
+                                this.crawler.waitForCardsInHand();
                                 this.crawler.saveWebpage("current");
                                 this.crawler.parseCards("current");
                                 this.setHand(this.crawler.getHand());
-                                if (this.hand.size() > 0)
-                                    this.makeDecision(this.crawler.getBlackCard());
+                                if (!this.crawler.currentState()) {
+                                    ArrayList<WhiteCard> on_table = this.crawler.getWhiteCardList();
+                                    Random r = new Random();
+                                    int win = r.nextInt(on_table.size()) % this.currentCard.getBlanks();
+                                    this.crawler.czarChoose(win);
+                                } else {
+                                    if (this.hand.size() > 0)
+                                        this.makeDecision(this.crawler.getBlackCard());
+                                }
                             }
                             System.out.println("Waiting");
+                            this.crawler.seeWinningCardSelected();
                             this.crawler.parseCards("current");
                             try {
                                 if (this.currentCard.getBlanks() <= 1)
                                     this.databaseInterface.adjustWeights(this.crawler.getWinningHand().get(0), this.crawler.getBlackCard());
-                                else{
-                                    String [] result = new String[this.currentCard.getBlanks()];
-                                    ArrayList<WhiteCard> thing= this.crawler.getWinningHand();
-                                    for(int i = 0; i < this.currentCard.getBlanks(); i++){
+                                else {
+                                    String[] result = new String[this.currentCard.getBlanks()];
+                                    ArrayList<WhiteCard> thing = this.crawler.getWinningHand();
+                                    for (int i = 0; i < this.currentCard.getBlanks(); i++) {
                                         result[i] = thing.get(i).getAnswer();
                                     }
                                     this.databaseInterface.adjustWeights(result, this.currentCard.getQuestion(), this.currentCard.getBlanks());
@@ -504,6 +513,13 @@ public class MCF {
             t.printStackTrace();
         }
     }
+
+    /**
+     * FUNCTIONS FOR AUTOMATIONS:
+     * wait for winning card: seeWinningCardSelected()
+     * When check if card (TO be done)
+     * Select winning card as card Czar czarChoose()
+     */
 
     /**
      * FOR TESTING PURPOSES ONLY
