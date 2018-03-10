@@ -48,8 +48,8 @@ public class onlineMode {
                     mcf.initalize(h);
                 }
                 set_line(true);
-                mcf.doStuff();
                 in_game = true;
+                mcf.doStuff();
                 //f.dispose();
             }
         });
@@ -129,8 +129,8 @@ public class onlineMode {
             this.b.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     set_line(true);
-                    mcf.doStuff();
                     in_game = true;
+                    mcf.doStuff();
                     //f.dispose();
                 }
             });

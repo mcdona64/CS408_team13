@@ -355,8 +355,10 @@ public class MCF {
     //These are the functions that we need
     private void initializeWebCrawler() {
         this.crawler = new Web("http://www.pretendyoure.xyz/zy/");
-        this.crawler.setNickName(this.username);
         this.crawler.grabWebpage();
+        this.crawler.getToGame(1);
+        this.crawler.setNickName(this.username);
+        this.crawler.getToGamePage(this.username);
     }
 
     /**
@@ -370,26 +372,26 @@ public class MCF {
                 try{
                     for(;;){
                         //Connect to a game Think I may be missing things
-                        this.crawler.parseGames();
-                        if(this.crawler.getLobbyList().size() == 0){
+                        this.crawler.parseLobbies();
+                        if(this.crawler.getAvailableLobbies().size() == 0){
                             throw new Game_Over_Excpetion();
                         }
                         Lobby curr_Lobby = null;
-                        for(int i = 0; i < this.crawler.getLobbyList().size(); i++){
+                        for(int i = 0; i < this.crawler.getAvailableLobbies().size(); i++){
                             if(this.flags[1]){
-                                if (this.crawler.getLobbyList().get(i).getSpectatorCount() >= this.crawler.getLobbyList().get(i).getMaxSpectators()){
+                                if (this.crawler.getAvailableLobbies().get(i).getSpectatorCount() >= this.crawler.getAvailableLobbies().get(i).getMaxSpectators()){
                                     continue;
                                 }else {
-                                    curr_Lobby = this.crawler.getLobbyList().get(i);
-                                    this.crawler.joinGame(Integer.parseInt(curr_Lobby.getGameNum()), false);
+                                    curr_Lobby = this.crawler.getAvailableLobbies().get(i);
+                                    this.crawler.joinLobby(curr_Lobby.getGameNum(), false);
                                     break;
                                 }
                             }else{
-                                if(this.crawler.getLobbyList().get(i).getPlayerCount() >= this.crawler.getLobbyList().get(i).getMaxPlayers()){
+                                if(this.crawler.getAvailableLobbies().get(i).getPlayerCount() >= this.crawler.getAvailableLobbies().get(i).getMaxPlayers()){
                                     continue;
                                 }else {
-                                    curr_Lobby = this.crawler.getLobbyList().get(i);
-                                    this.crawler.joinGame(Integer.parseInt(curr_Lobby.getGameNum()), true);
+                                    curr_Lobby = this.crawler.getAvailableLobbies().get(i);
+                                    this.crawler.joinLobby(curr_Lobby.getGameNum(), true);
                                     break;
                                 }
                             }
@@ -421,6 +423,7 @@ public class MCF {
             }
         }catch (Exit_Automation_Exception e){
             e.cheeseIt(this.flags[1]);
+            this.crawler.close();
         }
     }
 
