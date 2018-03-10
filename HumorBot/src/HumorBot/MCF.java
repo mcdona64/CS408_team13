@@ -456,6 +456,8 @@ public class MCF {
                                 this.crawler.parseCards("current");
                                 this.setHand(this.crawler.getHand());
                                 if (!this.crawler.currentState()) {
+                                    if (!this.automation)
+                                        throw new Exit_Automation_Exception("Automation Exited");
                                     ArrayList<WhiteCard> on_table = this.crawler.getWhiteCardList();
                                     Random r = new Random();
                                     int win = r.nextInt(on_table.size()) % this.currentCard.getBlanks();
@@ -465,9 +467,26 @@ public class MCF {
                                         this.makeDecision(this.crawler.getBlackCard());
                                 }
                             }
+                            if (!this.automation)
+                                throw new Exit_Automation_Exception("Automation Exited");
                             System.out.println("Waiting");
-                            this.crawler.seeWinningCardSelected();
+                            Thread t = new Thread(){
+                                @Override
+                                public void run() {
+                                    crawler.seeWinningCardSelected();
+                                }
+                            };
+                            t.start();
+                            for(;;){
+                                if(t.isInterrupted()){
+                                    break;
+                                }
+                                if (!this.automation)
+                                    throw new Exit_Automation_Exception("Automation Exited");
+                            }
                             this.crawler.parseCards("current");
+                            if (!this.automation)
+                                throw new Exit_Automation_Exception("Automation Exited");
                             try {
                                 if (this.currentCard.getBlanks() <= 1)
                                     this.databaseInterface.adjustWeights(this.crawler.getWinningHand().get(0), this.crawler.getBlackCard());
