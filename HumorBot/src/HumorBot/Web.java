@@ -604,7 +604,7 @@ public class Web {
 	}
 
 	public void close(){
-		wd.findElement(By.xpath("//*[@id='logout']"));
+		wd.findElement(By.xpath("//*[@id='logout']")).click();
 		String parentWindow = wd.getWindowHandle();
 		wd.switchTo().alert().accept();
 		wd.switchTo().window(parentWindow);
