@@ -50,7 +50,7 @@ public class MCF {
         return this.username;
     }
 
-    public void break_automation(){
+    public void break_automation() {
         this.automation = false;
     }
 
@@ -73,7 +73,13 @@ public class MCF {
         this.hand.clear();
         for (int i = 0; i < hand.size(); i++) {
             try {
-                this.hand.add(databaseInterface.getWhiteCard(hand.get(i).getAnswer()));
+                WhiteCard curr = databaseInterface.getWhiteCard(hand.get(i).getAnswer());
+                if (curr != null)
+                    this.hand.add(curr);
+                else {
+                    this.databaseInterface.addWhiteCard(new WhiteCard(hand.get(i).getAnswer()));
+                    i--;
+                }
             } catch (ConnectionNotEstablishedException e) {
                 e.printStackTrace();
             }
@@ -130,11 +136,17 @@ public class MCF {
     /**
      * Deep stuff, this will come way later down the road
      */
-    public void makeDecision(String blackCard) {
+    public int[] makeDecision(String blackCard) {
         //get the number of blanks
-        String[] splitted = blackCard.split("_");
-        this.setCurrentCard(new BlackCard(splitted.length - 1, blackCard));
-        setHand(this.crawler.getHand());
+        int g = 0;
+        for (int i = 0; i < blackCard.length(); i++) {
+            if (blackCard.charAt(i) == '_') {
+                g++;
+            }
+        }
+        this.setCurrentCard(new BlackCard(g, blackCard));
+        if (this.flags[0])
+            setHand(this.crawler.getHand());
         for (int i = 0; i < this.hand.size(); i++) {
             try {
                 this.hand.set(i, new WhiteCard(this.hand.get(i).getAnswer(), this.databaseInterface.getWeight(this.hand.get(i), this.currentCard),
@@ -144,6 +156,7 @@ public class MCF {
             } catch (NullPointerException n) {
                 try {
                     this.databaseInterface.addWhiteCard(this.hand.get(i));
+                    i--;
                 } catch (ConnectionNotEstablishedException e) {
                     e.printStackTrace();
                 } catch (NullPointerException kill) {
@@ -154,6 +167,7 @@ public class MCF {
         }
         try {
             setCurrentCard(this.databaseInterface.getBlackCard(this.currentCard));
+            this.currentCard.setBlanks(g);
         } catch (ConnectionNotEstablishedException e) {
             e.printStackTrace();
         } catch (NullPointerException f) {
@@ -167,27 +181,57 @@ public class MCF {
         long best_weight = getCardMaxWeight();
         //Not a throaway round
         if (best_weight >= THROWAWAY_MAX || averageWeight >= THROWAWAY_AVERAGE) {
-            if (this.currentCard.getBlanks() <= 1)
-                this.crawler.chooseAnswer(assessHandNormal());
-            else {
+            if (this.currentCard.getBlanks() <= 1) {
+                if (!this.flags[0]) {
+                    this.crawler.chooseAnswer(assessHandNormal());
+                } else {
+                    int[] thing = {assessHandNormal()};
+                    return thing;
+                }
+            } else {
                 try {
-                    this.crawler.chooseAnswer(assessHandMultipleBlanks(this.currentCard.getBlanks(), false));
+                    if (!this.flags[0]) {
+                        this.crawler.chooseAnswer(assessHandMultipleBlanks(this.currentCard.getBlanks(), false));
+                    } else {
+                        Integer[] thing = (Integer[]) assessHandMultipleBlanks(this.currentCard.getBlanks(), false).toArray();
+                        int[] hanso = new int[thing.length];
+                        for (int k = 0; k < thing.length; k++) {
+                            hanso[k] = Integer.getInteger("humina", thing[k]);
+                        }
+                        return hanso;
+                    }
                 } catch (CardCountException e) {
                     e.printStackTrace();
                 }
             }
         }//throwaway round
         else {
-            if (this.currentCard.getBlanks() <= 1)
-                this.crawler.chooseAnswer(assessHandThrowaway());
-            else {
+            if (this.currentCard.getBlanks() <= 1) {
+                if (this.flags[0]) {
+                    this.crawler.chooseAnswer(assessHandNormal());
+                } else {
+                    int[] thing = {assessHandNormal()};
+                    return thing;
+                }
+            } else {
                 try {
-                    this.crawler.chooseAnswer(assessHandMultipleBlanks(this.currentCard.getBlanks(), true));
+                    if (this.flags[0]) {
+                        this.crawler.chooseAnswer(assessHandMultipleBlanks(this.currentCard.getBlanks(), true));
+                    } else {
+                        Object[] thing = assessHandMultipleBlanks(this.currentCard.getBlanks(), true).toArray();
+                        int[] hanso = new int[thing.length];
+                        for (int k = 0; k < thing.length; k++) {
+                            if (thing[k] instanceof Integer)
+                                hanso[k] = Integer.getInteger("humina", (Integer) thing[k]);
+                        }
+                        return hanso;
+                    }
                 } catch (CardCountException e) {
                     e.printStackTrace();
                 }
             }
         }
+        return new int[0];
     }
 
     private long getCardMaxWeight() {
@@ -288,10 +332,10 @@ public class MCF {
                 int bestWeight = -1;
 
                 WhiteCard[] g = new WhiteCard[numBlanks];
-                int numArrays = (int)Math.pow(this.hand.size(), numBlanks);
-                for(int i = 0; i < numArrays; i++) {
+                int numArrays = (int) Math.pow(this.hand.size(), numBlanks);
+                for (int i = 0; i < numArrays; i++) {
                     // Calculate the correct item for each position in the array
-                    for(int j = 0; j < numBlanks; j++) {
+                    for (int j = 0; j < numBlanks; j++) {
                         // This is the period with which this position changes, i.e.
                         // a period of 5 means the value changes every 5th array
                         int period = (int) Math.pow(this.hand.size(), numBlanks - j - 1);
@@ -301,11 +345,11 @@ public class MCF {
                     }
                     int[] l = this.databaseInterface.getBestPermitation(this.currentCard, g, numBlanks);
                     WhiteCard[] goodg = new WhiteCard[numBlanks];
-                    for(int f = 0; f < l.length; f++){
+                    for (int f = 0; f < l.length; f++) {
                         goodg[f] = this.hand.get(getIndex(g[l[f]]));
                     }
                     int smifned;
-                    if((smifned = this.databaseInterface.getWeight(goodg, this.currentCard)) >= bestWeight){
+                    if ((smifned = this.databaseInterface.getWeight(goodg, this.currentCard)) >= bestWeight) {
                         bestWeight = smifned;
                         for (int j = 0; j < l.length; j++) {
                             choices.add(l[j]);
@@ -324,9 +368,9 @@ public class MCF {
         return choices;
     }
 
-    public int getIndex(WhiteCard card){
-        for (int i = 0; i < this.hand.size(); i++){
-            if(this.hand.get(i).equals(card)){
+    public int getIndex(WhiteCard card) {
+        for (int i = 0; i < this.hand.size(); i++) {
+            if (this.hand.get(i).equals(card)) {
                 return i;
             }
         }
@@ -353,7 +397,7 @@ public class MCF {
 
     //These are the functions that we need
     public void initializeWebCrawler() {
-        if(this.crawler != null){
+        if (this.crawler != null) {
             this.crawler.close();
         }
         this.crawler = new Web("http://www.pretendyoure.xyz/zy/");
@@ -369,67 +413,67 @@ public class MCF {
      */
     public void doStuff() {
         try {
-            for(;;){
+            for (; ; ) {
                 this.automation = true;
-                try{
-                    for(;;){
+                try {
+                    for (; ; ) {
                         //Connect to a game Think I may be missing things
                         this.crawler.parseLobbies();
-                        if(this.crawler.getAvailableLobbies().size() == 0){
+                        if (this.crawler.getAvailableLobbies().size() == 0) {
                             throw new Game_Over_Excpetion();
                         }
                         Lobby curr_Lobby = null;
-                        for(int i = 0; i < this.crawler.getAvailableLobbies().size(); i++){
-                            if(this.flags[1]){
-                                if (this.crawler.getAvailableLobbies().get(i).getSpectatorCount() >= this.crawler.getAvailableLobbies().get(i).getMaxSpectators()){
+                        for (int i = 0; i < this.crawler.getAvailableLobbies().size(); i++) {
+                            if (this.flags[1]) {
+                                if (this.crawler.getAvailableLobbies().get(i).getSpectatorCount() >= this.crawler.getAvailableLobbies().get(i).getMaxSpectators()) {
                                     continue;
-                                }else {
+                                } else {
                                     curr_Lobby = this.crawler.getAvailableLobbies().get(i);
                                     this.crawler.joinLobby(curr_Lobby.getGameNum(), false);
                                     break;
                                 }
-                            }else{
-                                if(this.crawler.getAvailableLobbies().get(i).getPlayerCount() >= this.crawler.getAvailableLobbies().get(i).getMaxPlayers()){
+                            } else {
+                                if (this.crawler.getAvailableLobbies().get(i).getPlayerCount() >= this.crawler.getAvailableLobbies().get(i).getMaxPlayers()) {
                                     continue;
-                                }else {
+                                } else {
                                     curr_Lobby = this.crawler.getAvailableLobbies().get(i);
                                     this.crawler.joinLobby(curr_Lobby.getGameNum(), true);
                                     break;
                                 }
                             }
                         }
-                        if(curr_Lobby == null){
+                        if (curr_Lobby == null) {
                             throw new Exit_Automation_Exception("No games with space found in this server");
                         }
                         //Now for the actual play
-                        for (;;){
-                            if(!this.automation)
+                        for (; ; ) {
+                            if (!this.automation)
                                 throw new Exit_Automation_Exception("Automation Exited");
-                            if(!this.flags[1]){
+                            if (!this.flags[1]) {
                                 //updates handled in makeDecision
                                 this.crawler.saveWebpage("current");
                                 this.crawler.parseCards("current");
                                 this.setHand(this.crawler.getHand());
-                                if(this.hand.size() > 0)
+                                if (this.hand.size() > 0)
                                     this.makeDecision(this.crawler.getBlackCard());
                             }
                             System.out.println("Waiting");
                             //find a way to actually wait
                             try {
                                 this.databaseInterface.adjustWeights("Temp Whitecard", "Temp BlackCard");
-                            }catch (ConnectionNotEstablishedException u){
+                            } catch (ConnectionNotEstablishedException u) {
                                 u.printStackTrace();
                                 return;
                             }
                         }
                     }
-                }catch (Game_Over_Excpetion r){
+                } catch (Game_Over_Excpetion r) {
                     System.out.println("Game ended, finding new Game");
-                }catch (NullPointerException t){
+                } catch (NullPointerException t) {
                     throw new Exit_Automation_Exception("Null pointer: Something is not right...");
                 }
             }
-        }catch (Exit_Automation_Exception e) {
+        } catch (Exit_Automation_Exception e) {
             e.cheeseIt(this.flags[1]);
             this.crawler.leaveGame();
             this.crawler.close();

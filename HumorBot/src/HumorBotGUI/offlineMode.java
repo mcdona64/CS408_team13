@@ -1,6 +1,7 @@
 package HumorBotGUI;
 
 import HumorBot.MCF;
+import HumorBot.WhiteCard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -60,15 +61,19 @@ public class offlineMode
                 //use blackcard text and arraylist of white card texts to return best card index and worst card index
                 String blackcardtext = blc.getTxt();
                 ArrayList<String> whitecardtext = new ArrayList<String>();
+                ArrayList<WhiteCard> cardz = new ArrayList<WhiteCard>();
                 for(int i = 0; i < wcards.size();i++)
                 {
                     whitecardtext.add(wcards.get(i).getTxt());
+                    cardz.add(new WhiteCard(wcards.get(i).getTxt()));
                 }
+                mcf.setHand(cardz);
+                int[] stuff = mcf.makeDecision(blackcardtext);
 
                 //Insert MOFO function that gives best card index and worst card index
                 //use white card function get index to actually get the index, not the index in the arrayList.
 
-                rec.setText(getRecs(blackcardtext,whitecardtext));
+                rec.setText(getRecs(blackcardtext,stuff));
             }
         });
 
@@ -107,14 +112,17 @@ public class offlineMode
 
     }
 
-    public String getRecs(String blctxt, ArrayList<String> whtcards)
+    public String getRecs(String blctxt, int[] stuff)
     {
-        int i = 0;
-        for(i = 0; i < wcards.size(); i++)
-            if(wcards.get(i).getTxt().equalsIgnoreCase(blctxt))
-                break;
-        wcards.get(i).getInd();
-        return blctxt;
+        String rec = "Card(s) to pick is/are: ";
+        for(int i = 0; i < stuff.length; i++){
+            if(i == 0){
+                rec = rec + "" + wcards.get(stuff[i]).getInd();
+            }else{
+                rec = rec + ", " + wcards.get(stuff[i]).getInd();
+            }
+        }
+        return rec;
     }
 
     public void removeWhiteCard(whiteCard i)
