@@ -14,7 +14,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.*;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jetty.util.StringUtil;
 import org.openqa.selenium.By;
@@ -44,6 +46,7 @@ public class Web {
 	private ArrayList<String> urls = new ArrayList<String>();
 	private ArrayList<WhiteCard> winningHand = new ArrayList<WhiteCard>();
 	private ArrayList<Lobby> lobbyList = new ArrayList<Lobby>();
+	private ArrayList<Lobby> availableLobbies = new ArrayList<Lobby>();
 
 	private WebDriver wd;
 	
@@ -73,6 +76,11 @@ public class Web {
 	public ArrayList<WhiteCard> getHand(){ return this.gameHand; }
 
 	public ArrayList<Lobby> getLobbyList() { return lobbyList; }
+
+	public ArrayList<Lobby> getAvailableLobbies() { return availableLobbies; }
+
+	
+
 
 	public void grabWebpage() {
 		String webURL = this.url;
@@ -358,6 +366,10 @@ public class Web {
 		name.sendKeys(nickname);
 		WebElement button_2 = driver.findElement(By.id("nicknameconfirm"));
 		button_2.click();
+
+		//CHECK IF NAME WAS ACCEPTED
+
+
 		//Should add functionality for pausing and waiting for GUI input for what game to choose.
 		//Look into PhantomJS for hiding web browser window
 		// v GUI can be updated with information from below v
@@ -375,7 +387,7 @@ public class Web {
 		 * 	-How many card sets
 		 * 	-Requires Password or not
 		 */
-		saveWebpage("gamelist");
+
 
 	}
 
@@ -392,7 +404,8 @@ public class Web {
 				}
 	}
 
-	public void parseGames() {
+	public void parseLobbies() {
+		saveWebpage("lobby");
 		File f = new File(filePath + "lobby.html");
 		BufferedReader br = null;
 		try {
@@ -400,13 +413,13 @@ public class Web {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		String buffer;
-		String gameNum = "";
+		String buffer = "";
+		int gameNum = 0;
 		String lobbyHost = "";
-		String playerCount = "";
-		String maxPlayers = "";
-		String spectatorCount = "";
-		String maxSpectators = "";
+		int playerCount = 0;
+		int maxPlayers = 0;
+		int spectatorCount = 0;
+		int maxSpectators = 0;
 		boolean lobbyStatus = false;
 		boolean password = false;
 
@@ -416,13 +429,14 @@ public class Web {
 					int beginIndex = buffer.indexOf("aria-label=\"");
 					int endIndex = buffer.indexOf("\">");
 					String str = buffer.substring(beginIndex+("aria-label=\"").length(), endIndex);
-					System.out.println(str);
+					//System.out.println(str);
 					//parse string and break it up into components
 
 					//gameNum
 					beginIndex = buffer.indexOf("lobby_");
 					endIndex = buffer.indexOf("\" class");
-					gameNum = buffer.substring(beginIndex+("lobby_").length(), endIndex);
+					gameNum = Integer.parseInt(buffer.substring(beginIndex+("lobby_").length(), endIndex));
+
 
 					//lobbyHost
 					beginIndex = 0;
@@ -432,22 +446,22 @@ public class Web {
 					//playerCount
 					beginIndex = str.indexOf("with ");
 					endIndex = str.indexOf(" of");
-					playerCount = str.substring(beginIndex + ("with ").length(), endIndex);
+					playerCount = Integer.parseInt(str.substring(beginIndex + ("with ").length(), endIndex));
 
 					//maxPlayers
 					beginIndex = str.indexOf("of ");
 					endIndex = str.indexOf(" player");
-					maxPlayers = str.substring(beginIndex + ("of ").length(), endIndex);
+					maxPlayers = Integer.parseInt(str.substring(beginIndex + ("of ").length(), endIndex));
 
 					//spectatorCount
 					beginIndex = str.indexOf("and ");
 					endIndex = str.lastIndexOf(" of");
-					spectatorCount = str.substring(beginIndex + ("and ").length(), endIndex);
+					spectatorCount = Integer.parseInt(str.substring(beginIndex + ("and ").length(), endIndex));
 
 					//maxSpectators
 					beginIndex = str.lastIndexOf("of ");
 					endIndex = str.indexOf("spectator");
-					maxSpectators = str.substring(beginIndex + ("of ").length(), endIndex);
+					maxSpectators = Integer.parseInt(str.substring(beginIndex + ("of ").length(), endIndex));
 
 					//lobbyStatus
 					if(str.contains("In Progress")){
@@ -459,10 +473,11 @@ public class Web {
 					//password
 					if(str.contains("Does not have a password")){
 						password = false;
+						availableLobbies.add(new Lobby(gameNum, lobbyHost, playerCount, maxPlayers, spectatorCount, maxSpectators, lobbyStatus, password));
 					} else {
 						password = true;
 					}
-					
+
 				//	System.out.println("gameNum " + gameNum);
 				//	System.out.println("lobbyHost " + lobbyHost);
 				//	System.out.println("playerCount " + playerCount);
@@ -487,11 +502,55 @@ public class Web {
 	}
 
 	/**
+	 * checks if bot can enter game and then enters game
+	 * @param gameNum integer of game number of available lobbies
+	 * @param play True if bot is joining game | False if spectating
+	 * @return
+	 */
+	public void joinLobby(int gameNum, boolean play){
+		for(Lobby e : availableLobbies){
+			if(e.getGameNum()==gameNum){
+				if(play){
+					//joining a game
+					//check if there is room
+					if(e.getPlayerCount() < e.getMaxPlayers() && !e.hasPassword()){
+						join(gameNum, play);
+					} else {
+						System.out.println("Lobby full");
+					}
+				} else {
+					//spectating a game
+					//check if there is room for spectators
+					if(e.getSpectatorCount() > 0 && e.getSpectatorCount() < e.getMaxSpectators() && !e.hasPassword()){
+						join(gameNum, play);
+					} else {
+						System.out.println("Spectating not available");
+					}
+				}
+			}
+		}
+	}
+
+	public void printAvailableLobbies(){
+		for(Lobby e : availableLobbies){
+			e.print();
+		}
+	}
+
+	public void printAvailableLobbyNums(){
+		for(Lobby e : availableLobbies){
+			if(e.getLobbyStatus()) {
+				System.out.print(e.getGameNum() + " | ");
+			}
+		}
+	}
+
+	/**
 	 * Join a specific game
 	 * @param game game lobby index
 	 * @param play true for play. false for spectate
 	 */
-	public void joinGame(int game, boolean play){
+	public void join(int game, boolean play){
 		WebDriverWait wait = new WebDriverWait(wd, 30);
 		if(play){
 			System.out.println("Join Game");
@@ -499,6 +558,30 @@ public class Web {
 		} else {
 			System.out.println("Spectate Game");
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='main']//*[@id='game_list']//*[@id='gamelist_lobby_" + game + "']//*[@class='gamelist_lobby_spectate']"))).click();
+		}
+
+	}
+
+	public boolean inGame(){
+		if(wd.findElements(By.xpath("//*[@id='main_holder']//*")).size()==0){
+			System.out.println("Not in game");
+			return false;
+		} else {
+			System.out.println("In game");
+			return true;
+		}
+	}
+
+	public void leaveGame(){
+		if(inGame()){
+			wd.findElement(By.xpath("//*[@id='leave_game']")).click();
+			String parentWindow = wd.getWindowHandle();
+
+			wd.switchTo().alert().accept();
+			wd.switchTo().window(parentWindow);
+
+		} else {
+			System.out.println("Not in game so can't leave a game");
 		}
 
 	}
@@ -521,16 +604,19 @@ public class Web {
 	}
 
 	public void close(){
-
+		wd.findElement(By.xpath("//*[@id='logout']"));
+		String parentWindow = wd.getWindowHandle();
+		wd.switchTo().alert().accept();
+		wd.switchTo().window(parentWindow);
 		wd.close();
 	}
 
 	public static void main(String[] args) {
 		Web w = new Web();
 
-		w.parseGames();
 
-		/*
+
+
 
 		w.setUrl("http://www.pretendyoure.xyz/zy/");
 		w.grabWebpage();
@@ -545,27 +631,58 @@ public class Web {
 		w.setNickName(name);
 		w.getToGamePage(w.getNickName());
 
-		//w.parseGames();
-
-
-
-
-		//w.joinGame(2, true);
 
 		boolean t = true;
 
 		while(t) {
-			System.out.println("Enter: 'p' to save Web page\n" + "Enter: 'stop' to close window");
-			String s = in.nextLine();
-			if(s.equals("p")) {
-				w.saveWebpage("manualSave");
-			} else if(s.equals("stop")) {
-				w.wd.close();
+			if(!w.wd.toString().contains("null")) {
+				System.out.println("Enter: 'p' to save Web page\n"
+						+ "Enter: 'l' to list available lobbies\n"
+						+ "Enter: 'j' to join a game\n"
+						+ "Enter: 'c' to check if in game\n"
+						+ "Enter: 'stop' to close window");
+				String s = in.nextLine();
+				int i;
+				switch (s) {
+					case "stop":
+						w.close();
+						t = false;
+						break;
+					case "p":
+						w.saveWebpage("manualSave");
+						break;
+					case "l":
+						w.parseLobbies();
+						w.printAvailableLobbies();
+						System.out.println("Game Nums");
+						w.printAvailableLobbyNums();
+						break;
+					case "j":
+						System.out.println("Enter an available game lobby number:");
+						i = in.nextInt();
+						w.joinLobby(i, true);
+						break;
+					case "s":
+						System.out.println("Enter an available game lobby number:");
+						i = in.nextInt();
+						w.joinLobby(i, false);
+						break;
+					case "c":
+						w.inGame();
+						break;
+					case "leave":
+						w.leaveGame();
+						break;
+
+
+				}
+			} else {
+				System.out.println("Browser is closed");
 				t = false;
 			}
 
 		}
-		*/
+
 	}
 	
 	
