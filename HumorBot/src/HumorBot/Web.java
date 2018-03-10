@@ -731,11 +731,17 @@ public class Web {
 		if(inGame()){
 			leaveGame();
 		}
-		wd.findElement(By.xpath("//*[@id='logout']")).click();
-		String parentWindow = wd.getWindowHandle();
-		wd.switchTo().alert().accept();
-		wd.switchTo().window(parentWindow);
-		wd.close();
+		WebDriverWait wait = new WebDriverWait(wd, 30);
+		int i = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@id='logout']"))).size();
+		if(i==0){
+			wd.close();
+		} else {
+			wd.findElement(By.xpath("//*[@id='logout']")).click();
+			String parentWindow = wd.getWindowHandle();
+			wd.switchTo().alert().accept();
+			wd.switchTo().window(parentWindow);
+			wd.close();
+		}
 	}
 
 	public static void main(String[] args) {
