@@ -714,6 +714,13 @@ public class Web {
 
 	}
 
+	public boolean seeWinningCardSelected(){
+		WebDriverWait wait = new WebDriverWait(wd, 420);
+		wait.pollingEvery(2, TimeUnit.SECONDS);
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@class='game_right_side_box game_white_card_wrapper']//*[@class='card whitecard selected']")));
+		return true;
+	}
+
 	public void webInit(String username){
 		this.setUrl("http://www.pretendyoure.xyz/zy/");
 		this.grabWebpage();
@@ -756,9 +763,6 @@ public class Web {
 
 	public static void main(String[] args) {
 		Web w = new Web();
-
-
-
 
 
 		w.setUrl("http://www.pretendyoure.xyz/zy/");
@@ -850,6 +854,9 @@ public class Web {
 						w.printInPlayCardIDs();
 						i = in.nextInt();
 						w.czarChoose(i);
+						break;
+					case "wait for":
+						w.seeWinningCardSelected();
 						break;
 
 				}
