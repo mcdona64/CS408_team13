@@ -462,76 +462,19 @@ public class Web {
 					} else {
 						password = true;
 					}
-
-
-					System.out.println("gameNum " + gameNum);
-					System.out.println("lobbyHost " + lobbyHost);
-					System.out.println("playerCount " + playerCount);
-					System.out.println("maxPlayers " + maxPlayers);
-					System.out.println("spectatorCount " + spectatorCount);
-					System.out.println("maxSpectators " + maxSpectators);
-					System.out.println("lobbyStatus " + lobbyStatus);
-					System.out.println("Password" + password);
-					System.out.println("---------------------");
-					//lobbyList.add(new Lobby(gameNum, lobbyHost, playerCount, maxPlayers, spectatorCount, maxSpectators, lobbyStatus));
+					
+				//	System.out.println("gameNum " + gameNum);
+				//	System.out.println("lobbyHost " + lobbyHost);
+				//	System.out.println("playerCount " + playerCount);
+				//	System.out.println("maxPlayers " + maxPlayers);
+				//	System.out.println("spectatorCount " + spectatorCount);
+				//	System.out.println("maxSpectators " + maxSpectators);
+				//	System.out.println("lobbyStatus " + lobbyStatus);
+				//	System.out.println("Password " + password);
+				//	System.out.println("---------------------");
+					lobbyList.add(new Lobby(gameNum, lobbyHost, playerCount, maxPlayers, spectatorCount, maxSpectators, lobbyStatus, password));
 
 				}
-
-
-
-			/*	if(buffer.contains("div id=\"gamelist_lobby_")) {
-					int beginIndex = buffer.indexOf("lobby_");
-					int endIndex = buffer.indexOf("\" class");
-					gameNum = buffer.substring(beginIndex+("lobby_").length(), endIndex);
-					flag_gameNum = true;
-				} else if(buffer.contains("class=\"gamelist_lobby_host\">")) {
-					int beginIndex = buffer.indexOf(">");
-					int endIndex = buffer.indexOf("</");
-					lobbyHost = buffer.substring(beginIndex+1, endIndex);
-					flag_lobbyHost = true;
-				} else if(buffer.contains("class=\"gamelist_lobby_player_count\">")) {
-					int beginIndex = buffer.indexOf(">");
-					int endIndex = buffer.indexOf("</");
-					playerCount = buffer.substring(beginIndex+1, endIndex);
-					flag_playerCount = true;
-					int begin2Index = buffer.indexOf("max_players\">");
-					int end2Index = buffer.indexOf("</span>,");
-					maxPlayers = buffer.substring(begin2Index+("max_players\">").length(), end2Index);
-					flag_maxPlayers = true;
-				} else if(buffer.contains("class=\"gamelist_lobby_spectator_count\">")) {
-					int beginIndex = buffer.indexOf(">");
-					int endIndex = buffer.indexOf("</");
-					spectatorCount = buffer.substring(beginIndex+1, endIndex);
-					flag_spectatorCount = true;
-					int begin2Index = buffer.indexOf("max_spectators\">");
-					int end2Index = buffer.indexOf("</span>)");
-					maxPlayers = buffer.substring(begin2Index+("max_spectators\">").length(), end2Index);
-					flag_maxSpectators = true;
-				} else if(buffer.contains("class=\"gamelist_lobby_status\">")) {
-					int beginIndex = buffer.indexOf(">");
-					int endIndex = buffer.indexOf("</");
-					lobbyStatus = buffer.substring(beginIndex+1, endIndex);
-					flag_lobbyStatus = true;
-				}
-				if( flag_gameNum && flag_lobbyHost && flag_playerCount && flag_maxPlayers && flag_spectatorCount && flag_maxSpectators && flag_lobbyStatus) {
-					System.out.println("gameNum " + gameNum);
-					System.out.println("lobbyHost " + lobbyHost);
-					System.out.println("playerCount " + playerCount);
-					System.out.println("maxPlayers " + maxPlayers);
-					System.out.println("spectatorCount " + spectatorCount);
-					System.out.println("maxSpectators " + maxSpectators);
-					System.out.println("lobbyStatus " + lobbyStatus);
-					System.out.println("---------------------");
-					//lobbyList.add(new Lobby(gameNum, lobbyHost, playerCount, maxPlayers, spectatorCount, maxSpectators, lobbyStatus));
-					flag_gameNum = false;
-					flag_lobbyHost = false;
-					flag_playerCount = false;
-					flag_maxPlayers = false;
-					flag_spectatorCount = false;
-					flag_maxSpectators = false;
-					flag_lobbyStatus = false;
-				}
-				*/
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
