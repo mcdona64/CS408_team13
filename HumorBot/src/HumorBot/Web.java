@@ -194,7 +194,7 @@ public class Web {
 	 * Stores BlackCard string and blanks in a BlackCard
 	 */
 	public void parseBlackCards(String fn) {
-		File f = new File(filePath + fn);
+		File f = new File(filePath + fn + ".html");
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader(f));
