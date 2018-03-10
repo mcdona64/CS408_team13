@@ -458,9 +458,18 @@ public class MCF {
                                     this.makeDecision(this.crawler.getBlackCard());
                             }
                             System.out.println("Waiting");
-                            //find a way to actually wait
+                            this.crawler.parseCards("current");
                             try {
-                                this.databaseInterface.adjustWeights("Temp Whitecard", "Temp BlackCard");
+                                if (this.currentCard.getBlanks() <= 1)
+                                    this.databaseInterface.adjustWeights(this.crawler.getWinningHand().get(0), this.crawler.getBlackCard());
+                                else{
+                                    String [] result = new String[this.currentCard.getBlanks()];
+                                    ArrayList<WhiteCard> thing= this.crawler.getWinningHand();
+                                    for(int i = 0; i < this.currentCard.getBlanks(); i++){
+                                        result[i] = thing.get(i).getAnswer();
+                                    }
+                                    this.databaseInterface.adjustWeights(result, this.currentCard.getQuestion(), this.currentCard.getBlanks());
+                                }
                             } catch (ConnectionNotEstablishedException u) {
                                 u.printStackTrace();
                                 return;
@@ -484,9 +493,9 @@ public class MCF {
         try {
             if (pos.length == 1) {
                 this.databaseInterface.adjustWeights(this.hand.get(pos[0]), this.currentCard.getQuestion());
-            }else{
+            } else {
                 String[] h = new String[pos.length];
-                for(int i = 0; i < pos.length; i++){
+                for (int i = 0; i < pos.length; i++) {
                     h[i] = this.hand.get(pos[i]).getAnswer();
                 }
                 this.databaseInterface.adjustWeights(h, this.currentCard.getQuestion(), this.currentCard.getBlanks());
