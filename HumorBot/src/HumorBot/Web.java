@@ -15,6 +15,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -701,6 +702,15 @@ public class Web {
 				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='main_holder']//*[@class='confirm_card']"))).click();
 			}
 		}
+
+	}
+
+	public void pollRound(){
+		WebDriverWait wait = new WebDriverWait(wd, 120);
+		while(wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@class='game_right_side']//*"))).size()==0){
+
+		}
+		System.out.println("Cards are available");
 
 	}
 
