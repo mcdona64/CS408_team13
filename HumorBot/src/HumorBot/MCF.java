@@ -28,6 +28,16 @@ public class MCF {
     private DatabaseInterface databaseInterface;
     //This is for automation purposes:
     private boolean automation;
+    //This is for if we should update db
+    private boolean updatedb;
+    public void setupdatedb(boolean updatedb){
+        this.updatedb = updatedb;
+    }
+    //This is for playing in naive mode
+    private boolean naivemode;
+    public void setnaivemode(boolean naivemode){
+        this.naivemode = naivemode;
+    }
     /**
      * This variable is our flags, the are rather important, 6 is kindof a placeholder for now.
      * Here is what it might stand for:
@@ -39,6 +49,8 @@ public class MCF {
     //Constructors
     public MCF(String username) {
         this.username = username;
+        this.naivemode = false;
+        this.updatedb = true;
     }
 
     public MCF() {
@@ -113,6 +125,30 @@ public class MCF {
         return av / this.hand.size();
     }
 
+    public int getwins(){
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            return db.getwins();
+        } catch (ConnectionNotEstablishedException e) {
+            System.out.println("no connection to database");
+            e.printStackTrace();
+            System.exit(-1);
+            return -1;
+        }
+    }
+
+    public int getlosses(){
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            return db.getlosses();
+        } catch (ConnectionNotEstablishedException e) {
+            System.out.println("no connection to database");
+            e.printStackTrace();
+            System.exit(-1);
+            return -1;
+        }
+    }
+
     //Setters
     public void setCurrentCard(BlackCard card) {
         this.currentCard = card;
@@ -123,7 +159,6 @@ public class MCF {
     /*public void updateHand(){
         this.hand = this.crawler.getHand();
 		for(int i = 0; i < this.hand.size(); i++){
-			//TODO implement database stuff
 			long weight = 0;
 			long avWeight = 0;
 			this.hand.get(i).setWeight(weight);
@@ -180,7 +215,7 @@ public class MCF {
         long averageWeight = getCardAverage(false);
         long best_weight = getCardMaxWeight();
         //Not a throaway round
-        if (best_weight >= THROWAWAY_MAX || averageWeight >= THROWAWAY_AVERAGE) {
+        if ((best_weight >= THROWAWAY_MAX || averageWeight >= THROWAWAY_AVERAGE) && !naivemode) {
             if (this.currentCard.getBlanks() <= 1) {
                 if (!this.flags[0]) {
                     this.crawler.chooseAnswer(assessHandNormal());
@@ -488,15 +523,30 @@ public class MCF {
                             if (!this.automation)
                                 throw new Exit_Automation_Exception("Automation Exited");
                             try {
-                                if (this.currentCard.getBlanks() <= 1)
-                                    this.databaseInterface.adjustWeights(this.crawler.getWinningHand().get(0), this.crawler.getBlackCard());
+                                if (this.currentCard.getBlanks() <= 1) {
+                                    if (updatedb) {
+                                        this.databaseInterface.adjustWeights(this.crawler.getWinningHand().get(0), this.crawler.getBlackCard());
+                                        if (this.crawler.seeWinningCardSelected()) {
+                                            this.databaseInterface.incwins();
+                                        } else {
+                                            this.databaseInterface.inclosses();
+                                        }
+                                    }
+                                }
                                 else {
                                     String[] result = new String[this.currentCard.getBlanks()];
                                     ArrayList<WhiteCard> thing = this.crawler.getWinningHand();
                                     for (int i = 0; i < this.currentCard.getBlanks(); i++) {
                                         result[i] = thing.get(i).getAnswer();
                                     }
-                                    this.databaseInterface.adjustWeights(result, this.currentCard.getQuestion(), this.currentCard.getBlanks());
+                                    if (updatedb) {
+                                        this.databaseInterface.adjustWeights(result, this.currentCard.getQuestion(), this.currentCard.getBlanks());
+                                        if (this.crawler.seeWinningCardSelected()) {
+                                            this.databaseInterface.incwins();
+                                        } else {
+                                            this.databaseInterface.inclosses();
+                                        }
+                                    }
                                 }
                             } catch (ConnectionNotEstablishedException u) {
                                 u.printStackTrace();
@@ -519,14 +569,19 @@ public class MCF {
 
     public void handleWin(int[] pos) {
         try {
+            this.databaseInterface.incwins();
             if (pos.length == 1) {
-                this.databaseInterface.adjustWeights(this.hand.get(pos[0]), this.currentCard.getQuestion());
+                if (updatedb) {
+                    this.databaseInterface.adjustWeights(this.hand.get(pos[0]), this.currentCard.getQuestion());
+                }
             } else {
                 String[] h = new String[pos.length];
                 for (int i = 0; i < pos.length; i++) {
                     h[i] = this.hand.get(pos[i]).getAnswer();
                 }
-                this.databaseInterface.adjustWeights(h, this.currentCard.getQuestion(), this.currentCard.getBlanks());
+                if (updatedb) {
+                    this.databaseInterface.adjustWeights(h, this.currentCard.getQuestion(), this.currentCard.getBlanks());
+                }
             }
         } catch (ConnectionNotEstablishedException t) {
             t.printStackTrace();

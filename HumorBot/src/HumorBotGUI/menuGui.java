@@ -23,7 +23,7 @@ public class menuGui
         JFrame f= new JFrame("Main Menu");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        f.setSize(500,500);
+        f.setSize(530,500);
         f.getContentPane().setBackground(Color.WHITE);
         JLabel title, instr;
         title = new JLabel("Welcome to Humor Bot!",JLabel.CENTER);
@@ -97,9 +97,17 @@ public class menuGui
         f.setLayout(null);
         f.setVisible(true);
 
-        //we should move to room across, cause of above normal asian woman, you know, the one with the highlights
+        JButton options=new JButton("Options");
+        options.setBounds(430,50,90,30);
 
+        options.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                OptionsMenu options = new OptionsMenu(mcf);
+                f.dispose();
+            }
+        });
 
+        f.add(options);
     }
 
 

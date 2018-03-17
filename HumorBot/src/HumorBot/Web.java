@@ -842,6 +842,7 @@ public class Web {
 		}
 	}
 
+	// This is for testing purposes only
 	public static void main(String[] args) {
 		Web w = new Web();
 

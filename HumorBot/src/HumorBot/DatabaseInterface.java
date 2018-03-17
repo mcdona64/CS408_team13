@@ -1004,5 +1004,126 @@ public class DatabaseInterface {
         return getAverageWeight(whiteCard.getAnswer());
     }
 
+    public int getwins() throws ConnectionNotEstablishedException {
+        // if we are currently unconnected connect
+        if (!connected){
+            connect();
+        }
+
+        // create the query to add an item to the table
+        String query = "select * from wins";
+        try {
+            // executes the query and returns true on success
+            ResultSet rs = stmt.executeQuery(query);
+            // check that we have found it
+            if(rs.next()){
+                // make the white card
+                int res = rs.getInt("wins");
+                // check we have not found multiple
+                if(rs.next()){
+                    // handle if multiple cards are added to the database
+                    System.out.println("Multeple values stored in variable wins");
+                    System.out.println("Database deprecated!");
+                    return -1;
+                }
+                // return result if no other errors
+                return res;
+            } else {
+                // handle no white card not in database
+                System.out.println("Value not set");
+                System.out.println("Database deprecated!");
+                return -2;
+            }
+        } catch (SQLException e) {
+            // catch errors with the connection
+            System.out.println("Error with connection!");
+            System.out.println(e.getMessage());
+            closeConnection();
+            return -3;
+        }
+    }
+
+    public int getlosses() throws ConnectionNotEstablishedException {
+        // if we are currently unconnected connect
+        if (!connected){
+            connect();
+        }
+
+        // create the query to add an item to the table
+        String query = "select * from losses";
+        try {
+            // executes the query and returns true on success
+            ResultSet rs = stmt.executeQuery(query);
+            // check that we have found it
+            if(rs.next()){
+                // make the white card
+                int res = rs.getInt("losses");
+                // check we have not found multiple
+                if(rs.next()){
+                    // handle if multiple cards are added to the database
+                    System.out.println("Multeple values stored in variable losses");
+                    System.out.println("Database deprecated!");
+                    return -1;
+                }
+                // return result if no other errors
+                return res;
+            } else {
+                // handle no white card not in database
+                System.out.println("Value not set");
+                System.out.println("Database deprecated!");
+                return -2;
+            }
+        } catch (SQLException e) {
+            // catch errors with the connection
+            System.out.println("Error with connection!");
+            closeConnection();
+            return -3;
+        }
+    }
+
+    public boolean incwins() throws ConnectionNotEstablishedException {
+        // if we are currently unconnected connect
+        if (!connected){
+            connect();
+        }
+
+        // create the query to add an item to the table
+        int wins = getwins();
+        String query = "update wins set wins=" + (wins+1) + " where wins="+ wins;
+        try {
+            // executes the query and returns true on success
+            stmt.execute(query);
+            return true;
+        } catch (SQLException e) {
+            // catch errors with the connection
+            System.out.println("Error with connection!");
+            System.out.println(e.getMessage());
+            closeConnection();
+            return false;
+        }
+    }
+
+    public boolean inclosses() throws ConnectionNotEstablishedException {
+        // if we are currently unconnected connect
+        if (!connected){
+            connect();
+        }
+
+        // create the query to add an item to the table
+        int losses = getlosses();
+        String query = "update losses set losses=" + (losses+1) + " where losses="+ losses;
+        try {
+            // executes the query and returns true on success
+            stmt.execute(query);
+            return true;
+        } catch (SQLException e) {
+            // catch errors with the connection
+            System.out.println("Error with connection!");
+            System.out.println(e.getMessage());
+            closeConnection();
+            return false;
+        }
+    }
+
 
 }

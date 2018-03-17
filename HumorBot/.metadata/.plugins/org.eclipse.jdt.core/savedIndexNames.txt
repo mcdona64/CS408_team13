@@ -1,0 +1,1 @@
+INDEX VERSION 1.126+/u/data/u91/mcdona64/cs408/repo/CS408_team13/HumorBot/.metadata/.plugins/org.eclipse.jdt.core

@@ -1,5 +1,7 @@
 package HumorBotGUI;
 
+import HumorBot.ConnectionNotEstablishedException;
+import HumorBot.DatabaseInterface;
 import HumorBot.MCF;
 import HumorBot.WhiteCard;
 import jdk.nashorn.internal.scripts.JO;
@@ -79,7 +81,14 @@ public class offlineMode
                 if(JOptionPane.showConfirmDialog(null, "Did You win?",
                         "Success", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                     mcf.handleWin(stuff);
-                }else { /*Do nothing*/}
+                }else {
+                    try {
+                        DatabaseInterface db = new DatabaseInterface();
+                        db.inclosses();
+                    } catch (ConnectionNotEstablishedException e1) {
+                        e1.printStackTrace();
+                    }
+                }
             }
         });
 

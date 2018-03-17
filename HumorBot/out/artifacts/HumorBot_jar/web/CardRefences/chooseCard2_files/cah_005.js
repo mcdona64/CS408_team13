@@ -1,0 +1,1 @@
+cah.DEBUG=false;cah.SILENT_DEBUG=false;cah.AJAX_URI='/zy/AjaxServlet';cah.LONGPOLL_URI='/zy/LongPollServlet';cah.COOKIE_DOMAIN='.pretendyoure.xyz';

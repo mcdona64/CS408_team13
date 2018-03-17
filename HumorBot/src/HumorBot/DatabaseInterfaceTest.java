@@ -562,6 +562,58 @@ public class DatabaseInterfaceTest {
         assert(result);
     }
 
+    @Test
+    void Testgetwins() {
+        boolean result = true;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            System.out.println(db.getwins());
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+        assert(result);
+    }
+
+    @Test
+    void Testincwins() {
+        boolean result = true;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            System.out.println(db.getwins());
+            db.incwins();
+            System.out.println(db.getwins());
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+        assert(result);
+    }
+
+    @Test
+    void Testgetlosses() {
+        boolean result = true;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            System.out.println(db.getlosses());
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+        assert(result);
+    }
+
+    @Test
+    void Testinclosses() {
+        boolean result = true;
+        try {
+            DatabaseInterface db = new DatabaseInterface();
+            System.out.println(db.getlosses());
+            db.inclosses();
+            System.out.println(db.getlosses());
+        } catch (ConnectionNotEstablishedException e) {
+            result = false;
+        }
+        assert(result);
+    }
+
     public static void tearDown() {
         // this will clean up the database after the tests are run
         System.out.println("Cleaning up");
