@@ -1089,7 +1089,7 @@ public class DatabaseInterface {
 
         // create the query to add an item to the table
         int wins = getwins();
-        String query = "update wins set wins=" + (wins+1) + " where wins="+ wins;
+        String query = "update wins set wins=" + (wins+2) + " where wins="+ wins;
         try {
             // executes the query and returns true on success
             stmt.execute(query);
