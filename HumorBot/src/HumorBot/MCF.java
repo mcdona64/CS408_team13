@@ -460,7 +460,7 @@ public class MCF {
                         //Now for the actual play
                         for (; ; ) {
                             if (!this.automation)
-                                throw new Exit_Automation_Exception("Automation Exited");
+                                throw new Exit_Automation_Exception();
                             if (!this.flags[1]) {
                                 //updates handled in makeDecision
                                 this.crawler.waitForCardsInHand();
@@ -469,7 +469,7 @@ public class MCF {
                                 this.setHand(this.crawler.getHand());
                                 if (!this.crawler.currentState()) {
                                     if (!this.automation)
-                                        throw new Exit_Automation_Exception("Automation Exited");
+                                        throw new Exit_Automation_Exception();
                                     ArrayList<WhiteCard> on_table = this.crawler.getWhiteCardList();
                                     Random r = new Random();
                                     int win = r.nextInt(on_table.size()) % this.currentCard.getBlanks();
@@ -480,7 +480,7 @@ public class MCF {
                                 }
                             }
                             if (!this.automation)
-                                throw new Exit_Automation_Exception("Automation Exited");
+                                throw new Exit_Automation_Exception();
                             System.out.println("Waiting");
                             Thread t = new Thread(){
                                 @Override
@@ -494,11 +494,11 @@ public class MCF {
                                     break;
                                 }
                                 if (!this.automation)
-                                    throw new Exit_Automation_Exception("Automation Exited");
+                                    throw new Exit_Automation_Exception();
                             }
                             this.crawler.parseCards("current");
                             if (!this.automation)
-                                throw new Exit_Automation_Exception("Automation Exited");
+                                throw new Exit_Automation_Exception();
                             try {
                                 if (this.currentCard.getBlanks() <= 1) {
                                     if (updatedb) {
