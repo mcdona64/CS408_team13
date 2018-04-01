@@ -501,7 +501,8 @@ public class Web {
 					//password
 					if(str.contains("Does not have a password")){
 						password = false;
-						availableLobbies.add(new Lobby(gameNum, lobbyHost, playerCount, maxPlayers, spectatorCount, maxSpectators, lobbyStatus, password));
+						if(lobbyStatus)
+							availableLobbies.add(new Lobby(gameNum, lobbyHost, playerCount, maxPlayers, spectatorCount, maxSpectators, lobbyStatus, password));
 					} else {
 						password = true;
 					}
