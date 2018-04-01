@@ -89,7 +89,7 @@ public class onlineMode {
                         boolean[] h = {true, false};
                         //mcf.setFlags(h);
                         modey = 1;
-                        mode.setText("Player Mode Enabled");
+                        //mode.setText("Player Mode Enabled");
                     }
 
                 }else{
