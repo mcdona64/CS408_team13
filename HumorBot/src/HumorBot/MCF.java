@@ -544,8 +544,6 @@ public class MCF {
             }
         } catch (Exit_Automation_Exception e) {
             e.cheeseIt(this.flags[1]);
-            this.crawler.leaveGame();
-            this.crawler.close();
         }
     }
 
