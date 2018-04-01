@@ -55,7 +55,7 @@ public class onlineMode {
                 }
                 set_line(true);
                 in_game = true;
-                mcf.doStuff();
+                r.start();
                 //f.dispose();
                 System.out.println("bollocks");
             }
@@ -152,7 +152,7 @@ public class onlineMode {
                             }
                         };
                         mcf.initializeWebCrawler();
-                        r.start();
+                        mcf.doStuff();
                     }
                     //f.dispose();
                 }
