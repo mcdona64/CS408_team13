@@ -224,7 +224,7 @@ public class MCF {
                     return thing;
                 }
             } else {
-                try {
+                //try {
                     if (!this.flags[0]) {
                         this.crawler.chooseAnswer(assessHandMultipleBlanks(this.currentCard.getBlanks(), false));
                     } else {
@@ -235,9 +235,9 @@ public class MCF {
                         }
                         return hanso;
                     }
-                } catch (CardCountException e) {
-                    e.printStackTrace();
-                }
+                //}catch (CardCountException e) {
+                   // e.printStackTrace();
+                //}
             }
         }//throwaway round
         else {
@@ -249,7 +249,7 @@ public class MCF {
                     return thing;
                 }
             } else {
-                try {
+                //try {
                     if (this.flags[0]) {
                         this.crawler.chooseAnswer(assessHandMultipleBlanks(this.currentCard.getBlanks(), true));
                     } else {
@@ -261,9 +261,9 @@ public class MCF {
                         }
                         return hanso;
                     }
-                } catch (CardCountException e) {
-                    e.printStackTrace();
-                }
+                //} catch (CardCountException e) {
+                  //  e.printStackTrace();
+                //}
             }
         }
         return new int[0];
@@ -330,12 +330,7 @@ public class MCF {
      * @param throaway
      * @return
      */
-    public ArrayList<Integer> assessHandMultipleBlanks(int numBlanks, boolean throaway) throws CardCountException {
-        if (numBlanks >= this.hand.size()) {
-            throw new CardCountException("Too many blanks in hand");
-        } else if (numBlanks <= 1) {
-            throw new CardCountException("Only 1 or no blanks found, as opposed to the multiple blanks expected");
-        }
+    public ArrayList<Integer> assessHandMultipleBlanks(int numBlanks, boolean throaway) {
         ArrayList<Integer> choices = new ArrayList<Integer>();
         if (throaway) {
             for (int i = 0; i < numBlanks; i++) {
