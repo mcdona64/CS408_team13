@@ -84,7 +84,7 @@ public class offlineMode
                 }else {
                     try {
                         DatabaseInterface db = new DatabaseInterface();
-                        db.inclosses();
+                        //db.inclosses();
                     } catch (ConnectionNotEstablishedException e1) {
                         e1.printStackTrace();
                     }
