@@ -296,7 +296,7 @@ public class MCF {
                 best_choice = i;
             } else if (curr.getWeight() == max) {
                 WhiteCard prevMax = this.hand.get(best_choice);
-                best_choice = (prevMax.getAverageWeight() >= curr.getAverageWeight()) ? best_choice : i;
+                best_choice = (prevMax.getAverageWeight() <= curr.getAverageWeight()) ? best_choice : i;
             }
         }
         return best_choice;
