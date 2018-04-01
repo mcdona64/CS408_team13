@@ -49,6 +49,7 @@ public class Web {
 	private ArrayList<WhiteCard> winningHand = new ArrayList<WhiteCard>();
 	private ArrayList<Lobby> lobbyList = new ArrayList<Lobby>();
 	private ArrayList<Lobby> availableLobbies = new ArrayList<Lobby>();
+	private boolean play = false;
 
 	private String parseFileName = "current";
 	private int score = 0;
@@ -501,7 +502,8 @@ public class Web {
 					//password
 					if(str.contains("Does not have a password")){
 						password = false;
-						availableLobbies.add(new Lobby(gameNum, lobbyHost, playerCount, maxPlayers, spectatorCount, maxSpectators, lobbyStatus, password));
+						if(lobbyStatus)
+							availableLobbies.add(new Lobby(gameNum, lobbyHost, playerCount, maxPlayers, spectatorCount, maxSpectators, lobbyStatus, password));
 					} else {
 						password = true;
 					}
@@ -537,6 +539,7 @@ public class Web {
 	 */
 	public void joinLobby(int gameNum, boolean play){
 		this.score = 0;
+		this.play = play;
 		for(Lobby e : availableLobbies){
 			if(e.getGameNum()==gameNum){
 				if(play){
@@ -728,41 +731,43 @@ public class Web {
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@class='game_right_side_box game_white_card_wrapper']//*[@class='card whitecard selected']")));
 		//check to see if you won round
 
+		if(this.play) {
+			this.saveWebpage("checkScore");
+			File f = new File(filePath + "checkScore.html");
+			BufferedReader br = null;
+			try {
+				br = new BufferedReader(new FileReader(f));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			String buffer = "";
 
-		this.saveWebpage("checkScore");
-		File f = new File(filePath + "checkScore.html");
-		BufferedReader br = null;
-		try {
-			br = new BufferedReader(new FileReader(f));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		String buffer = "";
-
-		try {
-			while ((buffer = br.readLine()) != null) {
-				if(buffer.contains("scorecard_player\">" + this.nickname)){
-					br.readLine();
-					buffer = br.readLine();
-					int beginIndex = buffer.indexOf("scoreboard_score\">");
-					int endIndex = buffer.indexOf("</span>");
-					String str = buffer.substring(beginIndex + ("scoreboard_score\">").length(), endIndex);
-					int i = Integer.parseInt(str);
-					if(this.score < i){
-						this.score = i;
-						return true;
-					} else {
-						return false;
+			try {
+				while ((buffer = br.readLine()) != null) {
+					if (buffer.contains("scorecard_player\">" + this.nickname)) {
+						br.readLine();
+						buffer = br.readLine();
+						int beginIndex = buffer.indexOf("scoreboard_score\">");
+						int endIndex = buffer.indexOf("</span>");
+						String str = buffer.substring(beginIndex + ("scoreboard_score\">").length(), endIndex);
+						int i = Integer.parseInt(str);
+						if (this.score < i) {
+							this.score = i;
+							return true;
+						} else {
+							return false;
+						}
 					}
 				}
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			br.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+			try {
+				br.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return false;
 		}
 		return false;
 	}
