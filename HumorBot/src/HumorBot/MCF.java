@@ -339,28 +339,10 @@ public class MCF {
         ArrayList<Integer> choices = new ArrayList<Integer>();
         if (throaway) {
             for (int i = 0; i < numBlanks; i++) {
-                ArrayList<WhiteCard> prevHand = new ArrayList<WhiteCard>();
-                for (int e = 0; e < this.hand.size(); e++)
-                    prevHand.add(this.hand.get(e));
-                for (int j = 0; j < choices.size(); j++) {
-                    int f;
-                    for (f = 0; f < this.hand.size(); f++) {
-                        if (this.hand.get(f).equals(prevHand.get((int) choices.get(j)))) {
-                            break;
-                        }
-                    }
-                    this.hand.remove(f);
-                }
                 int toSend = assessHandThrowaway();
                 //choices.add(prevHand.indexOf(this.hand.get(toSend)));
-                for (int j = 0; j < prevHand.size(); j++) {
-                    if (prevHand.get(j).equals(this.hand.get(toSend))) {
-                        choices.add(j);
-                        break;
-                    }
-                }
-                //System.out.println(choices.get(choices.size() - 1));
-                this.hand = prevHand;
+                choices.add(toSend);
+
             }
         } else {
             try {
