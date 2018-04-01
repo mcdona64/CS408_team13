@@ -98,9 +98,9 @@ public class offlineMode
 
         scat.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                blc.f.dispose();
-                for (int i = 0; i < wcards.size(); i++)
-                    wcards.get(i).f.dispose();
+                //blc.f.dispose();
+                //for (int i = 0; i < wcards.size(); i++)
+                   // wcards.get(i).f.dispose();
                 wcards.clear();
                 menuGui menuGui = new menuGui(mcf);
                 f.dispose();
