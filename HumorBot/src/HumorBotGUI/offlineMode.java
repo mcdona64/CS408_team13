@@ -147,7 +147,7 @@ public class offlineMode
 
     public void addWhiteCard()
     {
-        cnt++;
+        //cnt++;
         whiteCard whte = new whiteCard(cnt,this);
         wcards.add(whte);
     }
