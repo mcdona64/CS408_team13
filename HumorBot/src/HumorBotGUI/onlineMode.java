@@ -51,7 +51,7 @@ public class onlineMode {
                     mcf.initalize(g);
                 }else{
                     boolean[] h = {true, false};
-                    mcf.initalize(h);
+                   //mcf.initalize(h);
                 }
                 set_line(true);
                 in_game = true;
@@ -87,7 +87,7 @@ public class onlineMode {
                         mode.setText("Spectator Mode Enabled");
                     }else {
                         boolean[] h = {true, false};
-                        mcf.setFlags(h);
+                        //mcf.setFlags(h);
                         modey = 1;
                         mode.setText("Player Mode Enabled");
                     }
