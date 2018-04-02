@@ -120,12 +120,12 @@ information, including information about included libraries, see the
 <div id="canvas" class="" style="">
 <div id="menubar">
 <div id="menubar_left">
-<input type="button" id="refresh_games" class="hide" value="Refresh Games" style="display: inline-block;" />
-<input type="button" id="create_game" class="hide" value="Create Game" style="display: inline-block;" />
-<input type="text" id="filter_games" class="hide" placeholder="Filter games by keyword" data-lpignore="true" style="display: inline-block;" />
-<input type="button" id="leave_game" class="hide" value="Leave Game" />
-<input type="button" id="start_game" class="hide" value="Start Game" />
-<input type="button" id="stop_game" class="hide" value="Stop Game" />
+<input type="button" id="refresh_games" class="hide" value="Refresh Games" style="display: none;" />
+<input type="button" id="create_game" class="hide" value="Create Game" style="display: none;" />
+<input type="text" id="filter_games" class="hide" placeholder="Filter games by keyword" data-lpignore="true" style="display: none;" />
+<input type="button" id="leave_game" class="hide" value="Leave Game" style="display: inline-block;" />
+<input type="button" id="start_game" class="hide" value="Start Game" style="display: none;" />
+<input type="button" id="stop_game" class="hide" value="Stop Game" style="display: none;" />
 </div>
 <div id="menubar_right">
 Current timer duration: <span id="current_timer">0</span> seconds
@@ -134,22 +134,48 @@ Current timer duration: <span id="current_timer">0</span> seconds
 </div>
 </div>
 <div id="main">
-<div id="game_list" class="hide" style="display: block;">
-<div id="gamelist_lobby_3" class="gamelist_lobby" tabindex="0" aria-label="Billy_Scranner's game, with 6 of 10 players, and 1 of 10spectators. In Progress. Goal is 8 Awesome Points. Using 4 card sets. Does not have a password.">
+<div id="game_list" class="hide" style="display: none;">
+<div id="gamelist_lobby_2" class="gamelist_lobby" tabindex="0" aria-label="Lems's game, with 5 of 7 players, and 0 of 0spectators. Not Started. Goal is 20 Awesome Points. Using 42 card sets. Does not have a password.">
+<div class="gamelist_lobby_left">
+<h3>
+<span class="gamelist_lobby_host">Lems</span>'s Game
+(<span class="gamelist_lobby_player_count">5</span>/<span class="gamelist_lobby_max_players">7</span>,
+<span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">0</span>)
+<span class="gamelist_lobby_status">Not Started</span>
+</h3>
+<div>
+<strong>Players:</strong>
+<span class="gamelist_lobby_players">Lems, DICKGOBOOOM, WariosBellyButtonMilkshake, DumbBimbo, Edge</span>
+</div>
+<div>
+<strong>Spectators:</strong>
+<span class="gamelist_lobby_spectators"></span>
+</div>
+<div><strong>Goal:</strong> <span class="gamelist_lobby_goal">20</span></div>
+<div>
+<strong>Cards:</strong> <span class="gamelist_lobby_cardset">Base Game (Canada), Base Game (UK), Base Game (Australia), Base Game (International), Base Game (US), Box Expansion Pack, Hidden Compartment Pack, Red Box Expansion, PAX Prime 2014 Pack, Blue Box Expansion, Green Box Expansion, 90s Nostalgia Pack, Holiday Pack 2012, Vote for Hillary Pack, Vote for Trump Pack, House of Cards Pack, College Pack, Holiday Pack 2013, Fantasy Pack, Mass Effect Pack, Holiday Pack 2014, NASA Pack, Food Pack, PAX East 2013 Pack A, Season's Greetings Pack, PAX East 2013 Pack B, PAX East 2013 Pack C, Geek Pack, PAX East 2014 Pack, Jew Pack, PAX Prime 2013 Pack, Period Pack, Post-Trump Pack, Reject Pack, Retail Pack, Sci-Fi Pack, Reject Pack 2, Science Pack, Weed Pack, Retail Product Pack, Tabletop Pack, World Wide Web Pack</span>
+</div>
+<div class="hide">Game <span class="gamelist_lobby_id">2</span></div>
+</div>
+<div class="gamelist_lobby_right">
+<input type="button" class="gamelist_lobby_join" value="Join" />
+<input type="button" class="gamelist_lobby_spectate" value="Spectate" />
+</div>
+</div><div id="gamelist_lobby_3" class="gamelist_lobby" tabindex="0" aria-label="Billy_Scranner's game, with 8 of 10 players, and 0 of 10spectators. In Progress. Goal is 8 Awesome Points. Using 4 card sets. Does not have a password.">
 <div class="gamelist_lobby_left">
 <h3>
 <span class="gamelist_lobby_host">Billy_Scranner</span>'s Game
-(<span class="gamelist_lobby_player_count">6</span>/<span class="gamelist_lobby_max_players">10</span>,
-<span class="gamelist_lobby_spectator_count">1</span>/<span class="gamelist_lobby_max_spectators">10</span>)
+(<span class="gamelist_lobby_player_count">8</span>/<span class="gamelist_lobby_max_players">10</span>,
+<span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">10</span>)
 <span class="gamelist_lobby_status">In Progress</span>
 </h3>
 <div>
 <strong>Players:</strong>
-<span class="gamelist_lobby_players">Billy_Scranner, The_Earth_Is_A_Cylinder, ironbull, DarkSouls, Lucifer, Frost</span>
+<span class="gamelist_lobby_players">Billy_Scranner, The_Earth_Is_A_Cylinder, ironbull, DarkSouls, Lucifer, Kylax, ChloeWithTheGoodHair, Frost</span>
 </div>
 <div>
 <strong>Spectators:</strong>
-<span class="gamelist_lobby_spectators">someone</span>
+<span class="gamelist_lobby_spectators"></span>
 </div>
 <div><strong>Goal:</strong> <span class="gamelist_lobby_goal">8</span></div>
 <div>
@@ -187,17 +213,17 @@ Current timer duration: <span id="current_timer">0</span> seconds
 <input type="button" class="gamelist_lobby_join" value="Join" />
 <input type="button" class="gamelist_lobby_spectate" value="Spectate" />
 </div>
-</div><div id="gamelist_lobby_9" class="gamelist_lobby" tabindex="0" aria-label="gizmo's game, with 8 of 10 players, and 0 of 10spectators. In Progress. Goal is 8 Awesome Points. Using 9 card sets. Does not have a password.">
+</div><div id="gamelist_lobby_9" class="gamelist_lobby" tabindex="0" aria-label="gizmo's game, with 4 of 10 players, and 0 of 10spectators. In Progress. Goal is 8 Awesome Points. Using 9 card sets. Does not have a password.">
 <div class="gamelist_lobby_left">
 <h3>
 <span class="gamelist_lobby_host">gizmo</span>'s Game
-(<span class="gamelist_lobby_player_count">8</span>/<span class="gamelist_lobby_max_players">10</span>,
+(<span class="gamelist_lobby_player_count">4</span>/<span class="gamelist_lobby_max_players">10</span>,
 <span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">10</span>)
 <span class="gamelist_lobby_status">In Progress</span>
 </h3>
 <div>
 <strong>Players:</strong>
-<span class="gamelist_lobby_players">gizmo, mickey, Kavz, prettygay, Yendo123, PUTIN, Sara_Mattiasdottir, BigBlueThing</span>
+<span class="gamelist_lobby_players">gizmo, mickey, Kavz, prettygay</span>
 </div>
 <div>
 <strong>Spectators:</strong>
@@ -239,17 +265,17 @@ Current timer duration: <span id="current_timer">0</span> seconds
 <input type="button" class="gamelist_lobby_join" value="Join" />
 <input type="button" class="gamelist_lobby_spectate" value="Spectate" />
 </div>
-</div><div id="gamelist_lobby_12" class="gamelist_lobby" tabindex="0" aria-label="Bloop's game, with 7 of 10 players, and 0 of 10spectators. In Progress. Goal is 8 Awesome Points. Using 21 card sets. Does not have a password.">
+</div><div id="gamelist_lobby_12" class="gamelist_lobby" tabindex="0" aria-label="Bloop's game, with 9 of 10 players, and 0 of 10spectators. In Progress. Goal is 8 Awesome Points. Using 21 card sets. Does not have a password.">
 <div class="gamelist_lobby_left">
 <h3>
 <span class="gamelist_lobby_host">Bloop</span>'s Game
-(<span class="gamelist_lobby_player_count">7</span>/<span class="gamelist_lobby_max_players">10</span>,
+(<span class="gamelist_lobby_player_count">9</span>/<span class="gamelist_lobby_max_players">10</span>,
 <span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">10</span>)
 <span class="gamelist_lobby_status">In Progress</span>
 </h3>
 <div>
 <strong>Players:</strong>
-<span class="gamelist_lobby_players">Bloop, RCP, Link, Galadri, RachealFoster1314, samisayshi67, DumbBimbo</span>
+<span class="gamelist_lobby_players">Bloop, RCP, Cumber, Link, charnck, Galadri, RachealFoster1314, samisayshi67, jaydee</span>
 </div>
 <div>
 <strong>Spectators:</strong>
@@ -265,43 +291,43 @@ Current timer duration: <span id="current_timer">0</span> seconds
 <input type="button" class="gamelist_lobby_join" value="Join" />
 <input type="button" class="gamelist_lobby_spectate" value="Spectate" />
 </div>
-</div><div id="gamelist_lobby_14" class="gamelist_lobby" tabindex="0" aria-label="Indigo's game, with 1 of 10 players, and 0 of 10spectators. Not Started. Goal is 8 Awesome Points. Using 0 card sets. Does not have a password.">
+</div><div id="gamelist_lobby_29" class="gamelist_lobby" tabindex="0" aria-label="Arckhoz's game, with 3 of 4 players, and 0 of 10spectators. In Progress. Goal is 69 Awesome Points. Using 0 card sets. Does not have a password.">
 <div class="gamelist_lobby_left">
 <h3>
-<span class="gamelist_lobby_host">Indigo</span>'s Game
-(<span class="gamelist_lobby_player_count">1</span>/<span class="gamelist_lobby_max_players">10</span>,
+<span class="gamelist_lobby_host">Arckhoz</span>'s Game
+(<span class="gamelist_lobby_player_count">3</span>/<span class="gamelist_lobby_max_players">4</span>,
 <span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">10</span>)
-<span class="gamelist_lobby_status">Not Started</span>
+<span class="gamelist_lobby_status">In Progress</span>
 </h3>
 <div>
 <strong>Players:</strong>
-<span class="gamelist_lobby_players">Indigo</span>
+<span class="gamelist_lobby_players">Arckhoz, Mermoude, Kawelsidaction</span>
 </div>
 <div>
 <strong>Spectators:</strong>
 <span class="gamelist_lobby_spectators"></span>
 </div>
-<div><strong>Goal:</strong> <span class="gamelist_lobby_goal">8</span></div>
+<div><strong>Goal:</strong> <span class="gamelist_lobby_goal">69</span></div>
 <div>
 <strong>Cards:</strong> <span class="gamelist_lobby_cardset"></span>
 </div>
-<div class="hide">Game <span class="gamelist_lobby_id">14</span></div>
+<div class="hide">Game <span class="gamelist_lobby_id">29</span></div>
 </div>
 <div class="gamelist_lobby_right">
 <input type="button" class="gamelist_lobby_join" value="Join" />
 <input type="button" class="gamelist_lobby_spectate" value="Spectate" />
 </div>
-</div><div id="gamelist_lobby_29" class="gamelist_lobby" tabindex="0" aria-label="slobonmyknob's game, with 1 of 10 players, and 0 of 10spectators. Not Started. Goal is 8 Awesome Points. Using 0 card sets. Does not have a password.">
+</div><div id="gamelist_lobby_32" class="gamelist_lobby" tabindex="0" aria-label="wordo's game, with 7 of 10 players, and 0 of 10spectators. In Progress. Goal is 8 Awesome Points. Using 1 card set. Does not have a password.">
 <div class="gamelist_lobby_left">
 <h3>
-<span class="gamelist_lobby_host">slobonmyknob</span>'s Game
-(<span class="gamelist_lobby_player_count">1</span>/<span class="gamelist_lobby_max_players">10</span>,
+<span class="gamelist_lobby_host">wordo</span>'s Game
+(<span class="gamelist_lobby_player_count">7</span>/<span class="gamelist_lobby_max_players">10</span>,
 <span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">10</span>)
-<span class="gamelist_lobby_status">Not Started</span>
+<span class="gamelist_lobby_status">In Progress</span>
 </h3>
 <div>
 <strong>Players:</strong>
-<span class="gamelist_lobby_players">slobonmyknob</span>
+<span class="gamelist_lobby_players">wordo, GraPPo, Speckerino, Espentootius, Bambi, BigBlueThing, Chanthion_For_Life</span>
 </div>
 <div>
 <strong>Spectators:</strong>
@@ -309,9 +335,35 @@ Current timer duration: <span id="current_timer">0</span> seconds
 </div>
 <div><strong>Goal:</strong> <span class="gamelist_lobby_goal">8</span></div>
 <div>
-<strong>Cards:</strong> <span class="gamelist_lobby_cardset"></span>
+<strong>Cards:</strong> <span class="gamelist_lobby_cardset">Base Game (US)</span>
 </div>
-<div class="hide">Game <span class="gamelist_lobby_id">29</span></div>
+<div class="hide">Game <span class="gamelist_lobby_id">32</span></div>
+</div>
+<div class="gamelist_lobby_right">
+<input type="button" class="gamelist_lobby_join" value="Join" />
+<input type="button" class="gamelist_lobby_spectate" value="Spectate" />
+</div>
+</div><div id="gamelist_lobby_37" class="gamelist_lobby" tabindex="0" aria-label="NiggerLaury's game, with 1 of 6 players, and 0 of 10spectators. Not Started. Goal is 10 Awesome Points. Using 4 card sets. Does not have a password.">
+<div class="gamelist_lobby_left">
+<h3>
+<span class="gamelist_lobby_host">NiggerLaury</span>'s Game
+(<span class="gamelist_lobby_player_count">1</span>/<span class="gamelist_lobby_max_players">6</span>,
+<span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">10</span>)
+<span class="gamelist_lobby_status">Not Started</span>
+</h3>
+<div>
+<strong>Players:</strong>
+<span class="gamelist_lobby_players">NiggerLaury</span>
+</div>
+<div>
+<strong>Spectators:</strong>
+<span class="gamelist_lobby_spectators"></span>
+</div>
+<div><strong>Goal:</strong> <span class="gamelist_lobby_goal">10</span></div>
+<div>
+<strong>Cards:</strong> <span class="gamelist_lobby_cardset">Base Game (UK), Base Game (US), Red Box Expansion, Post-Trump Pack</span>
+</div>
+<div class="hide">Game <span class="gamelist_lobby_id">37</span></div>
 </div>
 <div class="gamelist_lobby_right">
 <input type="button" class="gamelist_lobby_join" value="Join" />
@@ -343,17 +395,17 @@ Current timer duration: <span id="current_timer">0</span> seconds
 <input type="button" class="gamelist_lobby_join" value="Join" />
 <input type="button" class="gamelist_lobby_spectate" value="Spectate" />
 </div>
-</div><div id="gamelist_lobby_41" class="gamelist_lobby" tabindex="0" aria-label="Tryler's game, with 4 of 10 players, and 0 of 10spectators. In Progress. Goal is 10 Awesome Points. Using 39 card sets. Does not have a password.">
+</div><div id="gamelist_lobby_41" class="gamelist_lobby" tabindex="0" aria-label="Tryler's game, with 3 of 10 players, and 0 of 10spectators. Not Started. Goal is 10 Awesome Points. Using 39 card sets. Does not have a password.">
 <div class="gamelist_lobby_left">
 <h3>
 <span class="gamelist_lobby_host">Tryler</span>'s Game
-(<span class="gamelist_lobby_player_count">4</span>/<span class="gamelist_lobby_max_players">10</span>,
+(<span class="gamelist_lobby_player_count">3</span>/<span class="gamelist_lobby_max_players">10</span>,
 <span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">10</span>)
-<span class="gamelist_lobby_status">In Progress</span>
+<span class="gamelist_lobby_status">Not Started</span>
 </h3>
 <div>
 <strong>Players:</strong>
-<span class="gamelist_lobby_players">Tryler, aerplanes, Endmysuffering, ZenoxSphere</span>
+<span class="gamelist_lobby_players">Tryler, aerplanes, Endmysuffering</span>
 </div>
 <div>
 <strong>Spectators:</strong>
@@ -379,7 +431,7 @@ Current timer duration: <span id="current_timer">0</span> seconds
 </h3>
 <div>
 <strong>Players:</strong>
-<span class="gamelist_lobby_players">pussilicker, DissapointingSalad, SoKs, Kitten, YaBoiGuzma, the_wan_way</span>
+<span class="gamelist_lobby_players">pussilicker, DissapointingSalad, SoKs, Qybala, Kitten, YaBoiGuzma</span>
 </div>
 <div>
 <strong>Spectators:</strong>
@@ -473,32 +525,6 @@ Current timer duration: <span id="current_timer">0</span> seconds
 <input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
 <input type="button" class="gamelist_lobby_spectate" value="Spectate" />
 </div>
-</div><div id="gamelist_lobby_2" class="gamelist_lobby" tabindex="0" aria-label="coolcamk1's game, with 1 of 10 players, and 0 of 10spectators. Not Started. Goal is 8 Awesome Points. Using 21 card sets. Has a password.">
-<div class="gamelist_lobby_left">
-<h3>
-<span class="gamelist_lobby_host">coolcamk1</span>'s Game
-(<span class="gamelist_lobby_player_count">1</span>/<span class="gamelist_lobby_max_players">10</span>,
-<span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">10</span>)
-<span class="gamelist_lobby_status">Not Started</span>
-</h3>
-<div>
-<strong>Players:</strong>
-<span class="gamelist_lobby_players">coolcamk1</span>
-</div>
-<div>
-<strong>Spectators:</strong>
-<span class="gamelist_lobby_spectators"></span>
-</div>
-<div><strong>Goal:</strong> <span class="gamelist_lobby_goal">8</span></div>
-<div>
-<strong>Cards:</strong> <span class="gamelist_lobby_cardset">Base Game (Canada), Base Game (UK), Base Game (Australia), Base Game (US), Hidden Compartment Pack, Red Box Expansion, Green Box Expansion, 90s Nostalgia Pack, Holiday Pack 2012, House of Cards Pack, Holiday Pack 2013, Holiday Pack 2014, PAX East 2013 Pack A, PAX East 2013 Pack B, PAX East 2013 Pack C, Jew Pack, Post-Trump Pack, Sci-Fi Pack, Science Pack, Weed Pack, Retail Product Pack</span>
-</div>
-<div class="hide">Game <span class="gamelist_lobby_id">2</span></div>
-</div>
-<div class="gamelist_lobby_right">
-<input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
-<input type="button" class="gamelist_lobby_spectate" value="Spectate" />
-</div>
 </div><div id="gamelist_lobby_4" class="gamelist_lobby" tabindex="0" aria-label="Bourguignon's game, with 5 of 10 players, and 0 of 10spectators. In Progress. Goal is 20 Awesome Points. Using 0 card sets. Has a password.">
 <div class="gamelist_lobby_left">
 <h3>
@@ -525,13 +551,13 @@ Current timer duration: <span id="current_timer">0</span> seconds
 <input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
 <input type="button" class="gamelist_lobby_spectate" value="Spectate" />
 </div>
-</div><div id="gamelist_lobby_6" class="gamelist_lobby" tabindex="0" aria-label="Lepasdrolehoopa's game, with 4 of 10 players, and 0 of 10spectators. Not Started. Goal is 8 Awesome Points. Using 0 card sets. Has a password.">
+</div><div id="gamelist_lobby_6" class="gamelist_lobby" tabindex="0" aria-label="Lepasdrolehoopa's game, with 4 of 10 players, and 0 of 10spectators. In Progress. Goal is 8 Awesome Points. Using 0 card sets. Has a password.">
 <div class="gamelist_lobby_left">
 <h3>
 <span class="gamelist_lobby_host">Lepasdrolehoopa</span>'s Game
 (<span class="gamelist_lobby_player_count">4</span>/<span class="gamelist_lobby_max_players">10</span>,
 <span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">10</span>)
-<span class="gamelist_lobby_status">Not Started</span>
+<span class="gamelist_lobby_status">In Progress</span>
 </h3>
 <div>
 <strong>Players:</strong>
@@ -572,6 +598,32 @@ Current timer duration: <span id="current_timer">0</span> seconds
 <strong>Cards:</strong> <span class="gamelist_lobby_cardset">Base Game (International)</span>
 </div>
 <div class="hide">Game <span class="gamelist_lobby_id">7</span></div>
+</div>
+<div class="gamelist_lobby_right">
+<input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
+<input type="button" class="gamelist_lobby_spectate" value="Spectate" />
+</div>
+</div><div id="gamelist_lobby_8" class="gamelist_lobby" tabindex="0" aria-label="Lama_Donna_Fruttarianosessuale's game, with 1 of 10 players, and 0 of 10spectators. Not Started. Goal is 12 Awesome Points. Using 0 card sets. Has a password.">
+<div class="gamelist_lobby_left">
+<h3>
+<span class="gamelist_lobby_host">Lama_Donna_Fruttarianosessuale</span>'s Game
+(<span class="gamelist_lobby_player_count">1</span>/<span class="gamelist_lobby_max_players">10</span>,
+<span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">10</span>)
+<span class="gamelist_lobby_status">Not Started</span>
+</h3>
+<div>
+<strong>Players:</strong>
+<span class="gamelist_lobby_players">Lama_Donna_Fruttarianosessuale</span>
+</div>
+<div>
+<strong>Spectators:</strong>
+<span class="gamelist_lobby_spectators"></span>
+</div>
+<div><strong>Goal:</strong> <span class="gamelist_lobby_goal">12</span></div>
+<div>
+<strong>Cards:</strong> <span class="gamelist_lobby_cardset"></span>
+</div>
+<div class="hide">Game <span class="gamelist_lobby_id">8</span></div>
 </div>
 <div class="gamelist_lobby_right">
 <input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
@@ -629,27 +681,27 @@ Current timer duration: <span id="current_timer">0</span> seconds
 <input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
 <input type="button" class="gamelist_lobby_spectate" value="Spectate" />
 </div>
-</div><div id="gamelist_lobby_15" class="gamelist_lobby" tabindex="0" aria-label="Bambi's game, with 3 of 10 players, and 0 of 10spectators. Not Started. Goal is 10 Awesome Points. Using 7 card sets. Has a password.">
+</div><div id="gamelist_lobby_14" class="gamelist_lobby" tabindex="0" aria-label="Losur's game, with 2 of 10 players, and 0 of 10spectators. Not Started. Goal is 8 Awesome Points. Using 14 card sets. Has a password.">
 <div class="gamelist_lobby_left">
 <h3>
-<span class="gamelist_lobby_host">Bambi</span>'s Game
-(<span class="gamelist_lobby_player_count">3</span>/<span class="gamelist_lobby_max_players">10</span>,
+<span class="gamelist_lobby_host">Losur</span>'s Game
+(<span class="gamelist_lobby_player_count">2</span>/<span class="gamelist_lobby_max_players">10</span>,
 <span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">10</span>)
 <span class="gamelist_lobby_status">Not Started</span>
 </h3>
 <div>
 <strong>Players:</strong>
-<span class="gamelist_lobby_players">Bambi, Espentootius, Speckerino</span>
+<span class="gamelist_lobby_players">Losur, duckman</span>
 </div>
 <div>
 <strong>Spectators:</strong>
 <span class="gamelist_lobby_spectators"></span>
 </div>
-<div><strong>Goal:</strong> <span class="gamelist_lobby_goal">10</span></div>
+<div><strong>Goal:</strong> <span class="gamelist_lobby_goal">8</span></div>
 <div>
-<strong>Cards:</strong> <span class="gamelist_lobby_cardset">Base Game (Canada), Base Game (Australia), Base Game (International), Base Game (US), Food Pack, PAX East 2013 Pack A, Weed Pack</span>
+<strong>Cards:</strong> <span class="gamelist_lobby_cardset">Base Game (International), Base Game (US), Box Expansion Pack, Red Box Expansion, House of Cards Pack, College Pack, Fantasy Pack, Food Pack, Geek Pack, Jew Pack, Retail Pack, Sci-Fi Pack, Science Pack, Weed Pack</span>
 </div>
-<div class="hide">Game <span class="gamelist_lobby_id">15</span></div>
+<div class="hide">Game <span class="gamelist_lobby_id">14</span></div>
 </div>
 <div class="gamelist_lobby_right">
 <input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
@@ -702,6 +754,58 @@ Current timer duration: <span id="current_timer">0</span> seconds
 <strong>Cards:</strong> <span class="gamelist_lobby_cardset">Base Game (US)</span>
 </div>
 <div class="hide">Game <span class="gamelist_lobby_id">18</span></div>
+</div>
+<div class="gamelist_lobby_right">
+<input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
+<input type="button" class="gamelist_lobby_spectate" value="Spectate" />
+</div>
+</div><div id="gamelist_lobby_20" class="gamelist_lobby" tabindex="0" aria-label="VisitorAtHome's game, with 1 of 10 players, and 0 of 10spectators. Not Started. Goal is 8 Awesome Points. Using 17 card sets. Has a password.">
+<div class="gamelist_lobby_left">
+<h3>
+<span class="gamelist_lobby_host">VisitorAtHome</span>'s Game
+(<span class="gamelist_lobby_player_count">1</span>/<span class="gamelist_lobby_max_players">10</span>,
+<span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">10</span>)
+<span class="gamelist_lobby_status">Not Started</span>
+</h3>
+<div>
+<strong>Players:</strong>
+<span class="gamelist_lobby_players">VisitorAtHome</span>
+</div>
+<div>
+<strong>Spectators:</strong>
+<span class="gamelist_lobby_spectators"></span>
+</div>
+<div><strong>Goal:</strong> <span class="gamelist_lobby_goal">8</span></div>
+<div>
+<strong>Cards:</strong> <span class="gamelist_lobby_cardset">Base Game (UK), Base Game (International), Base Game (US), 90s Nostalgia Pack, Vote for Trump Pack, House of Cards Pack, College Pack, Fantasy Pack, Holiday Pack 2014, NASA Pack, Food Pack, Season's Greetings Pack, Geek Pack, Jew Pack, Post-Trump Pack, Weed Pack, Retail Product Pack</span>
+</div>
+<div class="hide">Game <span class="gamelist_lobby_id">20</span></div>
+</div>
+<div class="gamelist_lobby_right">
+<input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
+<input type="button" class="gamelist_lobby_spectate" value="Spectate" />
+</div>
+</div><div id="gamelist_lobby_21" class="gamelist_lobby" tabindex="0" aria-label="Blazy's game, with 10 of 11 players, and 0 of 10spectators. In Progress. Goal is 11 Awesome Points. Using 42 card sets. Has a password.">
+<div class="gamelist_lobby_left">
+<h3>
+<span class="gamelist_lobby_host">Blazy</span>'s Game
+(<span class="gamelist_lobby_player_count">10</span>/<span class="gamelist_lobby_max_players">11</span>,
+<span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">10</span>)
+<span class="gamelist_lobby_status">In Progress</span>
+</h3>
+<div>
+<strong>Players:</strong>
+<span class="gamelist_lobby_players">Blazy, Papa_Zeppy, DarkCommentator, Nephthys, PrinceParadox, DuelTaku, RioDecade96, Hitler, Umbrus, koibu</span>
+</div>
+<div>
+<strong>Spectators:</strong>
+<span class="gamelist_lobby_spectators"></span>
+</div>
+<div><strong>Goal:</strong> <span class="gamelist_lobby_goal">11</span></div>
+<div>
+<strong>Cards:</strong> <span class="gamelist_lobby_cardset">Base Game (Canada), Base Game (UK), Base Game (Australia), Base Game (International), Base Game (US), Box Expansion Pack, Hidden Compartment Pack, Red Box Expansion, PAX Prime 2014 Pack, Blue Box Expansion, Green Box Expansion, 90s Nostalgia Pack, Holiday Pack 2012, Vote for Hillary Pack, Vote for Trump Pack, House of Cards Pack, College Pack, Holiday Pack 2013, Fantasy Pack, Mass Effect Pack, Holiday Pack 2014, NASA Pack, Food Pack, PAX East 2013 Pack A, Season's Greetings Pack, PAX East 2013 Pack B, PAX East 2013 Pack C, Geek Pack, PAX East 2014 Pack, Jew Pack, PAX Prime 2013 Pack, Period Pack, Post-Trump Pack, Reject Pack, Retail Pack, Sci-Fi Pack, Reject Pack 2, Science Pack, Weed Pack, Retail Product Pack, Tabletop Pack, World Wide Web Pack</span>
+</div>
+<div class="hide">Game <span class="gamelist_lobby_id">21</span></div>
 </div>
 <div class="gamelist_lobby_right">
 <input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
@@ -837,6 +941,32 @@ Current timer duration: <span id="current_timer">0</span> seconds
 <input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
 <input type="button" class="gamelist_lobby_spectate" value="Spectate" />
 </div>
+</div><div id="gamelist_lobby_28" class="gamelist_lobby" tabindex="0" aria-label="Joseph_Walker's game, with 19 of 20 players, and 1 of 20spectators. Not Started. Goal is 69 Awesome Points. Using 0 card sets. Has a password.">
+<div class="gamelist_lobby_left">
+<h3>
+<span class="gamelist_lobby_host">Joseph_Walker</span>'s Game
+(<span class="gamelist_lobby_player_count">19</span>/<span class="gamelist_lobby_max_players">20</span>,
+<span class="gamelist_lobby_spectator_count">1</span>/<span class="gamelist_lobby_max_spectators">20</span>)
+<span class="gamelist_lobby_status">Not Started</span>
+</h3>
+<div>
+<strong>Players:</strong>
+<span class="gamelist_lobby_players">Joseph_Walker, Alucard, Rosaline_Tepes, Emptyness_the_undead_umbreon, Anarchy, Valondrones, Jan_Valentine, Michael_White, ReyKryo, Urd_Geales_iS_HoRnY, ThePowerOfCommunism, nekokawaiiboobsLestKarr, Losers_Club_2017, Dark_Papyrus, Cecilia, Lonely_Typhlosion, Jessica_Heath, Neko_Erwin_Daddy_Rp, Glitsen</span>
+</div>
+<div>
+<strong>Spectators:</strong>
+<span class="gamelist_lobby_spectators">Misterio</span>
+</div>
+<div><strong>Goal:</strong> <span class="gamelist_lobby_goal">69</span></div>
+<div>
+<strong>Cards:</strong> <span class="gamelist_lobby_cardset"></span>
+</div>
+<div class="hide">Game <span class="gamelist_lobby_id">28</span></div>
+</div>
+<div class="gamelist_lobby_right">
+<input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
+<input type="button" class="gamelist_lobby_spectate" value="Spectate" />
+</div>
 </div><div id="gamelist_lobby_30" class="gamelist_lobby" tabindex="0" aria-label="Squishie's game, with 4 of 10 players, and 0 of 10spectators. In Progress. Goal is 10 Awesome Points. Using 10 card sets. Has a password.">
 <div class="gamelist_lobby_left">
 <h3>
@@ -858,6 +988,32 @@ Current timer duration: <span id="current_timer">0</span> seconds
 <strong>Cards:</strong> <span class="gamelist_lobby_cardset">Base Game (US), Red Box Expansion, Blue Box Expansion, Green Box Expansion, College Pack, Food Pack, Geek Pack, Jew Pack, Period Pack, Weed Pack</span>
 </div>
 <div class="hide">Game <span class="gamelist_lobby_id">30</span></div>
+</div>
+<div class="gamelist_lobby_right">
+<input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
+<input type="button" class="gamelist_lobby_spectate" value="Spectate" />
+</div>
+</div><div id="gamelist_lobby_31" class="gamelist_lobby" tabindex="0" aria-label="Fluffy_Crow's game, with 3 of 4 players, and 0 of 0spectators. In Progress. Goal is 12 Awesome Points. Using 0 card sets. Has a password.">
+<div class="gamelist_lobby_left">
+<h3>
+<span class="gamelist_lobby_host">Fluffy_Crow</span>'s Game
+(<span class="gamelist_lobby_player_count">3</span>/<span class="gamelist_lobby_max_players">4</span>,
+<span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">0</span>)
+<span class="gamelist_lobby_status">In Progress</span>
+</h3>
+<div>
+<strong>Players:</strong>
+<span class="gamelist_lobby_players">Fluffy_Crow, Teddy, deadboy</span>
+</div>
+<div>
+<strong>Spectators:</strong>
+<span class="gamelist_lobby_spectators"></span>
+</div>
+<div><strong>Goal:</strong> <span class="gamelist_lobby_goal">12</span></div>
+<div>
+<strong>Cards:</strong> <span class="gamelist_lobby_cardset"></span>
+</div>
+<div class="hide">Game <span class="gamelist_lobby_id">31</span></div>
 </div>
 <div class="gamelist_lobby_right">
 <input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
@@ -915,6 +1071,32 @@ Current timer duration: <span id="current_timer">0</span> seconds
 <input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
 <input type="button" class="gamelist_lobby_spectate" value="Spectate" />
 </div>
+</div><div id="gamelist_lobby_36" class="gamelist_lobby" tabindex="0" aria-label="thiriouz's game, with 1 of 10 players, and 0 of 0spectators. Not Started. Goal is 8 Awesome Points. Using 0 card sets. Has a password.">
+<div class="gamelist_lobby_left">
+<h3>
+<span class="gamelist_lobby_host">thiriouz</span>'s Game
+(<span class="gamelist_lobby_player_count">1</span>/<span class="gamelist_lobby_max_players">10</span>,
+<span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">0</span>)
+<span class="gamelist_lobby_status">Not Started</span>
+</h3>
+<div>
+<strong>Players:</strong>
+<span class="gamelist_lobby_players">thiriouz</span>
+</div>
+<div>
+<strong>Spectators:</strong>
+<span class="gamelist_lobby_spectators"></span>
+</div>
+<div><strong>Goal:</strong> <span class="gamelist_lobby_goal">8</span></div>
+<div>
+<strong>Cards:</strong> <span class="gamelist_lobby_cardset"></span>
+</div>
+<div class="hide">Game <span class="gamelist_lobby_id">36</span></div>
+</div>
+<div class="gamelist_lobby_right">
+<input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
+<input type="button" class="gamelist_lobby_spectate" value="Spectate" />
+</div>
 </div><div id="gamelist_lobby_39" class="gamelist_lobby" tabindex="0" aria-label="_______'s game, with 3 of 10 players, and 0 of 10spectators. Not Started. Goal is 8 Awesome Points. Using 0 card sets. Has a password.">
 <div class="gamelist_lobby_left">
 <h3>
@@ -941,17 +1123,17 @@ Current timer duration: <span id="current_timer">0</span> seconds
 <input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
 <input type="button" class="gamelist_lobby_spectate" value="Spectate" />
 </div>
-</div><div id="gamelist_lobby_40" class="gamelist_lobby" tabindex="0" aria-label="DoubleM's game, with 4 of 10 players, and 0 of 10spectators. In Progress. Goal is 8 Awesome Points. Using 7 card sets. Has a password.">
+</div><div id="gamelist_lobby_40" class="gamelist_lobby" tabindex="0" aria-label="Ace's game, with 4 of 10 players, and 0 of 10spectators. In Progress. Goal is 8 Awesome Points. Using 1 card set. Has a password.">
 <div class="gamelist_lobby_left">
 <h3>
-<span class="gamelist_lobby_host">DoubleM</span>'s Game
+<span class="gamelist_lobby_host">Ace</span>'s Game
 (<span class="gamelist_lobby_player_count">4</span>/<span class="gamelist_lobby_max_players">10</span>,
 <span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">10</span>)
 <span class="gamelist_lobby_status">In Progress</span>
 </h3>
 <div>
 <strong>Players:</strong>
-<span class="gamelist_lobby_players">DoubleM, ThePotatoActivist, Ace, MaggieGiveMeTheSUCC</span>
+<span class="gamelist_lobby_players">Ace, DoubleM, ThePotatoActivist, MaggieGiveMeTheSUCC</span>
 </div>
 <div>
 <strong>Spectators:</strong>
@@ -959,9 +1141,35 @@ Current timer duration: <span id="current_timer">0</span> seconds
 </div>
 <div><strong>Goal:</strong> <span class="gamelist_lobby_goal">8</span></div>
 <div>
-<strong>Cards:</strong> <span class="gamelist_lobby_cardset">Base Game (Australia), College Pack, Fantasy Pack, Food Pack, Period Pack, Retail Pack, Retail Product Pack</span>
+<strong>Cards:</strong> <span class="gamelist_lobby_cardset">Base Game (US)</span>
 </div>
 <div class="hide">Game <span class="gamelist_lobby_id">40</span></div>
+</div>
+<div class="gamelist_lobby_right">
+<input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
+<input type="button" class="gamelist_lobby_spectate" value="Spectate" />
+</div>
+</div><div id="gamelist_lobby_42" class="gamelist_lobby" tabindex="0" aria-label="Donbot_The_Mafia_Boss's game, with 1 of 10 players, and 0 of 10spectators. Not Started. Goal is 20 Awesome Points. Using 42 card sets. Has a password.">
+<div class="gamelist_lobby_left">
+<h3>
+<span class="gamelist_lobby_host">Donbot_The_Mafia_Boss</span>'s Game
+(<span class="gamelist_lobby_player_count">1</span>/<span class="gamelist_lobby_max_players">10</span>,
+<span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">10</span>)
+<span class="gamelist_lobby_status">Not Started</span>
+</h3>
+<div>
+<strong>Players:</strong>
+<span class="gamelist_lobby_players">Donbot_The_Mafia_Boss</span>
+</div>
+<div>
+<strong>Spectators:</strong>
+<span class="gamelist_lobby_spectators"></span>
+</div>
+<div><strong>Goal:</strong> <span class="gamelist_lobby_goal">20</span></div>
+<div>
+<strong>Cards:</strong> <span class="gamelist_lobby_cardset">Base Game (Canada), Base Game (UK), Base Game (Australia), Base Game (International), Base Game (US), Box Expansion Pack, Hidden Compartment Pack, Red Box Expansion, PAX Prime 2014 Pack, Blue Box Expansion, Green Box Expansion, 90s Nostalgia Pack, Holiday Pack 2012, Vote for Hillary Pack, Vote for Trump Pack, House of Cards Pack, College Pack, Holiday Pack 2013, Fantasy Pack, Mass Effect Pack, Holiday Pack 2014, NASA Pack, Food Pack, PAX East 2013 Pack A, Season's Greetings Pack, PAX East 2013 Pack B, PAX East 2013 Pack C, Geek Pack, PAX East 2014 Pack, Jew Pack, PAX Prime 2013 Pack, Period Pack, Post-Trump Pack, Reject Pack, Retail Pack, Sci-Fi Pack, Reject Pack 2, Science Pack, Weed Pack, Retail Product Pack, Tabletop Pack, World Wide Web Pack</span>
+</div>
+<div class="hide">Game <span class="gamelist_lobby_id">42</span></div>
 </div>
 <div class="gamelist_lobby_right">
 <input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
@@ -993,32 +1201,6 @@ Current timer duration: <span id="current_timer">0</span> seconds
 <input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
 <input type="button" class="gamelist_lobby_spectate" value="Spectate" />
 </div>
-</div><div id="gamelist_lobby_45" class="gamelist_lobby" tabindex="0" aria-label="CantThinkOfAName's game, with 7 of 8 players, and 0 of 0spectators. In Progress. Goal is 20 Awesome Points. Using 42 card sets. Has a password.">
-<div class="gamelist_lobby_left">
-<h3>
-<span class="gamelist_lobby_host">CantThinkOfAName</span>'s Game
-(<span class="gamelist_lobby_player_count">7</span>/<span class="gamelist_lobby_max_players">8</span>,
-<span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">0</span>)
-<span class="gamelist_lobby_status">In Progress</span>
-</h3>
-<div>
-<strong>Players:</strong>
-<span class="gamelist_lobby_players">CantThinkOfAName, Lems, WariosBellyButtonMilkshake, DICKGOBOOOM, MyAssCheeksHurt, Niggggers, Edge</span>
-</div>
-<div>
-<strong>Spectators:</strong>
-<span class="gamelist_lobby_spectators"></span>
-</div>
-<div><strong>Goal:</strong> <span class="gamelist_lobby_goal">20</span></div>
-<div>
-<strong>Cards:</strong> <span class="gamelist_lobby_cardset">Base Game (Canada), Base Game (UK), Base Game (Australia), Base Game (International), Base Game (US), Box Expansion Pack, Hidden Compartment Pack, Red Box Expansion, PAX Prime 2014 Pack, Blue Box Expansion, Green Box Expansion, 90s Nostalgia Pack, Holiday Pack 2012, Vote for Hillary Pack, Vote for Trump Pack, House of Cards Pack, College Pack, Holiday Pack 2013, Fantasy Pack, Mass Effect Pack, Holiday Pack 2014, NASA Pack, Food Pack, PAX East 2013 Pack A, Season's Greetings Pack, PAX East 2013 Pack B, PAX East 2013 Pack C, Geek Pack, PAX East 2014 Pack, Jew Pack, PAX Prime 2013 Pack, Period Pack, Post-Trump Pack, Reject Pack, Retail Pack, Sci-Fi Pack, Reject Pack 2, Science Pack, Weed Pack, Retail Product Pack, Tabletop Pack, World Wide Web Pack</span>
-</div>
-<div class="hide">Game <span class="gamelist_lobby_id">45</span></div>
-</div>
-<div class="gamelist_lobby_right">
-<input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
-<input type="button" class="gamelist_lobby_spectate" value="Spectate" />
-</div>
 </div><div id="gamelist_lobby_46" class="gamelist_lobby" tabindex="0" aria-label="TrumpIsDaBest's game, with 7 of 8 players, and 0 of 8spectators. In Progress. Goal is 10 Awesome Points. Using 10 card sets. Has a password.">
 <div class="gamelist_lobby_left">
 <h3>
@@ -1045,13 +1227,13 @@ Current timer duration: <span id="current_timer">0</span> seconds
 <input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
 <input type="button" class="gamelist_lobby_spectate" value="Spectate" />
 </div>
-</div><div id="gamelist_lobby_47" class="gamelist_lobby" tabindex="0" aria-label="zekie's game, with 6 of 10 players, and 0 of 10spectators. Not Started. Goal is 8 Awesome Points. Using 7 card sets. Has a password.">
+</div><div id="gamelist_lobby_47" class="gamelist_lobby" tabindex="0" aria-label="zekie's game, with 6 of 10 players, and 0 of 10spectators. In Progress. Goal is 8 Awesome Points. Using 6 card sets. Has a password.">
 <div class="gamelist_lobby_left">
 <h3>
 <span class="gamelist_lobby_host">zekie</span>'s Game
 (<span class="gamelist_lobby_player_count">6</span>/<span class="gamelist_lobby_max_players">10</span>,
 <span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">10</span>)
-<span class="gamelist_lobby_status">Not Started</span>
+<span class="gamelist_lobby_status">In Progress</span>
 </h3>
 <div>
 <strong>Players:</strong>
@@ -1063,7 +1245,7 @@ Current timer duration: <span id="current_timer">0</span> seconds
 </div>
 <div><strong>Goal:</strong> <span class="gamelist_lobby_goal">8</span></div>
 <div>
-<strong>Cards:</strong> <span class="gamelist_lobby_cardset">NASA Pack, Geek Pack, Reject Pack, Reject Pack 2, Weed Pack, Retail Product Pack, World Wide Web Pack</span>
+<strong>Cards:</strong> <span class="gamelist_lobby_cardset">90s Nostalgia Pack, Reject Pack, Reject Pack 2, Weed Pack, Retail Product Pack, World Wide Web Pack</span>
 </div>
 <div class="hide">Game <span class="gamelist_lobby_id">47</span></div>
 </div>
@@ -1159,7 +1341,7 @@ Current timer duration: <span id="current_timer">0</span> seconds
 </h3>
 <div>
 <strong>Players:</strong>
-<span class="gamelist_lobby_players">me_llamo_akane, Autumn, Taylor, mellie, Classic, MEAT_MAN_420, weclock</span>
+<span class="gamelist_lobby_players">me_llamo_akane, Autumn, Taylor, mellie, Classic, Christine, MEAT_MAN_420</span>
 </div>
 <div>
 <strong>Spectators:</strong>
@@ -1170,6 +1352,58 @@ Current timer duration: <span id="current_timer">0</span> seconds
 <strong>Cards:</strong> <span class="gamelist_lobby_cardset">Base Game (US), Red Box Expansion, Food Pack, PAX East 2013 Pack C, Jew Pack, Post-Trump Pack, Weed Pack, Retail Product Pack</span>
 </div>
 <div class="hide">Game <span class="gamelist_lobby_id">53</span></div>
+</div>
+<div class="gamelist_lobby_right">
+<input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
+<input type="button" class="gamelist_lobby_spectate" value="Spectate" />
+</div>
+</div><div id="gamelist_lobby_54" class="gamelist_lobby" tabindex="0" aria-label="coolcamk1's game, with 1 of 4 players, and 0 of 0spectators. Not Started. Goal is 8 Awesome Points. Using 42 card sets. Has a password.">
+<div class="gamelist_lobby_left">
+<h3>
+<span class="gamelist_lobby_host">coolcamk1</span>'s Game
+(<span class="gamelist_lobby_player_count">1</span>/<span class="gamelist_lobby_max_players">4</span>,
+<span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">0</span>)
+<span class="gamelist_lobby_status">Not Started</span>
+</h3>
+<div>
+<strong>Players:</strong>
+<span class="gamelist_lobby_players">coolcamk1</span>
+</div>
+<div>
+<strong>Spectators:</strong>
+<span class="gamelist_lobby_spectators"></span>
+</div>
+<div><strong>Goal:</strong> <span class="gamelist_lobby_goal">8</span></div>
+<div>
+<strong>Cards:</strong> <span class="gamelist_lobby_cardset">Base Game (Canada), Base Game (UK), Base Game (Australia), Base Game (International), Base Game (US), Box Expansion Pack, Hidden Compartment Pack, Red Box Expansion, PAX Prime 2014 Pack, Blue Box Expansion, Green Box Expansion, 90s Nostalgia Pack, Holiday Pack 2012, Vote for Hillary Pack, Vote for Trump Pack, House of Cards Pack, College Pack, Holiday Pack 2013, Fantasy Pack, Mass Effect Pack, Holiday Pack 2014, NASA Pack, Food Pack, PAX East 2013 Pack A, Season's Greetings Pack, PAX East 2013 Pack B, PAX East 2013 Pack C, Geek Pack, PAX East 2014 Pack, Jew Pack, PAX Prime 2013 Pack, Period Pack, Post-Trump Pack, Reject Pack, Retail Pack, Sci-Fi Pack, Reject Pack 2, Science Pack, Weed Pack, Retail Product Pack, Tabletop Pack, World Wide Web Pack</span>
+</div>
+<div class="hide">Game <span class="gamelist_lobby_id">54</span></div>
+</div>
+<div class="gamelist_lobby_right">
+<input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
+<input type="button" class="gamelist_lobby_spectate" value="Spectate" />
+</div>
+</div><div id="gamelist_lobby_68" class="gamelist_lobby" tabindex="0" aria-label="Trish's game, with 1 of 15 players, and 0 of 10spectators. Not Started. Goal is 8 Awesome Points. Using 13 card sets. Has a password.">
+<div class="gamelist_lobby_left">
+<h3>
+<span class="gamelist_lobby_host">Trish</span>'s Game
+(<span class="gamelist_lobby_player_count">1</span>/<span class="gamelist_lobby_max_players">15</span>,
+<span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">10</span>)
+<span class="gamelist_lobby_status">Not Started</span>
+</h3>
+<div>
+<strong>Players:</strong>
+<span class="gamelist_lobby_players">Trish</span>
+</div>
+<div>
+<strong>Spectators:</strong>
+<span class="gamelist_lobby_spectators"></span>
+</div>
+<div><strong>Goal:</strong> <span class="gamelist_lobby_goal">8</span></div>
+<div>
+<strong>Cards:</strong> <span class="gamelist_lobby_cardset">Base Game (Canada), Base Game (UK), Base Game (Australia), Base Game (International), Base Game (US), 90s Nostalgia Pack, Vote for Trump Pack, Food Pack, Geek Pack, Jew Pack, Post-Trump Pack, Weed Pack, World Wide Web Pack</span>
+</div>
+<div class="hide">Game <span class="gamelist_lobby_id">68</span></div>
 </div>
 <div class="gamelist_lobby_right">
 <input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
@@ -1201,7 +1435,33 @@ Current timer duration: <span id="current_timer">0</span> seconds
 <input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
 <input type="button" class="gamelist_lobby_spectate" value="Spectate" />
 </div>
-</div><div id="gamelist_lobby_77" class="gamelist_lobby" tabindex="0" aria-label="Master_Edgeworth's game, with 5 of 10 players, and 0 of 10spectators. In Progress. Goal is 8 Awesome Points. Using 21 card sets. Has a password.">
+</div><div id="gamelist_lobby_72" class="gamelist_lobby" tabindex="0" aria-label="FIZZZZ's game, with 1 of 16 players, and 0 of 11spectators. Not Started. Goal is 10 Awesome Points. Using 32 card sets. Has a password.">
+<div class="gamelist_lobby_left">
+<h3>
+<span class="gamelist_lobby_host">FIZZZZ</span>'s Game
+(<span class="gamelist_lobby_player_count">1</span>/<span class="gamelist_lobby_max_players">16</span>,
+<span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">11</span>)
+<span class="gamelist_lobby_status">Not Started</span>
+</h3>
+<div>
+<strong>Players:</strong>
+<span class="gamelist_lobby_players">FIZZZZ</span>
+</div>
+<div>
+<strong>Spectators:</strong>
+<span class="gamelist_lobby_spectators"></span>
+</div>
+<div><strong>Goal:</strong> <span class="gamelist_lobby_goal">10</span></div>
+<div>
+<strong>Cards:</strong> <span class="gamelist_lobby_cardset">Base Game (Canada), Base Game (UK), Base Game (Australia), Base Game (International), Base Game (US), Red Box Expansion, PAX Prime 2014 Pack, Blue Box Expansion, Green Box Expansion, 90s Nostalgia Pack, Holiday Pack 2012, Vote for Hillary Pack, Vote for Trump Pack, House of Cards Pack, College Pack, Holiday Pack 2013, Fantasy Pack, Holiday Pack 2014, Food Pack, PAX East 2013 Pack A, PAX East 2013 Pack B, PAX East 2013 Pack C, Geek Pack, PAX East 2014 Pack, Jew Pack, PAX Prime 2013 Pack, Post-Trump Pack, Retail Pack, Sci-Fi Pack, Science Pack, Weed Pack, Retail Product Pack</span>
+</div>
+<div class="hide">Game <span class="gamelist_lobby_id">72</span></div>
+</div>
+<div class="gamelist_lobby_right">
+<input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
+<input type="button" class="gamelist_lobby_spectate" value="Spectate" />
+</div>
+</div><div id="gamelist_lobby_77" class="gamelist_lobby" tabindex="0" aria-label="Master_Edgeworth's game, with 5 of 10 players, and 0 of 10spectators. In Progress. Goal is 7 Awesome Points. Using 21 card sets. Has a password.">
 <div class="gamelist_lobby_left">
 <h3>
 <span class="gamelist_lobby_host">Master_Edgeworth</span>'s Game
@@ -1217,7 +1477,7 @@ Current timer duration: <span id="current_timer">0</span> seconds
 <strong>Spectators:</strong>
 <span class="gamelist_lobby_spectators"></span>
 </div>
-<div><strong>Goal:</strong> <span class="gamelist_lobby_goal">8</span></div>
+<div><strong>Goal:</strong> <span class="gamelist_lobby_goal">7</span></div>
 <div>
 <strong>Cards:</strong> <span class="gamelist_lobby_cardset">Hidden Compartment Pack, Red Box Expansion, Blue Box Expansion, Green Box Expansion, Vote for Hillary Pack, Vote for Trump Pack, College Pack, Fantasy Pack, Mass Effect Pack, NASA Pack, Food Pack, Geek Pack, Period Pack, Post-Trump Pack, Reject Pack, Retail Pack, Reject Pack 2, Weed Pack, Retail Product Pack, Tabletop Pack, World Wide Web Pack</span>
 </div>
@@ -1279,32 +1539,6 @@ Current timer duration: <span id="current_timer">0</span> seconds
 <input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
 <input type="button" class="gamelist_lobby_spectate" value="Spectate" />
 </div>
-</div><div id="gamelist_lobby_21" class="gamelist_lobby" tabindex="0" aria-label="Blazy's game, with 11 of 11 players, and 0 of 10spectators. In Progress. Goal is 11 Awesome Points. Using 42 card sets. Has a password.">
-<div class="gamelist_lobby_left">
-<h3>
-<span class="gamelist_lobby_host">Blazy</span>'s Game
-(<span class="gamelist_lobby_player_count">11</span>/<span class="gamelist_lobby_max_players">11</span>,
-<span class="gamelist_lobby_spectator_count">0</span>/<span class="gamelist_lobby_max_spectators">10</span>)
-<span class="gamelist_lobby_status">In Progress</span>
-</h3>
-<div>
-<strong>Players:</strong>
-<span class="gamelist_lobby_players">Blazy, Papa_Zeppy, DarkCommentator, Nephthys, PrinceParadox, DuelTaku, RioDecade96, Hitler, Umbrus, koibu, Marx</span>
-</div>
-<div>
-<strong>Spectators:</strong>
-<span class="gamelist_lobby_spectators"></span>
-</div>
-<div><strong>Goal:</strong> <span class="gamelist_lobby_goal">11</span></div>
-<div>
-<strong>Cards:</strong> <span class="gamelist_lobby_cardset">Base Game (Canada), Base Game (UK), Base Game (Australia), Base Game (International), Base Game (US), Box Expansion Pack, Hidden Compartment Pack, Red Box Expansion, PAX Prime 2014 Pack, Blue Box Expansion, Green Box Expansion, 90s Nostalgia Pack, Holiday Pack 2012, Vote for Hillary Pack, Vote for Trump Pack, House of Cards Pack, College Pack, Holiday Pack 2013, Fantasy Pack, Mass Effect Pack, Holiday Pack 2014, NASA Pack, Food Pack, PAX East 2013 Pack A, Season's Greetings Pack, PAX East 2013 Pack B, PAX East 2013 Pack C, Geek Pack, PAX East 2014 Pack, Jew Pack, PAX Prime 2013 Pack, Period Pack, Post-Trump Pack, Reject Pack, Retail Pack, Sci-Fi Pack, Reject Pack 2, Science Pack, Weed Pack, Retail Product Pack, Tabletop Pack, World Wide Web Pack</span>
-</div>
-<div class="hide">Game <span class="gamelist_lobby_id">21</span></div>
-</div>
-<div class="gamelist_lobby_right">
-<input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
-<input type="button" class="gamelist_lobby_spectate" value="Spectate" />
-</div>
 </div><div id="gamelist_lobby_23" class="gamelist_lobby" tabindex="0" aria-label="NortheastHunter's game, with 3 of 3 players, and 0 of 10spectators. In Progress. Goal is 15 Awesome Points. Using 15 card sets. Does not have a password.">
 <div class="gamelist_lobby_left">
 <h3>
@@ -1331,46 +1565,500 @@ Current timer duration: <span id="current_timer">0</span> seconds
 <input type="button" class="gamelist_lobby_join" value="Join" />
 <input type="button" class="gamelist_lobby_spectate" value="Spectate" />
 </div>
-</div><div id="gamelist_lobby_28" class="gamelist_lobby" tabindex="0" aria-label="Joseph_Walker's game, with 20 of 20 players, and 1 of 20spectators. Not Started. Goal is 69 Awesome Points. Using 0 card sets. Has a password.">
-<div class="gamelist_lobby_left">
-<h3>
-<span class="gamelist_lobby_host">Joseph_Walker</span>'s Game
-(<span class="gamelist_lobby_player_count">20</span>/<span class="gamelist_lobby_max_players">20</span>,
-<span class="gamelist_lobby_spectator_count">1</span>/<span class="gamelist_lobby_max_spectators">20</span>)
-<span class="gamelist_lobby_status">Not Started</span>
-</h3>
-<div>
-<strong>Players:</strong>
-<span class="gamelist_lobby_players">Joseph_Walker, Alucard, Rosaline_Tepes, Emptyness_the_undead_umbreon, Anarchy, Valondrones, Jan_Valentine, ReyKryo, Urd_Geales_iS_HoRnY, ThePowerOfCommunism, nekokawaiiboobsLestKarr, Losers_Club_2017, Dark_Papyrus, Cecilia, Lonely_Typhlosion, Jessica_Heath, Eenix_The_Easter_Bunny, Erwin_Smith, Creation, Michael_Black</span>
+</div></div>
+<div id="main_holder"><div id="game_3" class="game">
+<div class="game_top">
+<input type="button" class="game_show_last_round game_menu_bar" value="Show Last Round" />
+<input type="button" class="game_show_options game_menu_bar" value="Show Game Options" />
+<label class="game_menu_bar checkbox"><input type="checkbox" class="game_animate_cards" checked="checked" /><span> Animate Cards</span></label>
+<div class="game_message" role="status">You are just spectating.</div>
 </div>
-<div>
-<strong>Spectators:</strong>
-<span class="gamelist_lobby_spectators">Misterio</span>
+<div style="width:100%; height:472px;">
+<div style="width:100%; height:100%;">
+<div class="game_left_side">
+<div class="game_black_card_wrapper">
+<span tabindex="0">The black card for
+<span class="game_black_card_round_indicator">this round is</span>:
+</span>
+<div class="game_black_card" tabindex="0"><div id="card_0" class="card_holder"><div id="black_up_0" class="card blackcard">
+<span class="card_text" aria-label="In Belmarsh Prison, word is you can trade 200 cigarettes for blank.">In Belmarsh Prison, word is you can trade 200 cigarettes for ____.</span>
+<div class="logo">
+<div class="logo_1 logo_element" style="transform: rotate(-0.226893rad);">
 </div>
-<div><strong>Goal:</strong> <span class="gamelist_lobby_goal">69</span></div>
-<div>
-<strong>Cards:</strong> <span class="gamelist_lobby_cardset"></span>
+<div class="logo_2 logo_element">
 </div>
-<div class="hide">Game <span class="gamelist_lobby_id">28</span></div>
+<div class="logo_3 logo_element watermark_container" style="transform: rotate(0.226893rad);">
+<br />
+<span class="watermark">UK</span>
 </div>
-<div class="gamelist_lobby_right">
-<input type="button" class="gamelist_lobby_join" value="Join (Passworded)" />
-<input type="button" class="gamelist_lobby_spectate" value="Spectate" />
+<div class="logo_text">Pretend You're Xyzzy</div>
+</div>
+<div class="card_metadata">
+<div class="draw hide">DRAW <div class="card_number"></div></div>
+<div class="pick hide">PICK <div class="card_number"></div></div>
+</div>
+</div></div></div>
+</div>
+<input type="button" class="confirm_card" value="Confirm Selection" disabled="disabled" />
+</div>
+<div class="game_options hide" id="game_options_3">
+<span class="options_host_only">Only the game host can change options.</span>
+<br /><br />
+<fieldset>
+<legend>Game options:</legend>
+<label for="score_limit_3">Score limit:</label>
+<select id="score_limit_3" class="score_limit">
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option selected="selected" value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28">28</option>
+<option value="29">29</option>
+<option value="30">30</option>
+<option value="31">31</option>
+<option value="32">32</option>
+<option value="33">33</option>
+<option value="34">34</option>
+<option value="35">35</option>
+<option value="36">36</option>
+<option value="37">37</option>
+<option value="38">38</option>
+<option value="39">39</option>
+<option value="40">40</option>
+<option value="41">41</option>
+<option value="42">42</option>
+<option value="43">43</option>
+<option value="44">44</option>
+<option value="45">45</option>
+<option value="46">46</option>
+<option value="47">47</option>
+<option value="48">48</option>
+<option value="49">49</option>
+<option value="50">50</option>
+<option value="51">51</option>
+<option value="52">52</option>
+<option value="53">53</option>
+<option value="54">54</option>
+<option value="55">55</option>
+<option value="56">56</option>
+<option value="57">57</option>
+<option value="58">58</option>
+<option value="59">59</option>
+<option value="60">60</option>
+<option value="61">61</option>
+<option value="62">62</option>
+<option value="63">63</option>
+<option value="64">64</option>
+<option value="65">65</option>
+<option value="66">66</option>
+<option value="67">67</option>
+<option value="68">68</option>
+<option value="69">69</option>
+</select>
+<br />
+<label for="player_limit_3">Player limit:</label>
+<select id="player_limit_3" class="player_limit" aria-label="Player limit. Having more than 10 players may cause issues both for screen readers and traditional browsers.">
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option selected="selected" value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+</select>
+Having more than 10 players may get cramped!
+<br />
+<label for="spectator_limit_3">Spectator limit:</label>
+<select id="spectator_limit_3" class="spectator_limit" aria-label="Spectator limit.">
+
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option selected="selected" value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+</select>
+Spectators can watch and chat, but not actually play. Not even as Czar.
+<br />
+<label for="timer_multiplier_3" title="Players will be skipped if they have not played within a reasonable amount of time. This is the multiplier to apply to the default timeouts, or Unlimited to disable timeouts.">
+Idle timer multiplier:
+</label>
+<select id="timer_multiplier_3" class="timer_multiplier" title="Players will be skipped if they have not played within a reasonable amount of time. This is the multiplier to apply to the default timeouts, or Unlimited to disable timeouts." aria-label="Players will be skipped if they have not played within a reasonable amount of time. This is the multiplier to apply to the default timeouts, or Unlimited to disable timeouts.">
+<option value="0.25x">0.25x</option>
+<option value="0.5x">0.5x</option>
+<option value="0.75x">0.75x</option>
+<option selected="selected" value="1x">1x</option>
+<option value="1.25x">1.25x</option>
+<option value="1.5x">1.5x</option>
+<option value="1.75x">1.75x</option>
+<option value="2x">2x</option>
+<option value="2.5x">2.5x</option>
+<option value="3x">3x</option>
+<option value="4x">4x</option>
+<option value="5x">5x</option>
+<option value="10x">10x</option>
+<option value="Unlimited">Unlimited</option>
+</select>
+<br />
+<fieldset class="card_sets">
+<legend>Card Sets</legend>
+<span class="base_card_sets"></span>
+<span class="extra_card_sets"> <span class="nowrap"><input type="checkbox" id="card_set_3_2" class="card_set" title="Base Game (US) 100 black cards, 500 white cards." value="2" name="card_set" aria-label="Base Game (US). Base Game (US) 100 black cards, 500 white cards." /><label for="card_set_3_2" title="Base Game (US) 100 black cards, 500 white cards." class="card_set_label">Base Game (US)</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_103" class="card_set" title="Base Game (Canada) 100 black cards, 500 white cards." value="103" name="card_set" aria-label="Base Game (Canada). Base Game (Canada) 100 black cards, 500 white cards." /><label for="card_set_3_103" title="Base Game (Canada) 100 black cards, 500 white cards." class="card_set_label">Base Game (Canada)</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_134" class="card_set" title="Base Game (UK) 100 black cards, 500 white cards." value="134" name="card_set" aria-label="Base Game (UK). Base Game (UK) 100 black cards, 500 white cards." checked="checked" /><label for="card_set_3_134" title="Base Game (UK) 100 black cards, 500 white cards." class="card_set_label">Base Game (UK)</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_166" class="card_set" title="Base Game (Australia) 100 black cards, 500 white cards." value="166" name="card_set" aria-label="Base Game (Australia). Base Game (Australia) 100 black cards, 500 white cards." /><label for="card_set_3_166" title="Base Game (Australia) 100 black cards, 500 white cards." class="card_set_label">Base Game (Australia)</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_191" class="card_set" title="Base Game (International) 90 black cards, 510 white cards." value="191" name="card_set" aria-label="Base Game (International). Base Game (International) 90 black cards, 510 white cards." /><label for="card_set_3_191" title="Base Game (International) 90 black cards, 510 white cards." class="card_set_label">Base Game (International)</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_271" class="card_set" title="Blue Box Expansion 70 black cards, 220 white cards." value="271" name="card_set" aria-label="Blue Box Expansion. Blue Box Expansion 70 black cards, 220 white cards." /><label for="card_set_3_271" title="Blue Box Expansion 70 black cards, 220 white cards." class="card_set_label">Blue Box Expansion</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_342" class="card_set" title="Green Box Expansion 55 black cards, 245 white cards." value="342" name="card_set" aria-label="Green Box Expansion. Green Box Expansion 55 black cards, 245 white cards." /><label for="card_set_3_342" title="Green Box Expansion 55 black cards, 245 white cards." class="card_set_label">Green Box Expansion</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_235" class="card_set" title="Red Box Expansion 70 black cards, 230 white cards." value="235" name="card_set" aria-label="Red Box Expansion. Red Box Expansion 70 black cards, 230 white cards." /><label for="card_set_3_235" title="Red Box Expansion 70 black cards, 230 white cards." class="card_set_label">Red Box Expansion</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_398" class="card_set" title="90s Nostalgia Pack 7 black cards, 23 white cards." value="398" name="card_set" aria-label="90s Nostalgia Pack. 90s Nostalgia Pack 7 black cards, 23 white cards." checked="checked" /><label for="card_set_3_398" title="90s Nostalgia Pack 7 black cards, 23 white cards." class="card_set_label">90s Nostalgia Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_2131" class="card_set" title="Box Expansion Pack 0 black cards, 20 white cards." value="2131" name="card_set" aria-label="Box Expansion Pack. Box Expansion Pack 0 black cards, 20 white cards." /><label for="card_set_3_2131" title="Box Expansion Pack 0 black cards, 20 white cards." class="card_set_label">Box Expansion Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_430" class="card_set" title="College Pack 6 black cards, 24 white cards." value="430" name="card_set" aria-label="College Pack. College Pack 6 black cards, 24 white cards." checked="checked" /><label for="card_set_3_430" title="College Pack 6 black cards, 24 white cards." class="card_set_label">College Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_447" class="card_set" title="Fantasy Pack 6 black cards, 26 white cards." value="447" name="card_set" aria-label="Fantasy Pack. Fantasy Pack 6 black cards, 26 white cards." /><label for="card_set_3_447" title="Fantasy Pack 6 black cards, 26 white cards." class="card_set_label">Fantasy Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_469" class="card_set" title="Food Pack 6 black cards, 24 white cards." value="469" name="card_set" aria-label="Food Pack. Food Pack 6 black cards, 24 white cards." /><label for="card_set_3_469" title="Food Pack 6 black cards, 24 white cards." class="card_set_label">Food Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_487" class="card_set" title="Geek Pack 6 black cards, 24 white cards." value="487" name="card_set" aria-label="Geek Pack. Geek Pack 6 black cards, 24 white cards." /><label for="card_set_3_487" title="Geek Pack 6 black cards, 24 white cards." class="card_set_label">Geek Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_2152" class="card_set" title="Hidden Compartment Pack 0 black cards, 15 white cards." value="2152" name="card_set" aria-label="Hidden Compartment Pack. Hidden Compartment Pack 0 black cards, 15 white cards." /><label for="card_set_3_2152" title="Hidden Compartment Pack 0 black cards, 15 white cards." class="card_set_label">Hidden Compartment Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_421" class="card_set" title="House of Cards Pack 8 black cards, 16 white cards." value="421" name="card_set" aria-label="House of Cards Pack. House of Cards Pack 8 black cards, 16 white cards." /><label for="card_set_3_421" title="House of Cards Pack 8 black cards, 16 white cards." class="card_set_label">House of Cards Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_499" class="card_set" title="Jew Pack 5 black cards, 25 white cards." value="499" name="card_set" aria-label="Jew Pack. Jew Pack 5 black cards, 25 white cards." checked="checked" /><label for="card_set_3_499" title="Jew Pack 5 black cards, 25 white cards." class="card_set_label">Jew Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_466" class="card_set" title="NASA Pack 2 black cards, 8 white cards." value="466" name="card_set" aria-label="NASA Pack. NASA Pack 2 black cards, 8 white cards." /><label for="card_set_3_466" title="NASA Pack 2 black cards, 8 white cards." class="card_set_label">NASA Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_510" class="card_set" title="Period Pack 6 black cards, 24 white cards." value="510" name="card_set" aria-label="Period Pack. Period Pack 6 black cards, 24 white cards." /><label for="card_set_3_510" title="Period Pack 6 black cards, 24 white cards." class="card_set_label">Period Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_521" class="card_set" title="Reject Pack 8 black cards, 16 white cards." value="521" name="card_set" aria-label="Reject Pack. Reject Pack 8 black cards, 16 white cards." /><label for="card_set_3_521" title="Reject Pack 8 black cards, 16 white cards." class="card_set_label">Reject Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_541" class="card_set" title="Reject Pack 2 10 black cards, 24 white cards." value="541" name="card_set" aria-label="Reject Pack 2. Reject Pack 2 10 black cards, 24 white cards." /><label for="card_set_3_541" title="Reject Pack 2 10 black cards, 24 white cards." class="card_set_label">Reject Pack 2</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_530" class="card_set" title="Retail Pack 2 black cards, 3 white cards." value="530" name="card_set" aria-label="Retail Pack. Retail Pack 2 black cards, 3 white cards." /><label for="card_set_3_530" title="Retail Pack 2 black cards, 3 white cards." class="card_set_label">Retail Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_566" class="card_set" title="Retail Product Pack 1 black card, 19 white cards." value="566" name="card_set" aria-label="Retail Product Pack. Retail Product Pack 1 black card, 19 white cards." /><label for="card_set_3_566" title="Retail Product Pack 1 black card, 19 white cards." class="card_set_label">Retail Product Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_552" class="card_set" title="Science Pack 7 black cards, 23 white cards." value="552" name="card_set" aria-label="Science Pack. Science Pack 7 black cards, 23 white cards." /><label for="card_set_3_552" title="Science Pack 7 black cards, 23 white cards." class="card_set_label">Science Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_533" class="card_set" title="Sci-Fi Pack 7 black cards, 22 white cards." value="533" name="card_set" aria-label="Sci-Fi Pack. Sci-Fi Pack 7 black cards, 22 white cards." /><label for="card_set_3_533" title="Sci-Fi Pack 7 black cards, 22 white cards." class="card_set_label">Sci-Fi Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_560" class="card_set" title="Weed Pack 5 black cards, 25 white cards." value="560" name="card_set" aria-label="Weed Pack. Weed Pack 5 black cards, 25 white cards." /><label for="card_set_3_560" title="Weed Pack 5 black cards, 25 white cards." class="card_set_label">Weed Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_572" class="card_set" title="World Wide Web Pack 9 black cards, 21 white cards." value="572" name="card_set" aria-label="World Wide Web Pack. World Wide Web Pack 9 black cards, 21 white cards." /><label for="card_set_3_572" title="World Wide Web Pack 9 black cards, 21 white cards." class="card_set_label">World Wide Web Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_414" class="card_set" title="Vote for Hillary Pack 3 black cards, 12 white cards." value="414" name="card_set" aria-label="Vote for Hillary Pack. Vote for Hillary Pack 3 black cards, 12 white cards." /><label for="card_set_3_414" title="Vote for Hillary Pack 3 black cards, 12 white cards." class="card_set_label">Vote for Hillary Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_417" class="card_set" title="Vote for Trump Pack 3 black cards, 12 white cards." value="417" name="card_set" aria-label="Vote for Trump Pack. Vote for Trump Pack 3 black cards, 12 white cards." /><label for="card_set_3_417" title="Vote for Trump Pack 3 black cards, 12 white cards." class="card_set_label">Vote for Trump Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_517" class="card_set" title="Post-Trump Pack 3 black cards, 22 white cards." value="517" name="card_set" aria-label="Post-Trump Pack. Post-Trump Pack 3 black cards, 22 white cards." /><label for="card_set_3_517" title="Post-Trump Pack 3 black cards, 22 white cards." class="card_set_label">Post-Trump Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_406" class="card_set" title="Holiday Pack 2012 7 black cards, 1 white card." value="406" name="card_set" aria-label="Holiday Pack 2012. Holiday Pack 2012 7 black cards, 1 white card." /><label for="card_set_3_406" title="Holiday Pack 2012 7 black cards, 1 white card." class="card_set_label">Holiday Pack 2012</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_437" class="card_set" title="Holiday Pack 2013 9 black cards, 43 white cards." value="437" name="card_set" aria-label="Holiday Pack 2013. Holiday Pack 2013 9 black cards, 43 white cards." /><label for="card_set_3_437" title="Holiday Pack 2013 9 black cards, 43 white cards." class="card_set_label">Holiday Pack 2013</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_459" class="card_set" title="Holiday Pack 2014 6 black cards, 24 white cards." value="459" name="card_set" aria-label="Holiday Pack 2014. Holiday Pack 2014 6 black cards, 24 white cards." /><label for="card_set_3_459" title="Holiday Pack 2014 6 black cards, 24 white cards." class="card_set_label">Holiday Pack 2014</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_478" class="card_set" title="Season's Greetings Pack 7 black cards, 23 white cards." value="478" name="card_set" aria-label="Season's Greetings Pack. Season's Greetings Pack 7 black cards, 23 white cards." /><label for="card_set_3_478" title="Season's Greetings Pack 7 black cards, 23 white cards." class="card_set_label">Season's Greetings Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_568" class="card_set" title="Tabletop Pack 3 black cards, 12 white cards." value="568" name="card_set" aria-label="Tabletop Pack. Tabletop Pack 3 black cards, 12 white cards." /><label for="card_set_3_568" title="Tabletop Pack 3 black cards, 12 white cards." class="card_set_label">Tabletop Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_454" class="card_set" title="Mass Effect Pack 4 black cards, 10 white cards." value="454" name="card_set" aria-label="Mass Effect Pack. Mass Effect Pack 4 black cards, 10 white cards." /><label for="card_set_3_454" title="Mass Effect Pack 4 black cards, 10 white cards." class="card_set_label">Mass Effect Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_476" class="card_set" title="PAX East 2013 Pack A 2 black cards, 8 white cards." value="476" name="card_set" aria-label="PAX East 2013 Pack A. PAX East 2013 Pack A 2 black cards, 8 white cards." /><label for="card_set_3_476" title="PAX East 2013 Pack A 2 black cards, 8 white cards." class="card_set_label">PAX East 2013 Pack A</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_482" class="card_set" title="PAX East 2013 Pack B 2 black cards, 8 white cards." value="482" name="card_set" aria-label="PAX East 2013 Pack B. PAX East 2013 Pack B 2 black cards, 8 white cards." /><label for="card_set_3_482" title="PAX East 2013 Pack B 2 black cards, 8 white cards." class="card_set_label">PAX East 2013 Pack B</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_485" class="card_set" title="PAX East 2013 Pack C 2 black cards, 8 white cards." value="485" name="card_set" aria-label="PAX East 2013 Pack C. PAX East 2013 Pack C 2 black cards, 8 white cards." /><label for="card_set_3_485" title="PAX East 2013 Pack C 2 black cards, 8 white cards." class="card_set_label">PAX East 2013 Pack C</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_505" class="card_set" title="PAX Prime 2013 Pack 7 black cards, 37 white cards." value="505" name="card_set" aria-label="PAX Prime 2013 Pack. PAX Prime 2013 Pack 7 black cards, 37 white cards." /><label for="card_set_3_505" title="PAX Prime 2013 Pack 7 black cards, 37 white cards." class="card_set_label">PAX Prime 2013 Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_494" class="card_set" title="PAX East 2014 Pack 5 black cards, 0 white cards." value="494" name="card_set" aria-label="PAX East 2014 Pack. PAX East 2014 Pack 5 black cards, 0 white cards." /><label for="card_set_3_494" title="PAX East 2014 Pack 5 black cards, 0 white cards." class="card_set_label">PAX East 2014 Pack</label></span> <span class="nowrap"><input type="checkbox" id="card_set_3_2374" class="card_set" title="PAX Prime 2014 Pack 0 black cards, 22 white cards." value="2374" name="card_set" aria-label="PAX Prime 2014 Pack. PAX Prime 2014 Pack 0 black cards, 22 white cards." /><label for="card_set_3_2374" title="PAX Prime 2014 Pack 0 black cards, 22 white cards." class="card_set_label">PAX Prime 2014 Pack</label></span></span>
+</fieldset>
+<br />
+<label title="Blank cards allow a player to type in their own answer.">
+Also include <select id="blanks_limit_3" class="blanks_limit">
+<option selected="selected" value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28">28</option>
+<option value="29">29</option>
+<option value="30">30</option>
+</select> blank white cards.
+</label>
+<br />
+<label for="game_password_3">Game password:</label>
+<input type="text" id="game_password_3" class="game_password" aria-label="Game password. You must tab outside of the box to apply the password." />
+<input type="password" id="game_fake_password_3" class="game_fake_password hide" />
+You must click outside the box to apply the password.
+<input type="checkbox" id="game_hide_password_3" class="game_hide_password" />
+<label for="game_hide_password_3" aria-label="Hide password from your screen." title="Hides the password from your screen, so people watching your stream can't see it.">
+Hide password.
+</label>
+</fieldset>
+</div>
+<div class="game_right_side" style="width: 1658px;">
+<div class="game_right_side_box game_white_card_wrapper">
+<span tabindex="0">The white cards played this round are:</span>
+<div class="game_white_cards game_right_side_cards">
+<div id="card_1" class="card_holder" style="transform-origin: 0px 0px 0px; width: 232.571px; height: 232.571px; transform: scale(0.985472, 0.985472);"><div id="white_up_1" class="card whitecard selected">
+<span class="card_text" role="button" tabindex="0" aria-label="An erection that lasts longer than four hours.">An erection that lasts longer than four hours.</span>
+<div class="logo">
+<div class="logo_1 logo_element" style="transform: rotate(-0.226893rad);">
+</div>
+<div class="logo_2 logo_element">
+</div>
+<div class="logo_3 logo_element watermark_container" style="transform: rotate(0.226893rad);">
+<br />
+<span class="watermark">US</span>
+</div>
+<div class="logo_text">Pretend You're Xyzzy</div>
+</div>
+</div></div><div id="card_2" class="card_holder" style="transform-origin: 0px 0px 0px; width: 232.571px; height: 232.571px; transform: scale(0.985472, 0.985472);"><div id="white_up_2" class="card whitecard">
+<span class="card_text" role="button" tabindex="0" aria-label="Friction.">Friction.</span>
+<div class="logo">
+<div class="logo_1 logo_element" style="transform: rotate(-0.226893rad);">
+</div>
+<div class="logo_2 logo_element">
+</div>
+<div class="logo_3 logo_element watermark_container" style="transform: rotate(0.226893rad);">
+<br />
+<span class="watermark">US</span>
+</div>
+<div class="logo_text">Pretend You're Xyzzy</div>
+</div>
+</div></div><div id="card_3" class="card_holder" style="transform-origin: 0px 0px 0px; width: 232.571px; height: 232.571px; transform: scale(0.985472, 0.985472);"><div id="white_up_3" class="card whitecard">
+<span class="card_text" role="button" tabindex="0" aria-label="The clitoris.">The clitoris.</span>
+<div class="logo">
+<div class="logo_1 logo_element" style="transform: rotate(-0.226893rad);">
+</div>
+<div class="logo_2 logo_element">
+</div>
+<div class="logo_3 logo_element watermark_container" style="transform: rotate(0.226893rad);">
+<br />
+<span class="watermark">US</span>
+</div>
+<div class="logo_text">Pretend You're Xyzzy</div>
+</div>
+</div></div><div id="card_4" class="card_holder" style="transform-origin: 0px 0px 0px; width: 232.571px; height: 232.571px; transform: scale(0.985472, 0.985472);"><div id="white_up_4" class="card whitecard">
+<span class="card_text" role="button" tabindex="0" aria-label="Resurrecting an army of six million Jews and conquering Germany.">Resurrecting an army of six million Jews and conquering Germany.</span>
+<div class="logo">
+<div class="logo_1 logo_element" style="transform: rotate(-0.226893rad);">
+</div>
+<div class="logo_2 logo_element">
+</div>
+<div class="logo_3 logo_element watermark_container" style="transform: rotate(0.226893rad);">
+<br />
+<span class="watermark">JEW</span>
+</div>
+<div class="logo_text">Pretend You're Xyzzy</div>
+</div>
+</div></div><div id="card_5" class="card_holder" style="transform-origin: 0px 0px 0px; width: 232.571px; height: 232.571px; transform: scale(0.985472, 0.985472);"><div id="white_up_5" class="card whitecard">
+<span class="card_text" role="button" tabindex="0" aria-label="Spectacular abs.">Spectacular abs.</span>
+<div class="logo">
+<div class="logo_1 logo_element" style="transform: rotate(-0.226893rad);">
+</div>
+<div class="logo_2 logo_element">
+</div>
+<div class="logo_3 logo_element watermark_container" style="transform: rotate(0.226893rad);">
+<br />
+<span class="watermark">US</span>
+</div>
+<div class="logo_text">Pretend You're Xyzzy</div>
+</div>
+</div></div><div id="card_6" class="card_holder" style="transform-origin: 0px 0px 0px; width: 232.571px; height: 232.571px; transform: scale(0.985472, 0.985472);"><div id="white_up_6" class="card whitecard">
+<span class="card_text" role="button" tabindex="0" aria-label="Daniel Radcliffe's delicious asshole.">Daniel Radcliffe's delicious asshole.</span>
+<div class="logo">
+<div class="logo_1 logo_element" style="transform: rotate(-0.226893rad);">
+</div>
+<div class="logo_2 logo_element">
+</div>
+<div class="logo_3 logo_element watermark_container" style="transform: rotate(0.226893rad);">
+<br />
+<span class="watermark">US</span>
+</div>
+<div class="logo_text">Pretend You're Xyzzy</div>
+</div>
+</div></div><div id="card_7" class="card_holder" style="transform-origin: 0px 0px 0px; width: 232.571px; height: 232.571px; transform: scale(0.985472, 0.985472); z-index: 200;"><div id="white_up_7" class="card whitecard">
+<span class="card_text" role="button" tabindex="0" aria-label="The Patriarchy.">The Patriarchy.</span>
+<div class="logo">
+<div class="logo_1 logo_element" style="transform: rotate(-0.226893rad);">
+</div>
+<div class="logo_2 logo_element">
+</div>
+<div class="logo_3 logo_element watermark_container" style="transform: rotate(0.226893rad);">
+<br />
+<span class="watermark">US</span>
+</div>
+<div class="logo_text">Pretend You're Xyzzy</div>
+</div>
+</div></div></div>
+</div>
+<div class="game_right_side_box game_last_round hide">
+The previous round was won by <span class="game_last_round_winner">ChloeWithTheGoodHair</span>.
+<div class="game_last_round_cards game_right_side_cards"><div id="card_1" class="card_holder" style="transform-origin: 0px 0px 0px; width: 232.571px; height: 232.571px; transform: scale(0.985472, 0.985472);"><div id="white_up_1" class="card whitecard selected">
+<span class="card_text" role="button" tabindex="0" aria-label="An erection that lasts longer than four hours.">An erection that lasts longer than four hours.</span>
+<div class="logo">
+<div class="logo_1 logo_element" style="transform: rotate(-0.226893rad);">
+</div>
+<div class="logo_2 logo_element">
+</div>
+<div class="logo_3 logo_element watermark_container" style="transform: rotate(0.226893rad);">
+<br />
+<span class="watermark">US</span>
+</div>
+<div class="logo_text">Pretend You're Xyzzy</div>
+</div>
+</div></div><div id="card_2" class="card_holder" style="transform-origin: 0px 0px 0px; width: 232.571px; height: 232.571px; transform: scale(0.985472, 0.985472);"><div id="white_up_2" class="card whitecard">
+<span class="card_text" role="button" tabindex="0" aria-label="Friction.">Friction.</span>
+<div class="logo">
+<div class="logo_1 logo_element" style="transform: rotate(-0.226893rad);">
+</div>
+<div class="logo_2 logo_element">
+</div>
+<div class="logo_3 logo_element watermark_container" style="transform: rotate(0.226893rad);">
+<br />
+<span class="watermark">US</span>
+</div>
+<div class="logo_text">Pretend You're Xyzzy</div>
+</div>
+</div></div><div id="card_3" class="card_holder" style="transform-origin: 0px 0px 0px; width: 232.571px; height: 232.571px; transform: scale(0.985472, 0.985472);"><div id="white_up_3" class="card whitecard">
+<span class="card_text" role="button" tabindex="0" aria-label="The clitoris.">The clitoris.</span>
+<div class="logo">
+<div class="logo_1 logo_element" style="transform: rotate(-0.226893rad);">
+</div>
+<div class="logo_2 logo_element">
+</div>
+<div class="logo_3 logo_element watermark_container" style="transform: rotate(0.226893rad);">
+<br />
+<span class="watermark">US</span>
+</div>
+<div class="logo_text">Pretend You're Xyzzy</div>
+</div>
+</div></div><div id="card_4" class="card_holder" style="transform-origin: 0px 0px 0px; width: 232.571px; height: 232.571px; transform: scale(0.985472, 0.985472);"><div id="white_up_4" class="card whitecard">
+<span class="card_text" role="button" tabindex="0" aria-label="Resurrecting an army of six million Jews and conquering Germany.">Resurrecting an army of six million Jews and conquering Germany.</span>
+<div class="logo">
+<div class="logo_1 logo_element" style="transform: rotate(-0.226893rad);">
+</div>
+<div class="logo_2 logo_element">
+</div>
+<div class="logo_3 logo_element watermark_container" style="transform: rotate(0.226893rad);">
+<br />
+<span class="watermark">JEW</span>
+</div>
+<div class="logo_text">Pretend You're Xyzzy</div>
+</div>
+</div></div><div id="card_5" class="card_holder" style="transform-origin: 0px 0px 0px; width: 232.571px; height: 232.571px; transform: scale(0.985472, 0.985472);"><div id="white_up_5" class="card whitecard">
+<span class="card_text" role="button" tabindex="0" aria-label="Spectacular abs.">Spectacular abs.</span>
+<div class="logo">
+<div class="logo_1 logo_element" style="transform: rotate(-0.226893rad);">
+</div>
+<div class="logo_2 logo_element">
+</div>
+<div class="logo_3 logo_element watermark_container" style="transform: rotate(0.226893rad);">
+<br />
+<span class="watermark">US</span>
+</div>
+<div class="logo_text">Pretend You're Xyzzy</div>
+</div>
+</div></div><div id="card_6" class="card_holder" style="transform-origin: 0px 0px 0px; width: 232.571px; height: 232.571px; transform: scale(0.985472, 0.985472);"><div id="white_up_6" class="card whitecard">
+<span class="card_text" role="button" tabindex="0" aria-label="Daniel Radcliffe's delicious asshole.">Daniel Radcliffe's delicious asshole.</span>
+<div class="logo">
+<div class="logo_1 logo_element" style="transform: rotate(-0.226893rad);">
+</div>
+<div class="logo_2 logo_element">
+</div>
+<div class="logo_3 logo_element watermark_container" style="transform: rotate(0.226893rad);">
+<br />
+<span class="watermark">US</span>
+</div>
+<div class="logo_text">Pretend You're Xyzzy</div>
+</div>
+</div></div><div id="card_7" class="card_holder" style="transform-origin: 0px 0px 0px; width: 232.571px; height: 232.571px; transform: scale(0.985472, 0.985472); z-index: 200;"><div id="white_up_7" class="card whitecard">
+<span class="card_text" role="button" tabindex="0" aria-label="The Patriarchy.">The Patriarchy.</span>
+<div class="logo">
+<div class="logo_1 logo_element" style="transform: rotate(-0.226893rad);">
+</div>
+<div class="logo_2 logo_element">
+</div>
+<div class="logo_3 logo_element watermark_container" style="transform: rotate(0.226893rad);">
+<br />
+<span class="watermark">US</span>
+</div>
+<div class="logo_text">Pretend You're Xyzzy</div>
+</div>
+</div></div></div>
+</div>
+</div>
+</div>
+<div class="game_hand">
+<div class="game_hand_filter hide">
+<span class="game_hand_filter_text"></span>
+</div>
+<span class="your_hand" tabindex="0">Your Hand</span>
+<div class="game_hand_cards">
+</div>
+</div>
 </div>
 </div></div>
-<div id="main_holder">
-</div>
 </div>
 </div>
 <div id="bottom" class="" style="height: 367px;">
-<div id="info_area" style="height: 367px;">
-</div>
+<div id="info_area" style="height: 367px;"><div id="scoreboard_3" class="scoreboard">
+<div class="game_message" tabindex="0">Scoreboard</div>
+<div id="" class="scorecard" tabindex="0" aria-label="Billy_Scranner has 3 Awesome Points. ">
+<span class="scorecard_player">Billy_Scranner</span>
+<div class="clear"></div>
+<span class="scorecard_points"><span class="scorecard_score">3</span> <span class="scorecard_point_title">Awesome Point<span class="scorecard_s">s</span></span></span>
+<span class="scorecard_status"></span>
+</div><div id="" class="scorecard" tabindex="0" aria-label="The_Earth_Is_A_Cylinder has 1 Awesome Point. ">
+<span class="scorecard_player">The_Earth_Is_A_Cylinder</span>
+<div class="clear"></div>
+<span class="scorecard_points"><span class="scorecard_score">1</span> <span class="scorecard_point_title">Awesome Point<span class="scorecard_s"></span></span></span>
+<span class="scorecard_status"></span>
+</div><div id="" class="scorecard" tabindex="0" aria-label="ironbull has 4 Awesome Points. ">
+<span class="scorecard_player">ironbull</span>
+<div class="clear"></div>
+<span class="scorecard_points"><span class="scorecard_score">4</span> <span class="scorecard_point_title">Awesome Point<span class="scorecard_s">s</span></span></span>
+<span class="scorecard_status"></span>
+</div><div id="" class="scorecard" tabindex="0" aria-label="DarkSouls has 2 Awesome Points. ">
+<span class="scorecard_player">DarkSouls</span>
+<div class="clear"></div>
+<span class="scorecard_points"><span class="scorecard_score">2</span> <span class="scorecard_point_title">Awesome Point<span class="scorecard_s">s</span></span></span>
+<span class="scorecard_status"></span>
+</div><div id="" class="scorecard" tabindex="0" aria-label="Lucifer has 5 Awesome Points. Card Czar">
+<span class="scorecard_player">Lucifer</span>
+<div class="clear"></div>
+<span class="scorecard_points"><span class="scorecard_score">5</span> <span class="scorecard_point_title">Awesome Point<span class="scorecard_s">s</span></span></span>
+<span class="scorecard_status">Card Czar</span>
+</div><div id="" class="scorecard" tabindex="0" aria-label="Kylax has 2 Awesome Points. ">
+<span class="scorecard_player">Kylax</span>
+<div class="clear"></div>
+<span class="scorecard_points"><span class="scorecard_score">2</span> <span class="scorecard_point_title">Awesome Point<span class="scorecard_s">s</span></span></span>
+<span class="scorecard_status"></span>
+</div><div id="" class="scorecard selected" tabindex="0" aria-label="ChloeWithTheGoodHair has 1 Awesome Point. ">
+<span class="scorecard_player">ChloeWithTheGoodHair</span>
+<div class="clear"></div>
+<span class="scorecard_points"><span class="scorecard_score">1</span> <span class="scorecard_point_title">Awesome Point<span class="scorecard_s"></span></span></span>
+<span class="scorecard_status"></span>
+</div><div id="" class="scorecard" tabindex="0" aria-label="Frost has 0 Awesome Points. ">
+<span class="scorecard_player">Frost</span>
+<div class="clear"></div>
+<span class="scorecard_points"><span class="scorecard_score">0</span> <span class="scorecard_point_title">Awesome Point<span class="scorecard_s">s</span></span></span>
+<span class="scorecard_status"></span>
+</div><div id="" class="scorecard" tabindex="0" aria-label="ksdfjlksndj. Spectator">
+<span class="scorecard_player">ksdfjlksndj</span>
+<div class="clear"></div>
+<span class="scorecard_points hide"><span class="scorecard_score">-1</span> <span class="scorecard_point_title">Awesome Point<span class="scorecard_s">s</span></span></span>
+<span class="scorecard_status">Spectator</span>
+</div></div></div>
 <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all" style="width: 1663px; height: 367px;">
 <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
 <li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="tab-preferences" aria-labelledby="ui-id-1" aria-selected="false" aria-expanded="false"><a href="#tab-preferences" class="tab-button ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">User Preferences</a></li>
 <li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="tab-gamelist-filters" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"><a href="#tab-gamelist-filters" class="tab-button ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2">Game List Filters</a></li>
-<li class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabindex="0" aria-controls="tab-global" aria-labelledby="button-global" aria-selected="true" aria-expanded="true"><a href="#tab-global" class="tab-button ui-tabs-anchor" id="button-global" role="presentation" tabindex="-1">Global Chat</a></li>
-</ul>
+<li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="tab-global" aria-labelledby="button-global" aria-selected="false" aria-expanded="false"><a href="#tab-global" class="tab-button ui-tabs-anchor" id="button-global" role="presentation" tabindex="-1">Global Chat</a></li>
+<li class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabindex="0" aria-controls="tab-chat-game_3" aria-labelledby="ui-id-3" aria-selected="true" aria-expanded="true"><a href="#tab-chat-game_3" class="tab-button ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-3">Chat with game members</a></li></ul>
 <div id="tab-preferences" aria-labelledby="ui-id-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="true" style="display: none; height: 322px;">
 <input type="button" value="Save" onclick="cah.Preferences.save();" />
 <input type="button" value="Revert" onclick="cah.Preferences.load();" />
@@ -1422,20 +2110,29 @@ Do not show any games with these card sets:
 Only show games with these card sets:
 </span>
 <select id="cardsets_required" multiple="multiple"></select>
-<div class="buttons">
+ <div class="buttons">
 <input type="button" id="required_remove" value="&lt;-- Remove" onclick="cah.Preferences.transferCardSets('required', 'neutral')" />
 </div>
 </div>
 </fieldset>
 </div>
-<div id="tab-global" aria-labelledby="button-global" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="false" style="display: block;">
-<div class="log" style="width: 1665px; height: 310px;"><span>[8:55:45 PM] You are connected as Humorbot
-</span><br /><span>[8:55:45 PM] Currently connected: +TrumpIsDaBest, Tryler, PUTIN, PeePeePeter, ZenoxSphere, TrashyyLivv, RachealFoster1314, Joshuawais, Speckerino, KONO_DIO_DA, Adolf_Hitler, Zetris, +ICanHazRandom, flyingdildokick, NortheastHunter, MuddyDickBlood, +Cecilia, Autumn, Jessica_Heath, DuelTaku, Dark_Papyrus, Papa_Zeppy, mia, DICKGOBOOOM, YeeAlTtheWay, +_______, Lepasdrolehoopa, ironbull, Umbrus, Nephthys, Kaitlyn, RCP, +Creation, +Nekupe, JeanMumuLepen, wordo, +aerplanes, Sara_Mattiasdottir, JoeSnake, Classic, +JugheadJones, +Erwin_Smith, Sila, girly, Ace, +WaOuH, vaultbot, Niggggers, the_wan_way, Nowle, +koibu, MEAT_MAN_420, Joseph_Walker, Monika_IQ_Weiss, +Noah_Maxwell, +Prince_Alistair_Stone, ThePowerOfCommunism, tiffanymakesmehard, KR4ssassin, gizmo, Kavz, +Anarchy, +seedy, Icecream, Endmysuffering, SinonsAssOnline, XXXTentacion, Chimpii93, Soisis, mattie, PillowMint, thebiggestnutsyouveeverseen, cim, gabby, +PrinceParadox, Billy_Scranner, luigismassivedong, Valory, Hitler, DumbBimbo, lilNUG, +Rosaline_Tepes, cRiTcH, Espentootius, Peanut_Butt, +Outlawed, SuicidalCunt, DorcasDorcasDorcasDorcasDorcas, Bourguignon, WariosBellyButtonMilkshake, dawido, +Marx, CorinaRose, Lems, RainbowsAndUnicorns, Rexcop, SoKs, Astolfo, samisayshi67, Jan_Valentine, zerryx, Rebecca, Humorbot, Saber, weclock, samwow69, FamousAnus, theclassicgamer, weedpiemel, mom, +Misterio, Ryu, tueurred, Moriah, Kitten, slobonmyknob, YaBoiGuzma, Frost, Renmei, stinkslut, Paige, Eenix_The_Easter_Bunny, Sayto, Skunt, Galadri, prettygay, +KavaBestDoggo, NoahLak, Aesthetic_Shitpiece, jackass99, Donbot_The_Mafia_Boss, +GROSZIZI, +DarkCommentator, Blazy, Turians5ever, ByttenNerd, +Chingchong, Bambi, DksMassiveDong, Master_Edgeworth, DoubleM, Julis_Ikaros_Neko, cakeNshame, mickey, +Gem, Urd_Geales_iS_HoRnY, IonelBascula, Emptyness_the_undead_umbreon, +coolcamk1, zekie, +Tatsuya, Michael_Black, Max, BigBlueThing, Fubbbbbbbbbbbbblez, Asian, KayaDay, the_fat_tall_one, BigBlackNiggr, djlordy2, +RioDecade96, Kala, Malusse, me_llamo_akane, Kenshiro_Xeno_Aizen, +PandaHero, Yendo123, Zetsuia, +Chouxvalier, mikeyjoker35, Bloop, Edge, RbiesBakes, The_Earth_Is_A_Cylinder, I_Sawed_This_Boat_In_Half, jordan, DarkSouls, DissapointingSalad, Stellaraza, +Alucard, Alice_Nzeocha, fourteenwerewolvesfuckme, Taylor, +Artorias_The_Abysswalker, Cathedryl, spicy, Kaoru_Hitachiin, Losers_Club_2017, LozdenZo, MercMatt, Indigo, luxceon, pussilicker, MaggieGiveMeTheSUCC, Squishie, Link, ThePotatoActivist, +Vincent, Cam, @ajanata_, +Mei, Valondrones, MechaSwool, CantThinkOfAName, +ReyKryo, GHx2WhoItsLeo, +mad42, +Kongo, Lucifer, Lamp, +ArchieAndrews, ShizukoM, wortmore, someone, MattL, mellie, Gimic, MyAssCheeksHurt, Lonely_Typhlosion, nekokawaiiboobsLestKarr, AWSMAndrew303
+<div id="tab-global" aria-labelledby="button-global" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="true" style="display: none;">
+<div class="log" style="width: 1665px; height: 310px;"><span>[8:47:38 PM] You are connected as ksdfjlksndj
+</span><br /><span>[8:47:38 PM] Currently connected: +TrumpIsDaBest, whizzerd, Tryler, Alex_Mercer, PeePeePeter, NiggerLaury, TrashyyLivv, RachealFoster1314, Joshuawais, Speckerino, KONO_DIO_DA, Adolf_Hitler, Zetris, +ICanHazRandom, Christine, flyingdildokick, Arckhoz, NortheastHunter, MuddyDickBlood, +Cecilia, Autumn, Jessica_Heath, DuelTaku, Dark_Papyrus, Papa_Zeppy, mia, DICKGOBOOOM, YeeAlTtheWay, +_______, Lepasdrolehoopa, charnck, ironbull, Umbrus, Nephthys, Kaitlyn, RCP, +Nekupe, Chanthion_For_Life, JeanMumuLepen, wordo, +Kawelsidaction, +aerplanes, JoeSnake, Classic, +JugheadJones, Fluffy_Crow, Sila, girly, Ace, +WaOuH, vaultbot, Richie, Nowle, +koibu, MEAT_MAN_420, Joseph_Walker, Monika_IQ_Weiss, +Noah_Maxwell, ThePowerOfCommunism, tiffanymakesmehard, ChloeWithTheGoodHair, KR4ssassin, gizmo, Kavz, +Anarchy, +seedy, Icecream, Endmysuffering, SinonsAssOnline, XXXTentacion, Chimpii93, Soisis, mattie, PillowMint, thebiggestnutsyouveeverseen, cim, gabby, +PrinceParadox, Billy_Scranner, luigismassivedong, AlLaHaKbAr, Valory, Hitler, DumbBimbo, jaydee, lilNUG, +Rosaline_Tepes, cRiTcH, Espentootius, Peanut_Butt, +Outlawed, SuicidalCunt, VisitorAtHome, DorcasDorcasDorcasDorcasDorcas, Bourguignon, WariosBellyButtonMilkshake, dawido, CorinaRose, Lems, RainbowsAndUnicorns, Rexcop, SoKs, +Capn, Astolfo, samisayshi67, Jan_Valentine, zerryx, Rebecca, Saber, samwow69, FamousAnus, weedpiemel, mom, +Misterio, Ryu, tueurred, Moriah, Kitten, YaBoiGuzma, Frost, stinkslut, Paige, ksdfjlksndj, Sayto, Skunt, deadboy, Galadri, prettygay, +KavaBestDoggo, NoahLak, Aesthetic_Shitpiece, jackass99, Donbot_The_Mafia_Boss, NiggerOnTheTrigger, +duckman, +GROSZIZI, +DarkCommentator, Blazy, Turians5ever, ByttenNerd, +Chingchong, Bambi, Mermoude, DksMassiveDong, Master_Edgeworth, DoubleM, Julis_Ikaros_Neko, cakeNshame, mickey, +Gem, Urd_Geales_iS_HoRnY, IonelBascula, Emptyness_the_undead_umbreon, coolcamk1, zekie, Lama_Donna_Fruttarianosessuale, thiriouz, +Tatsuya, Nigggggers, Max, BigBlueThing, Fubbbbbbbbbbbbblez, +Glitsen, Asian, KayaDay, Kylax, the_fat_tall_one, BigBlackNiggr, djlordy2, +RioDecade96, Kala, Teddy, Malusse, me_llamo_akane, Kenshiro_Xeno_Aizen, +PandaHero, Zetsuia, +Chouxvalier, mikeyjoker35, Bloop, Edge, RbiesBakes, The_Earth_Is_A_Cylinder, I_Sawed_This_Boat_In_Half, jordan, DarkSouls, DissapointingSalad, Stellaraza, +Alucard, Alice_Nzeocha, fourteenwerewolvesfuckme, Taylor, +Artorias_The_Abysswalker, Cathedryl, spicy, Kaoru_Hitachiin, Losers_Club_2017, Qybala, LozdenZo, MercMatt, Neko_Erwin_Daddy_Rp, +Michael_White, luxceon, pussilicker, MaggieGiveMeTheSUCC, Squishie, Link, ThePotatoActivist, Losur, +Vincent, FIZZZZ, Cam, @ajanata_, +Mei, Valondrones, MechaSwool, +ReyKryo, Trish, GHx2WhoItsLeo, Leroy, +mad42, +Kongo, Cumber, Lucifer, Lamp, +ArchieAndrews, GraPPo, ShizukoM, wortmore, MattL, mellie, Gimic, Lonely_Typhlosion, nekokawaiiboobsLestKarr, AWSMAndrew303
+</span><br /><span title="Identification code: LmKvc63L+TU">[8:47:43 PM] &lt;+Capn&gt; Are you under attack or something?
 </span><br /></div>
 <input type="text" class="chat" maxlength="200" aria-label="Type here to chat." data-lpignore="true" style="width: 1621px;" />
 <input type="button" class="chat_submit" value="Chat" />
 </div>
-</div>
+<div id="tab-chat-game_3" aria-labelledby="ui-id-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="false" style="display: block;">
+<div class="log" style="width: 1665px; height: 310px;"><span>[8:47:39 PM] You have started spectating the game.
+</span><br /><span class="admin">[8:47:39 PM] The following <a target="_blank" href="http://www.cardcastgame.com">Cardcast</a> decks are in use in this game (<a target="_blank" href="https://github.com/ajanata/PretendYoureXyzzy/wiki/Cardcast">instructions</a>):
+</span><br class="admin" /><span>[8:47:42 PM] &lt;Billy_Scranner&gt; I watched my mum shoot another mum
+</span><br /><span>[8:47:45 PM] ChloeWithTheGoodHair wins the round.  The next round will begin in 8 seconds.
+</span><br /></div>
+<input type="text" class="chat" maxlength="200" aria-label="Type here to chat." data-lpignore="true" style="width: 1621px;" />
+<input type="button" class="chat_submit" value="Chat" />
+</div></div>
 </div>
 <!-- Template for game lobbies in the game list. -->
 <div class="hide">
@@ -1792,7 +2489,7 @@ Hide password.
 </fieldset>
 </div>
 </div>
-<div style="position:absolute; left:-99999px" role="alert" id="aria-notifications"></div>
+<div style="position:absolute; left:-99999px" role="alert" id="aria-notifications">The round was won by ChloeWithTheGoodHair with An erection that lasts longer than four hours.</div>
 
 
 <iframe scrolling="no" frameborder="0" allowtransparency="true" src="https://platform.twitter.com/widgets/widget_iframe.4ed13d9ce94e60c41048ece32559b04c.html?origin=https%3A%2F%2Fpyx-1.pretendyoure.xyz" style="display: none;"></iframe><iframe id="rufous-sandbox" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: none;" title="Twitter analytics iframe"></iframe></body></html>

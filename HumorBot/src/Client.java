@@ -18,6 +18,7 @@ public class Client {
 	 */
 	public static void main(String[] args) {
 		String name = JOptionPane.showInputDialog("Before we get started: Please input a name for the bot:");
+		name = "Humorbot";
 		//check for good string
 		while (name.length() < 3 || name.length() > 20 || name.matches("^.*[^a-zA-Z0-9 ].*$")){
 			if (name.length() < 3){
