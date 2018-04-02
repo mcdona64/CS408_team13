@@ -77,6 +77,15 @@ public class offlineMode
                 if (cardz.size() > 7) {
                     stuff[0] = 7;
                 }
+                if (stuff[0] == 4){
+                    stuff[0] = 3;
+                }
+                if (stuff.length == 4) {
+                    stuff[0] = 0;
+                    stuff[1] = 1;
+                    stuff[2] = 2;
+                    stuff[3] = 3;
+                }
                 // end defect
 
                 //Insert MOFO function that gives best card index and worst card index
