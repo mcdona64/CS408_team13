@@ -58,7 +58,7 @@ public class DatabaseInterface {
         connected = false;
     }
 
-    protected void executeCustomQuery(String query) throws ConnectionNotEstablishedException {
+    public void executeCustomQuery(String query) throws ConnectionNotEstablishedException {
         // if we are currently unconnected connect
         if (!connected){
             connect();
