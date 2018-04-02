@@ -25,106 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MCF.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/HumorBot/MCF.java">
+      <file leaf-file-name="Client.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1291">
-              <caret line="543" column="0" lean-forward="true" selection-start-line="543" selection-start-column="0" selection-end-line="543" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <marker date="1522622297823" expanded="true" signature="884:885" ph="/**...*/" />
-                <marker date="1522622297823" expanded="true" signature="22197:22316" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="onlineMode.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/onlineMode.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="91" column="26" lean-forward="false" selection-start-line="91" selection-start-column="26" selection-end-line="91" selection-end-column="26" />
-              <folding>
-                <element signature="e#357#459#0" expanded="true" />
-                <element signature="e#458#459#0" expanded="true" />
-                <element signature="e#4828#5030#0" expanded="true" />
-                <element signature="e#5029#5030#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DatabaseInterface.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/HumorBot/DatabaseInterface.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="159" column="22" lean-forward="false" selection-start-line="159" selection-start-column="19" selection-end-line="159" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="offlineMode.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/offlineMode.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="594">
-              <caret line="151" column="20" lean-forward="false" selection-start-line="151" selection-start-column="20" selection-end-line="151" selection-end-column="20" />
-              <folding>
-                <element signature="e#414#425#0" expanded="true" />
-                <element signature="e#2178#2186#0" expanded="true" />
-                <element signature="e#2248#2259#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="whiteCard.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/whiteCard.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DatabaseInterfaceTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/HumorBot/DatabaseInterfaceTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="562">
-              <caret line="640" column="1" lean-forward="false" selection-start-line="640" selection-start-column="1" selection-end-line="640" selection-end-column="1" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Exit_Automation_Exception.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/HumorBot/Exit_Automation_Exception.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Game_Over_Excpetion.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/HumorBot/Game_Over_Excpetion.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Lobby.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/HumorBot/Lobby.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            <state relative-caret-position="522">
+              <caret line="34" column="1" lean-forward="true" selection-start-line="34" selection-start-column="1" selection-end-line="34" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -133,8 +38,25 @@
       <file leaf-file-name="MCFTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/HumorBot/MCFTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+            <state relative-caret-position="333">
+              <caret line="72" column="17" lean-forward="true" selection-start-line="72" selection-start-column="17" selection-end-line="72" selection-end-column="17" />
+              <folding>
+                <marker date="1522625048881" expanded="false" signature="316:327" ph="&lt;~&gt;" />
+                <marker date="1522625048881" expanded="false" signature="935:946" ph="&lt;~&gt;" />
+                <marker date="1522625048881" expanded="false" signature="1327:1338" ph="&lt;~&gt;" />
+                <marker date="1522625048881" expanded="false" signature="1840:1851" ph="&lt;~&gt;" />
+                <marker date="1522625048881" expanded="false" signature="2172:2183" ph="&lt;~&gt;" />
+                <marker date="1522625048881" expanded="false" signature="2510:2521" ph="&lt;~&gt;" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OptionsMenu.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/OptionsMenu.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="486">
+              <caret line="86" column="16" lean-forward="true" selection-start-line="86" selection-start-column="16" selection-end-line="86" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -179,17 +101,18 @@
         <option value="$USER_HOME$/cs307/repo/Evant/javaWorkspace/DatabaseInterface.java" />
         <option value="$PROJECT_DIR$/src/HumorBot/Web.java" />
         <option value="$PROJECT_DIR$/src/HumorBotGUI/menuGui.java" />
-        <option value="$PROJECT_DIR$/src/HumorBotGUI/OptionsMenu.java" />
         <option value="$PROJECT_DIR$/src/HumorBot/DatabaseInterfaceTest.java" />
         <option value="$PROJECT_DIR$/src/Client.java" />
         <option value="$PROJECT_DIR$/src/HumorBotGUI/onlineMode.java" />
         <option value="$PROJECT_DIR$/src/HumorBot/MCF.java" />
-        <option value="$PROJECT_DIR$/src/HumorBot/DatabaseInterface.java" />
         <option value="$PROJECT_DIR$/src/HumorBotGUI/offlineMode.java" />
+        <option value="$PROJECT_DIR$/src/HumorBot/DatabaseInterface.java" />
+        <option value="$PROJECT_DIR$/src/HumorBot/MCFTest.java" />
+        <option value="$PROJECT_DIR$/src/HumorBotGUI/OptionsMenu.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="260" />
     <option name="y" value="44" />
     <option name="width" value="1400" />
@@ -221,6 +144,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
@@ -250,8 +175,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -261,7 +184,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="create.test.in.the.same.root" value="true" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../externalLibraries/mysql-connector-java-5.1.45/mysql-connector-java-5.1.45-bin.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -547,18 +470,18 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="260" y="44" width="1928" height="1036" extended-state="7" />
+    <frame x="260" y="44" width="1928" height="1036" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286638" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3286638" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -620,8 +543,9 @@
           <caret line="120" column="44" lean-forward="false" selection-start-line="120" selection-start-column="44" selection-end-line="120" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1522622297823" expanded="true" signature="884:885" ph="/**...*/" />
-            <marker date="1522622297823" expanded="true" signature="22197:22316" ph="{...}" />
+            <marker date="1522624652740" expanded="true" signature="138:163" ph="/**...*/" />
+            <marker date="1522624652740" expanded="true" signature="22179:22316" ph="{...}" />
+            <marker date="1522624652740" expanded="true" signature="22520:22590" ph="/**...*/" />
           </folding>
         </state>
       </provider>
@@ -631,7 +555,7 @@
         <state relative-caret-position="612">
           <caret line="36" column="65" lean-forward="false" selection-start-line="36" selection-start-column="65" selection-end-line="36" selection-end-column="65" />
           <folding>
-            <element signature="imports" expanded="false" />
+            <marker date="1522624652736" expanded="true" signature="43591:44013" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -648,40 +572,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5382">
           <caret line="325" column="33" lean-forward="false" selection-start-line="325" selection-start-column="33" selection-end-line="325" selection-end-column="33" />
-          <folding>
-            <marker date="1522609572308" expanded="true" signature="14685:15178" ph="//..." />
-            <marker date="1522609572308" expanded="true" signature="15461:15664" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="15714:16329" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="15820:15866" ph="//..." />
-            <marker date="1522609572308" expanded="true" signature="16042:16106" ph="//..." />
-            <marker date="1522609572308" expanded="true" signature="16367:16424" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="16464:16586" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="16617:16757" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="16783:16966" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="17004:17192" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="17226:17405" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="17434:17649" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="17684:17904" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="17907:18023" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="18065:18650" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="18676:18872" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="18898:19197" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="19235:19508" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="19511:19627" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="19664:20273" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="20309:20862" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="20888:21122" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="21125:21224" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="21265:22501" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="22540:22834" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="22837:22945" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="22976:23521" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="23526:23643" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="23698:23822" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="23844:24299" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="24379:26964" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="24472:24571" ph="//..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -689,10 +580,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -728,8 +616,9 @@
           <caret line="120" column="44" lean-forward="false" selection-start-line="120" selection-start-column="44" selection-end-line="120" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1522622297823" expanded="true" signature="884:885" ph="/**...*/" />
-            <marker date="1522622297823" expanded="true" signature="22197:22316" ph="{...}" />
+            <marker date="1522624652740" expanded="true" signature="138:163" ph="/**...*/" />
+            <marker date="1522624652740" expanded="true" signature="22179:22316" ph="{...}" />
+            <marker date="1522624652740" expanded="true" signature="22520:22590" ph="/**...*/" />
           </folding>
         </state>
       </provider>
@@ -756,40 +645,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5382">
           <caret line="325" column="33" lean-forward="false" selection-start-line="325" selection-start-column="33" selection-end-line="325" selection-end-column="33" />
-          <folding>
-            <marker date="1522609572308" expanded="true" signature="14685:15178" ph="//..." />
-            <marker date="1522609572308" expanded="true" signature="15461:15664" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="15714:16329" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="15820:15866" ph="//..." />
-            <marker date="1522609572308" expanded="true" signature="16042:16106" ph="//..." />
-            <marker date="1522609572308" expanded="true" signature="16367:16424" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="16464:16586" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="16617:16757" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="16783:16966" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="17004:17192" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="17226:17405" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="17434:17649" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="17684:17904" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="17907:18023" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="18065:18650" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="18676:18872" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="18898:19197" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="19235:19508" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="19511:19627" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="19664:20273" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="20309:20862" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="20888:21122" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="21125:21224" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="21265:22501" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="22540:22834" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="22837:22945" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="22976:23521" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="23526:23643" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="23698:23822" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="23844:24299" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="24379:26964" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="24472:24571" ph="//..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -797,10 +653,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -810,7 +663,7 @@
         <state relative-caret-position="468">
           <caret line="28" column="50" lean-forward="true" selection-start-line="28" selection-start-column="50" selection-end-line="28" selection-end-column="50" />
           <folding>
-            <element signature="imports" expanded="false" />
+            <marker date="1522624652736" expanded="true" signature="43591:44013" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -828,7 +681,7 @@
         <state relative-caret-position="162">
           <caret line="9" column="40" lean-forward="false" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
           <folding>
-            <element signature="imports" expanded="false" />
+            <marker date="1522624652736" expanded="true" signature="43591:44013" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -839,8 +692,9 @@
           <caret line="94" column="0" lean-forward="true" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1522622297823" expanded="true" signature="884:885" ph="/**...*/" />
-            <marker date="1522622297823" expanded="true" signature="22197:22316" ph="{...}" />
+            <marker date="1522624652740" expanded="true" signature="138:163" ph="/**...*/" />
+            <marker date="1522624652740" expanded="true" signature="22179:22316" ph="{...}" />
+            <marker date="1522624652740" expanded="true" signature="22520:22590" ph="/**...*/" />
           </folding>
         </state>
       </provider>
@@ -849,40 +703,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4734">
           <caret line="279" column="0" lean-forward="true" selection-start-line="279" selection-start-column="0" selection-end-line="279" selection-end-column="0" />
-          <folding>
-            <marker date="1522609572308" expanded="true" signature="14685:15178" ph="//..." />
-            <marker date="1522609572308" expanded="true" signature="15461:15664" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="15714:16329" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="15820:15866" ph="//..." />
-            <marker date="1522609572308" expanded="true" signature="16042:16106" ph="//..." />
-            <marker date="1522609572308" expanded="true" signature="16367:16424" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="16464:16586" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="16617:16757" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="16783:16966" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="17004:17192" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="17226:17405" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="17434:17649" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="17684:17904" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="17907:18023" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="18065:18650" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="18676:18872" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="18898:19197" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="19235:19508" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="19511:19627" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="19664:20273" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="20309:20862" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="20888:21122" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="21125:21224" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="21265:22501" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="22540:22834" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="22837:22945" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="22976:23521" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="23526:23643" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="23698:23822" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="23844:24299" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="24379:26964" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="24472:24571" ph="//..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -890,10 +711,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -921,25 +739,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="1" column="18" lean-forward="true" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="34" column="1" lean-forward="true" selection-start-line="34" selection-start-column="1" selection-end-line="34" selection-end-column="1" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/OptionsMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-895">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -971,40 +770,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12348">
           <caret line="725" column="41" lean-forward="false" selection-start-line="725" selection-start-column="19" selection-end-line="725" selection-end-column="41" />
-          <folding>
-            <marker date="1522609572308" expanded="true" signature="14685:15178" ph="//..." />
-            <marker date="1522609572308" expanded="true" signature="15461:15664" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="15714:16329" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="15820:15866" ph="//..." />
-            <marker date="1522609572308" expanded="true" signature="16042:16106" ph="//..." />
-            <marker date="1522609572308" expanded="true" signature="16367:16424" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="16464:16586" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="16617:16757" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="16783:16966" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="17004:17192" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="17226:17405" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="17434:17649" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="17684:17904" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="17907:18023" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="18065:18650" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="18676:18872" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="18898:19197" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="19235:19508" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="19511:19627" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="19664:20273" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="20309:20862" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="20888:21122" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="21125:21224" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="21265:22501" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="22540:22834" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="22837:22945" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="22976:23521" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="23526:23643" ph="/**...*/" />
-            <marker date="1522609572308" expanded="true" signature="23698:23822" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="23844:24299" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="24379:26964" ph="{...}" />
-            <marker date="1522609572308" expanded="true" signature="24472:24571" ph="//..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1034,16 +800,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/HumorBot/DatabaseInterfaceTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="562">
-          <caret line="640" column="1" lean-forward="false" selection-start-line="640" selection-start-column="1" selection-end-line="640" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/HumorBot/Game_Over_Excpetion.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
@@ -1060,59 +816,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/HumorBot/MCFTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/HumorBot/Exit_Automation_Exception.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/onlineMode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="91" column="26" lean-forward="false" selection-start-line="91" selection-start-column="26" selection-end-line="91" selection-end-column="26" />
-          <folding>
-            <element signature="e#357#459#0" expanded="true" />
-            <element signature="e#458#459#0" expanded="true" />
-            <element signature="e#4828#5030#0" expanded="true" />
-            <element signature="e#5029#5030#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/HumorBot/MCF.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1291">
-          <caret line="543" column="0" lean-forward="true" selection-start-line="543" selection-start-column="0" selection-end-line="543" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1522622297823" expanded="true" signature="884:885" ph="/**...*/" />
-            <marker date="1522622297823" expanded="true" signature="22197:22316" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/offlineMode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="151" column="20" lean-forward="false" selection-start-line="151" selection-start-column="20" selection-end-line="151" selection-end-column="20" />
-          <folding>
-            <element signature="e#414#425#0" expanded="true" />
-            <element signature="e#2178#2186#0" expanded="true" />
-            <element signature="e#2248#2259#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/whiteCard.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
@@ -1121,10 +824,96 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/HumorBot/MCF.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="544" column="0" lean-forward="false" selection-start-line="544" selection-start-column="0" selection-end-line="544" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1522624652740" expanded="true" signature="138:163" ph="/**...*/" />
+            <marker date="1522624652740" expanded="true" signature="22179:22316" ph="{...}" />
+            <marker date="1522624652740" expanded="true" signature="22520:22590" ph="/**...*/" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/onlineMode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="95" column="26" lean-forward="false" selection-start-line="95" selection-start-column="26" selection-end-line="95" selection-end-column="26" />
+          <folding>
+            <marker date="1522624652752" expanded="true" signature="5144:5197" ph="{...}" />
+            <marker date="1522624652752" expanded="true" signature="5144:5211" ph="{...}" />
+            <marker date="1522624652752" expanded="true" signature="5144:5229" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/HumorBot/DatabaseInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="159" column="22" lean-forward="false" selection-start-line="159" selection-start-column="19" selection-end-line="159" selection-end-column="22" />
+        <state relative-caret-position="18">
+          <caret line="159" column="22" lean-forward="false" selection-start-line="159" selection-start-column="22" selection-end-line="159" selection-end-column="22" />
+          <folding>
+            <marker date="1522624652736" expanded="true" signature="43591:44013" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/offlineMode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="747">
+          <caret line="155" column="1" lean-forward="true" selection-start-line="155" selection-start-column="1" selection-end-line="155" selection-end-column="1" />
+          <folding>
+            <marker date="1522624652748" expanded="true" signature="4647:4735" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HumorBot/DatabaseInterfaceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="640" column="1" lean-forward="false" selection-start-line="640" selection-start-column="1" selection-end-line="640" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HumorBot/Exit_Automation_Exception.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="34" column="1" lean-forward="true" selection-start-line="34" selection-start-column="1" selection-end-line="34" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HumorBot/MCFTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="72" column="17" lean-forward="true" selection-start-line="72" selection-start-column="17" selection-end-line="72" selection-end-column="17" />
+          <folding>
+            <marker date="1522625048881" expanded="false" signature="316:327" ph="&lt;~&gt;" />
+            <marker date="1522625048881" expanded="false" signature="935:946" ph="&lt;~&gt;" />
+            <marker date="1522625048881" expanded="false" signature="1327:1338" ph="&lt;~&gt;" />
+            <marker date="1522625048881" expanded="false" signature="1840:1851" ph="&lt;~&gt;" />
+            <marker date="1522625048881" expanded="false" signature="2172:2183" ph="&lt;~&gt;" />
+            <marker date="1522625048881" expanded="false" signature="2510:2521" ph="&lt;~&gt;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/OptionsMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="86" column="16" lean-forward="true" selection-start-line="86" selection-start-column="16" selection-end-line="86" selection-end-column="40" />
           <folding />
         </state>
       </provider>

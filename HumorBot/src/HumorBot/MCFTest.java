@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 public class MCFTest {
-    @Test
+    /*@Test
     public void TestMCFThroawayMultipleBlanks() {
         MCF mcf = new MCF("Test");
         ArrayList<WhiteCard> m = new ArrayList<WhiteCard>();
@@ -91,6 +91,6 @@ public class MCFTest {
         } catch (CardCountException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 }

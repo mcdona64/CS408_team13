@@ -83,8 +83,8 @@ public class OptionsMenu {
         set_button.setBounds(10, 238, 150, 30);
         set_button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mcf.setupdatedb(learncb.isSelected());
-                mcf.setnaivemode(naivecb.isSelected());
+                mcf.setupdatedb(true);
+                mcf.setnaivemode(false);
             }
         });
         this.frame.add(set_button);
