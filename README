@@ -1,0 +1,55 @@
+README file for HumorBot
+
+Hello and welcome to HumorBot! As you know, this is a bot that is made to play cards against humanity, the Popular card game. If you don not know what Cards Against Humanity is, please look it up (Just google it)
+
+There are certain things that occur in our app, and here is the way to work around that.
+
+Firstly, our app is heavily reliant on a database, however you are not allowed to access the database. However we have added a script that will allow you to do these things:
+	1. **Adam list the things the script wil let you do here**
+
+**Adam add stuff about the database here that they would need to know**
+
+Exceptions:
+
+**Talk about DatabaseInterface Exceptions here**
+
+Secondly, our application has a online environment. This is mostly used for learning but it does allow you to switch modes and our AI can play and spectate online. It will tell you what mode you are in in the Online Mode GUI and on terminal.
+
+**Max add stuff about the web interface**
+
+Exceptions:
+
+**Talk about Web Exceptions here**
+
+Third, the actual "thinking" (for the most part) falls upon our Main Control Flow unit, (AKA MCF), The MCF will be handling all of the actual thinking, and it is also what connects the GUI with the actual application.
+
+Our bot runs by using weights called from the database. The weights are weighted via combination. So every time a new card combination is found, it is added to the database with a weight of zero. Every time a round is played online, it will see the winning card and will adjust the wieghts for the combination of the black card and stuff. The database will also keep track of the average weights of each whitecard (in case of a tie in a normal round).
+
+The MCF also utilizes the average weight of your entire hand. If the average weight of your entire hand is low overall for that combination, the AI will choose that round as a "throwaway round" in which it throws away the card with the lowest average weight. 
+
+In the beginning, it will usually treat all rounds like throwaway rounds, as a throwaway round is the default when you are dealing with only newly added cards. But after that there are these conditions for a normal(non-throwaway round):
+	1. The AI must not be playing in naive mode
+		- Assuming 1 is true:
+			1. The Max Card must have a weight greater than 10
+			OR
+			2, The Average Card weight for the hand must be greater than 5 
+
+These values are not set in stone, as these are only for early on, when there is not a lot of data to go off of. As the data increases, the values would need to be altered by the programmer. As the data increases, However for the testing these values should not need to be altered. 
+
+Exceptions: 
+
+	1. Exit_Automation_Exception - When you exit automation in Online Mode (by pressing the Exit Online Mode button) you should see on the terminal a massage that says "Automation Exited" and a message stating whether you exited as a Spectator or as a player. This is supposed to happen, so you will not see any stack trace when this is thrown. 
+	
+	2. CardCountException - There is also another Exception called CardCountException that will be thrown when the number of blanks on a black card or the number of cards in your hand do not match. This is NOT supposed to happen, so you will see a stack trace if this is thrown.
+	
+	3. Game_Over_Exception - The final Exception that you would need to be aware about is the Game_Over_Exception, which will be thrown when a Game Ends or the lobby is closed, this is not an important error that you would. This is supposed to happen, so you will not see a stack trace when this is thrown.
+
+That is all you need to know about our program, here are some helpful suggestions for testing.
+
+	- Do not use online more for a lot of the tests, if you use offline mode, you can create a clean environment in which you can keep track of the values for your cards. This is important because YOU WILL NOT BE GIVEN ACCESS TO THE DATABASE. 
+
+	-If you forget values, we have provided a script that will let you clear the database, I highly suggest using this. It will be super helpful.
+
+	**Add More suggestions if you have any**
+
+Thank you and Enjoy HumorBot!
