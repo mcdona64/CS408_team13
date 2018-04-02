@@ -291,12 +291,14 @@ public class MCF {
         int best_choice = 0;
         for (int i = 0; i < this.hand.size(); i++) {
             WhiteCard curr = this.hand.get(i);
-            if (curr.getWeight() > max) {
-                max = curr.getWeight();
-                best_choice = i;
-            } else if (curr.getWeight() == max) {
-                WhiteCard prevMax = this.hand.get(best_choice);
-                best_choice = (prevMax.getAverageWeight() <= curr.getAverageWeight()) ? best_choice : i;
+            if (!curr.getAnswer().startsWith("z")) {
+                if (curr.getWeight() > max) {
+                    max = curr.getWeight();
+                    best_choice = i;
+                } else if (curr.getWeight() == max) {
+                    WhiteCard prevMax = this.hand.get(best_choice);
+                    best_choice = (prevMax.getAverageWeight() <= curr.getAverageWeight()) ? best_choice : i;
+                }
             }
             //Defect
             if (curr.getAnswer().startsWith("a")){

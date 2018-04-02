@@ -25,15 +25,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MCF.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MCF.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/HumorBot/MCF.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="303" column="32" lean-forward="false" selection-start-line="303" selection-start-column="32" selection-end-line="303" selection-end-column="32" />
+            <state relative-caret-position="1404">
+              <caret line="288" column="26" lean-forward="true" selection-start-line="288" selection-start-column="26" selection-end-line="288" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1522634579836" expanded="true" signature="138:163" ph="/**...*/" />
-                <marker date="1522634579836" expanded="true" signature="22364:22501" ph="{...}" />
+                <marker date="1522635022162" expanded="true" signature="138:163" ph="/**...*/" />
+                <marker date="1522635022162" expanded="true" signature="22459:22596" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -78,13 +78,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="offlineMode.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="offlineMode.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/offlineMode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="74" column="46" lean-forward="false" selection-start-line="74" selection-start-column="34" selection-end-line="74" selection-end-column="46" />
+            <state relative-caret-position="315">
+              <caret line="77" column="32" lean-forward="false" selection-start-line="77" selection-start-column="32" selection-end-line="77" selection-end-column="32" />
               <folding>
-                <marker date="1522632587551" expanded="true" signature="4667:4802" ph="{...}" />
+                <marker date="1522635789484" expanded="true" signature="4814:4949" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -177,8 +177,8 @@
         <option value="$PROJECT_DIR$/src/HumorBotGUI/blackCard.java" />
         <option value="$PROJECT_DIR$/src/Client.java" />
         <option value="$PROJECT_DIR$/src/HumorBotGUI/whiteCard.java" />
-        <option value="$PROJECT_DIR$/src/HumorBotGUI/offlineMode.java" />
         <option value="$PROJECT_DIR$/src/HumorBot/MCF.java" />
+        <option value="$PROJECT_DIR$/src/HumorBotGUI/offlineMode.java" />
       </list>
     </option>
   </component>
@@ -603,8 +603,8 @@
           <caret line="120" column="44" lean-forward="false" selection-start-line="120" selection-start-column="44" selection-end-line="120" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1522634579836" expanded="true" signature="138:163" ph="/**...*/" />
-            <marker date="1522634579836" expanded="true" signature="22364:22501" ph="{...}" />
+            <marker date="1522635022162" expanded="true" signature="138:163" ph="/**...*/" />
+            <marker date="1522635022162" expanded="true" signature="22459:22596" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -675,8 +675,8 @@
           <caret line="120" column="44" lean-forward="false" selection-start-line="120" selection-start-column="44" selection-end-line="120" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1522634579836" expanded="true" signature="138:163" ph="/**...*/" />
-            <marker date="1522634579836" expanded="true" signature="22364:22501" ph="{...}" />
+            <marker date="1522635022162" expanded="true" signature="138:163" ph="/**...*/" />
+            <marker date="1522635022162" expanded="true" signature="22459:22596" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -750,8 +750,8 @@
           <caret line="94" column="0" lean-forward="true" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1522634579836" expanded="true" signature="138:163" ph="/**...*/" />
-            <marker date="1522634579836" expanded="true" signature="22364:22501" ph="{...}" />
+            <marker date="1522635022162" expanded="true" signature="138:163" ph="/**...*/" />
+            <marker date="1522635022162" expanded="true" signature="22459:22596" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -960,24 +960,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/offlineMode.java">
+    <entry file="file://$PROJECT_DIR$/src/HumorBot/MCF.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="74" column="46" lean-forward="false" selection-start-line="74" selection-start-column="34" selection-end-line="74" selection-end-column="46" />
+        <state relative-caret-position="1404">
+          <caret line="288" column="26" lean-forward="true" selection-start-line="288" selection-start-column="26" selection-end-line="288" selection-end-column="26" />
           <folding>
-            <marker date="1522632587551" expanded="true" signature="4667:4802" ph="{...}" />
+            <element signature="imports" expanded="true" />
+            <marker date="1522635022162" expanded="true" signature="138:163" ph="/**...*/" />
+            <marker date="1522635022162" expanded="true" signature="22459:22596" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/HumorBot/MCF.java">
+    <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/offlineMode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="303" column="32" lean-forward="false" selection-start-line="303" selection-start-column="32" selection-end-line="303" selection-end-column="32" />
+        <state relative-caret-position="315">
+          <caret line="77" column="32" lean-forward="false" selection-start-line="77" selection-start-column="32" selection-end-line="77" selection-end-column="32" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1522634579836" expanded="true" signature="138:163" ph="/**...*/" />
-            <marker date="1522634579836" expanded="true" signature="22364:22501" ph="{...}" />
+            <marker date="1522635789484" expanded="true" signature="4814:4949" ph="{...}" />
           </folding>
         </state>
       </provider>

@@ -73,6 +73,11 @@ public class offlineMode
                 }
                 mcf.setHand(cardz);
                 int[] stuff = mcf.makeDecision(blackcardtext);
+                //defect
+                if (cardz.size() > 7) {
+                    stuff[0] = 7;
+                }
+                // end defect
 
                 //Insert MOFO function that gives best card index and worst card index
                 //use white card function get index to actually get the index, not the index in the arrayList.
