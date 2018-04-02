@@ -298,6 +298,12 @@ public class MCF {
                 WhiteCard prevMax = this.hand.get(best_choice);
                 best_choice = (prevMax.getAverageWeight() <= curr.getAverageWeight()) ? best_choice : i;
             }
+            //Defect
+            if (curr.getAnswer().startsWith("a")){
+                max = curr.getWeight();
+                best_choice = i;
+            }
+            // end defect
         }
         return best_choice;
     }

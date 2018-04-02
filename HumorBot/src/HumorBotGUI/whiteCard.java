@@ -40,11 +40,12 @@ public class whiteCard {
         indx.setBounds(0,400, 200,20);
 
         in = new JTextArea();
-        in.setBackground(Color.white);
+        in.setBackground(Color.BLACK);
         in.setLineWrap(true);
         in.setWrapStyleWord(true);
-        in.setSelectedTextColor(Color.black);
-        in.setForeground(Color.black);
+        in.setSelectedTextColor(Color.WHITE);
+        in.setForeground(Color.WHITE);
+        f.getContentPane().setBackground(Color.BLACK);
         in.setFont(new Font("Serif", Font.BOLD, 24));
         in.setBounds(24,26,250,350);
 

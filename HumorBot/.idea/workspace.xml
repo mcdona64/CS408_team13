@@ -25,26 +25,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MCF.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MCF.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/HumorBot/MCF.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="121">
-              <caret line="544" column="0" lean-forward="false" selection-start-line="544" selection-start-column="0" selection-end-line="544" selection-end-column="0" />
+            <state relative-caret-position="432">
+              <caret line="303" column="32" lean-forward="false" selection-start-line="303" selection-start-column="32" selection-end-line="303" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1522624652740" expanded="true" signature="138:163" ph="/**...*/" />
-                <marker date="1522624652740" expanded="true" signature="22179:22316" ph="{...}" />
+                <marker date="1522634579836" expanded="true" signature="138:163" ph="/**...*/" />
+                <marker date="1522634579836" expanded="true" signature="22364:22501" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Client.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Client.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="20" column="8" lean-forward="false" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+            <state relative-caret-position="234">
+              <caret line="18" column="44" lean-forward="true" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DatabaseInterface.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/HumorBot/DatabaseInterface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-5490">
+              <caret line="159" column="22" lean-forward="false" selection-start-line="159" selection-start-column="22" selection-end-line="159" selection-end-column="22" />
+              <folding>
+                <marker date="1522624652736" expanded="true" signature="43591:44013" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -66,6 +78,18 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="offlineMode.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/offlineMode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="74" column="46" lean-forward="false" selection-start-line="74" selection-start-column="34" selection-end-line="74" selection-end-column="46" />
+              <folding>
+                <marker date="1522632587551" expanded="true" signature="4667:4802" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="OptionsMenu.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/OptionsMenu.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -76,21 +100,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="menuGui.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/menuGui.java">
+      <file leaf-file-name="whiteCard.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/whiteCard.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-270">
-              <caret line="48" column="37" lean-forward="false" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
+            <state relative-caret-position="622">
+              <caret line="47" column="52" lean-forward="false" selection-start-line="47" selection-start-column="52" selection-end-line="47" selection-end-column="52" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BlackCard.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/HumorBot/BlackCard.java">
+      <file leaf-file-name="menuGui.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/menuGui.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            <state relative-caret-position="198">
+              <caret line="26" column="8" lean-forward="false" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -100,7 +124,7 @@
         <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/blackCard.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="252">
-              <caret line="17" column="52" lean-forward="false" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
+              <caret line="17" column="8" lean-forward="true" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -146,14 +170,15 @@
         <option value="$PROJECT_DIR$/src/HumorBot/Web.java" />
         <option value="$PROJECT_DIR$/src/HumorBot/DatabaseInterfaceTest.java" />
         <option value="$PROJECT_DIR$/src/HumorBotGUI/onlineMode.java" />
-        <option value="$PROJECT_DIR$/src/HumorBot/MCF.java" />
-        <option value="$PROJECT_DIR$/src/HumorBotGUI/offlineMode.java" />
         <option value="$PROJECT_DIR$/src/HumorBot/DatabaseInterface.java" />
         <option value="$PROJECT_DIR$/src/HumorBot/MCFTest.java" />
         <option value="$PROJECT_DIR$/src/HumorBotGUI/OptionsMenu.java" />
         <option value="$PROJECT_DIR$/src/HumorBotGUI/menuGui.java" />
         <option value="$PROJECT_DIR$/src/HumorBotGUI/blackCard.java" />
         <option value="$PROJECT_DIR$/src/Client.java" />
+        <option value="$PROJECT_DIR$/src/HumorBotGUI/whiteCard.java" />
+        <option value="$PROJECT_DIR$/src/HumorBotGUI/offlineMode.java" />
+        <option value="$PROJECT_DIR$/src/HumorBot/MCF.java" />
       </list>
     </option>
   </component>
@@ -578,8 +603,8 @@
           <caret line="120" column="44" lean-forward="false" selection-start-line="120" selection-start-column="44" selection-end-line="120" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1522624652740" expanded="true" signature="138:163" ph="/**...*/" />
-            <marker date="1522624652740" expanded="true" signature="22179:22316" ph="{...}" />
+            <marker date="1522634579836" expanded="true" signature="138:163" ph="/**...*/" />
+            <marker date="1522634579836" expanded="true" signature="22364:22501" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -650,8 +675,8 @@
           <caret line="120" column="44" lean-forward="false" selection-start-line="120" selection-start-column="44" selection-end-line="120" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1522624652740" expanded="true" signature="138:163" ph="/**...*/" />
-            <marker date="1522624652740" expanded="true" signature="22179:22316" ph="{...}" />
+            <marker date="1522634579836" expanded="true" signature="138:163" ph="/**...*/" />
+            <marker date="1522634579836" expanded="true" signature="22364:22501" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -725,8 +750,8 @@
           <caret line="94" column="0" lean-forward="true" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1522624652740" expanded="true" signature="138:163" ph="/**...*/" />
-            <marker date="1522624652740" expanded="true" signature="22179:22316" ph="{...}" />
+            <marker date="1522634579836" expanded="true" signature="138:163" ph="/**...*/" />
+            <marker date="1522634579836" expanded="true" signature="22364:22501" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -832,14 +857,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/whiteCard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/onlineMode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
@@ -848,26 +865,6 @@
             <marker date="1522624652752" expanded="true" signature="5144:5197" ph="{...}" />
             <marker date="1522624652752" expanded="true" signature="5144:5211" ph="{...}" />
             <marker date="1522624652752" expanded="true" signature="5144:5229" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/HumorBot/DatabaseInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="159" column="22" lean-forward="false" selection-start-line="159" selection-start-column="22" selection-end-line="159" selection-end-column="22" />
-          <folding>
-            <marker date="1522624652736" expanded="true" signature="43591:44013" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/offlineMode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="747">
-          <caret line="155" column="1" lean-forward="true" selection-start-line="155" selection-start-column="1" selection-end-line="155" selection-end-column="1" />
-          <folding>
-            <marker date="1522624652748" expanded="true" signature="4647:4735" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -905,10 +902,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/OptionsMenu.java">
+    <entry file="file://$PROJECT_DIR$/src/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="82" column="38" lean-forward="false" selection-start-line="82" selection-start-column="38" selection-end-line="82" selection-end-column="38" />
+        <state relative-caret-position="234">
+          <caret line="18" column="44" lean-forward="true" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
           <folding />
         </state>
       </provider>
@@ -921,39 +918,67 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/blackCard.java">
+    <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/menuGui.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="17" column="52" lean-forward="false" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
+        <state relative-caret-position="198">
+          <caret line="26" column="8" lean-forward="false" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="54" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/menuGui.java">
+    <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/blackCard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-270">
-          <caret line="48" column="37" lean-forward="false" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
+        <state relative-caret-position="252">
+          <caret line="17" column="8" lean-forward="true" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="54" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/whiteCard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="622">
+          <caret line="47" column="52" lean-forward="false" selection-start-line="47" selection-start-column="52" selection-end-line="47" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/OptionsMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="82" column="38" lean-forward="false" selection-start-line="82" selection-start-column="38" selection-end-line="82" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HumorBot/DatabaseInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5490">
+          <caret line="159" column="22" lean-forward="false" selection-start-line="159" selection-start-column="22" selection-end-line="159" selection-end-column="22" />
+          <folding>
+            <marker date="1522624652736" expanded="true" signature="43591:44013" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/offlineMode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="74" column="46" lean-forward="false" selection-start-line="74" selection-start-column="34" selection-end-line="74" selection-end-column="46" />
+          <folding>
+            <marker date="1522632587551" expanded="true" signature="4667:4802" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/HumorBot/MCF.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="544" column="0" lean-forward="false" selection-start-line="544" selection-start-column="0" selection-end-line="544" selection-end-column="0" />
+        <state relative-caret-position="432">
+          <caret line="303" column="32" lean-forward="false" selection-start-line="303" selection-start-column="32" selection-end-line="303" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1522624652740" expanded="true" signature="138:163" ph="/**...*/" />
-            <marker date="1522624652740" expanded="true" signature="22179:22316" ph="{...}" />
+            <marker date="1522634579836" expanded="true" signature="138:163" ph="/**...*/" />
+            <marker date="1522634579836" expanded="true" signature="22364:22501" ph="{...}" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="20" column="8" lean-forward="false" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>

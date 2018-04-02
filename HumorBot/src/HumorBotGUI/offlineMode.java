@@ -16,7 +16,8 @@ public class offlineMode
 {
     ArrayList<whiteCard> wcards = new ArrayList<whiteCard>();
     blackCard blc;
-    int cnt = 0;
+    //int cnt = 0;
+    int cnt = 24;
     private MCF mcf;
     private menuGui menuGui;
     public offlineMode(MCF mcf)
@@ -148,6 +149,7 @@ public class offlineMode
     public void addWhiteCard()
     {
         //cnt++;
+        cnt = (cnt%2 == 0)? cnt/2 : cnt*3 + 1;
         whiteCard whte = new whiteCard(cnt,this);
         wcards.add(whte);
     }
