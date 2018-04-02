@@ -43,9 +43,10 @@ public class menuGui
         //rbot.setIcon(new ImageIcon(img));
         rbot.setBounds(150,80,200,200);
         Image im = new ImageIcon(this.getClass().getResource("funnybot.jpg")).getImage();
-        Image img = im.getScaledInstance(rbot.getWidth(), rbot.getHeight(), Image.SCALE_SMOOTH);
+        //Image img = im.getScaledInstance(rbot.getWidth(), rbot.getHeight(), Image.SCALE_SMOOTH);
         //JLabel rbot = new JLabel("");
-        rbot.setIcon(new ImageIcon(img));
+        //rbot.setIcon(new ImageIcon(img));
+        rbot.setIcon(new ImageIcon(im));
         //rbot.setBounds(130,80,200,250);
         f.getContentPane().add(rbot);
 
@@ -54,10 +55,9 @@ public class menuGui
 
         b.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                offlineMode om = new offlineMode(mcf);
-                boolean[] g = {false, false};
-                mcf.initalize(g);
+                onlineMode olm = new onlineMode(mcf);
                 f.dispose();
+
             }
         });
 
@@ -68,7 +68,9 @@ public class menuGui
 
         onl.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                onlineMode olm = new onlineMode(mcf);
+                offlineMode om = new offlineMode(mcf);
+                boolean[] g = {false, false};
+                mcf.initalize(g);
                 f.dispose();
             }
         });

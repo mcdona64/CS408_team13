@@ -52,11 +52,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OptionsMenu.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="OptionsMenu.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/OptionsMenu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
-              <caret line="86" column="16" lean-forward="true" selection-start-line="86" selection-start-column="16" selection-end-line="86" selection-end-column="40" />
+            <state relative-caret-position="414">
+              <caret line="82" column="38" lean-forward="false" selection-start-line="82" selection-start-column="38" selection-end-line="82" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="menuGui.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/menuGui.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="305">
+              <caret line="48" column="37" lean-forward="false" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -100,7 +110,6 @@
         <option value="$PROJECT_DIR$/src/HumorBot/ConnectionNotEstablishedException.java" />
         <option value="$USER_HOME$/cs307/repo/Evant/javaWorkspace/DatabaseInterface.java" />
         <option value="$PROJECT_DIR$/src/HumorBot/Web.java" />
-        <option value="$PROJECT_DIR$/src/HumorBotGUI/menuGui.java" />
         <option value="$PROJECT_DIR$/src/HumorBot/DatabaseInterfaceTest.java" />
         <option value="$PROJECT_DIR$/src/Client.java" />
         <option value="$PROJECT_DIR$/src/HumorBotGUI/onlineMode.java" />
@@ -109,6 +118,7 @@
         <option value="$PROJECT_DIR$/src/HumorBot/DatabaseInterface.java" />
         <option value="$PROJECT_DIR$/src/HumorBot/MCFTest.java" />
         <option value="$PROJECT_DIR$/src/HumorBotGUI/OptionsMenu.java" />
+        <option value="$PROJECT_DIR$/src/HumorBotGUI/menuGui.java" />
       </list>
     </option>
   </component>
@@ -742,14 +752,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/menuGui.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="869">
-          <caret line="113" column="0" lean-forward="false" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/HumorBot/CardCountException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
@@ -912,8 +914,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/OptionsMenu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="86" column="16" lean-forward="true" selection-start-line="86" selection-start-column="16" selection-end-line="86" selection-end-column="40" />
+        <state relative-caret-position="414">
+          <caret line="82" column="38" lean-forward="false" selection-start-line="82" selection-start-column="38" selection-end-line="82" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HumorBotGUI/menuGui.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="48" column="37" lean-forward="false" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
           <folding />
         </state>
       </provider>
