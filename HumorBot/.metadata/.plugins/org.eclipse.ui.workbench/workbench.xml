@@ -149,8 +149,8 @@
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Client.java" tooltip="/u/data/u91/mcdona64/cs408/repo/CS408_team13/HumorBot/src/Client.java">
-<persistable uri="file:/u/data/u91/mcdona64/cs408/repo/CS408_team13/HumorBot/src/Client.java"/>
+<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="HumorBot.Client.java" tooltip="/u/data/u91/mcdona64/cs408/repo/CS408_team13/HumorBot/src/HumorBot.Client.java">
+<persistable uri="file:/u/data/u91/mcdona64/cs408/repo/CS408_team13/HumorBot/src/HumorBot.Client.java"/>
 </file>
 </mruList>
 </workbench>

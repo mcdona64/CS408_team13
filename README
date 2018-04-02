@@ -4,22 +4,13 @@ Hello and welcome to HumorBot! As you know, this is a bot that is made to play c
 
 There are certain things that occur in our app, and here is the way to work around that.
 
-Firstly, our app is heavily reliant on a database, however you are not allowed to access the database. However we have added a script that will allow you to do these things:
-	1. **Adam list the things the script wil let you do here**
-
-**Adam add stuff about the database here that they would need to know**
+Firstly, our app is heavily reliant on a database, however you are not allowed to access the database. Because of this we have added a jar file that will allow to reset the databse to all zero values. This will alow you to test that the program is infact choosing the correct values. If you notice that the program is crashing whenever you click on either online or offline mode, this might be because the database is down. This should never occur, but if you notice it you may contact the systems administrator at mcdona64@purdue.edu or at 720-891-6931 in case of emergencies. 
 
 Exceptions:
 
-**Talk about DatabaseInterface Exceptions here**
+1. ConnectionNotEstablishedException - This exception is thrown when a call is made to the datbase, but a connection can not be established. If you get one of these exception it may be because the database is down
 
 Secondly, our application has a online environment. This is mostly used for learning but it does allow you to switch modes and our AI can play and spectate online. It will tell you what mode you are in in the Online Mode GUI and on terminal.
-
-**Max add stuff about the web interface**
-
-Exceptions:
-
-**Talk about Web Exceptions here**
 
 Third, the actual "thinking" (for the most part) falls upon our Main Control Flow unit, (AKA MCF), The MCF will be handling all of the actual thinking, and it is also what connects the GUI with the actual application.
 
@@ -50,6 +41,25 @@ That is all you need to know about our program, here are some helpful suggestion
 
 	-If you forget values, we have provided a script that will let you clear the database, I highly suggest using this. It will be super helpful.
 
-	**Add More suggestions if you have any**
+Because our app is more complicated than most we have decided to include a list of what everything is supposed to do so you can better understand it. In order to do this we will walk you through a sample execution and explain what is supposed to happen. 
+
+Name Dialog:
+Upon opening the app you will be greeted with a dialog asking you to enter a name for the AI to use online. The entered name will serve as its username. Clicking cancel will close the app.
+
+Main Menu:
+After opening our app you will see the main menu. From here you will have three options. Go to the options menu, use the bot in offline mode, and  use the bot online
+
+Options:
+In this menu you can see the number of rounds the bot has won, and several options. You can play in native mode in which case, bot online and offline the bot will recommend the first card in your hand rather than following the algorithm. You can also have the AI not learn from your current session in which case the bot will not update the database and therefore not change its behavior. To apply these changes click apply. This will close the window and return to the main menu.  If you do not want the changes to be saved then click cancel. This will also close the window and return to the main menu.
+
+Online mode:
+In this mode the bot will go to the website “pretend you're xyzzy” and play cards against humanity online. When clicking on this option the main menu will close and you will see a window with three options. Back which will close the current window and bring you back to the main menu. Set mode which will change the text on in the center of the window and the mode to be spectator mode if is currently play online, and set it to play online if it is currently spectate. In spectate mode the bot joins a game as a spectator not a player. This allows the bot to learn. The other mode lets the bot be a player in the game. In this case it actually plays the game against real people. When you click play a window of your default web browser will open controlled by the bot. In this window you will be able to see the bot playing or watching the game. If the window does not open try running the app from command line. 
+
+Offline mode:
+When the user clicks on offline mode from the main menu the main menu closes and the offline mode GUI pops up as well as a black card GUI. In this mode you can ask the bot to tell you which card to pick for a real life game. The add white card button opens a new window of a white card. This window will have an index number at the top, and a place to type in the middle. Add a white card for each card in your hand in the real game. Type in the black card, and all of the white cards in your hand. If the black card has blanks these can be denoted with an underscore. Then click be funny and the bot will recommend a card by displaying the cards index in the center of the new screen. It will then ask you if you won the round. If you click yes the combo of that white card and that black card’s weight will be increased. When you are done you may click the back button. This will close all of the open windows and open the main menu.
+
+A note about how the bot chooses cards:
+The bot will always choose the card or card combination with the highest weight. Upon a tie it will choose the card or card combo with the lowest indices. This means if you reset the database and then play in offline mode, and you have two cards in hand a and b the AI should pick the one with the lowest index. If that is A and it is selected, and you say you won, then after switching the values of the two cards the AI will still pick A. 
+
 
 Thank you and Enjoy HumorBot!
